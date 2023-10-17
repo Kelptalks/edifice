@@ -1,11 +1,10 @@
-import Constants.Constants;
-import World.Chunk;
+import Testing.Testing;
+import World.World;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("creating game frame");
+        Testing testing = new Testing();
+        //World world = new World();
         GameFrame gameFrame = new GameFrame();
-        Chunk chunk = new Chunk();
     }
-
 }

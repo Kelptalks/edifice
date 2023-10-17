@@ -1,40 +1,35 @@
+import Constants.Constants;
+import Controls.KeyBoardInputs;
+import Controls.MouseInputs;
+import Testing.PackageTests.RenderTesting;
+import Visuals.ChunkRenderer.ViewPort;
+import Visuals.ChunkRenderer.chunkRendering.RaycastRenderer;
 
-
-import java.io.File;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
+import static java.awt.image.BufferedImage.TYPE_4BYTE_ABGR_PRE;
 
-import ChunkRenderer.ChunkRenderer;
-import ChunkRenderer.GridDrawingManager;
-import Constants.Constants;
-import World.Chunk;
-
-public class GameFrame extends JFrame{
-
-    Constants constants;
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  GameFrame
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *
+ */
+public class GameFrame extends JFrame {
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Constructor
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
-    public ChunkRenderer chunkRenderer;
-    public GameFrame() throws IOException{
+    private ViewPort viewPort = new ViewPort();
+    public GameFrame() throws IOException {
         super();
         this.setSize(Constants.SCREEN_X_REZ, Constants.SCREEN_Y_REZ);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setTitle("Telp");
-        setIcon();
-        System.out.println("Created JFrame");
-
-        this.chunkRenderer = new ChunkRenderer();
-        
-        this.add(chunkRenderer);
         this.setVisible(true);
-    }
+        this.setTitle("Telp");
 
-    private void setIcon() throws IOException{
-        //this.setIconImage(ImageIO.read(new File("src\\ChunkRenderer\\Textures\\block.png")));
+        this.add(viewPort);
     }
 
 }
