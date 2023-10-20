@@ -20,7 +20,6 @@ public class World{
 
     public World(){
         testingTerrain.genTerrain(octree);
-
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -29,16 +28,16 @@ public class World{
      *  I will need to create methods that can organize
      *  and track how the octree expands
      */
-    public int getBlock(int x, int y, int z){
+    public int getBlock(long x, long y, long z){
         return octree.getBlock(corToKey(x, y, z));
     }
 
     //set a block using with 3D cords create a negative system
-    public void setBlock(int x, int y, int z, int block){
+    public void setBlock(long x, long y, long z, int block){
         octree.setBlock(corToKey(x, y, z), block);
     }
 
-    private long corToKey(int x, int y, int z){
+    private long corToKey(long x, long y, long z){
         int topDepth = octree.getTopDepth()+4; //add 4 because octree doesn't account for leave nodes
         long currentX = x;
         long currentY = y;
