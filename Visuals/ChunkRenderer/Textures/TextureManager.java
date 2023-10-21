@@ -16,8 +16,8 @@ import javax.imageio.ImageIO;
 public class TextureManager {
 
     private BufferedImage [][]blockTextures = new BufferedImage[15][6];
-    private String blockFilePaths[] = {null, "src/Visuals/ChunkRenderer/Textures/Grass.png", "src/Visuals/ChunkRenderer/Textures/Block.png", "src/Visuals/ChunkRenderer/Textures/Blorb.png"
-    , "src/Visuals/ChunkRenderer/Textures/Sand.png"};
+    private String blockFilePaths[] = {null, "Visuals/ChunkRenderer/Textures/Blorb.png", "Visuals/ChunkRenderer/Textures/Blorb.png", "Visuals/ChunkRenderer/Textures/Blorb.png"
+    , "Visuals/ChunkRenderer/Textures/Blorb.png"};
 
     public TextureManager(){
         spliceAndStore(1);
