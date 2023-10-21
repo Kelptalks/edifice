@@ -1,7 +1,7 @@
-package Visuals.ChunkRenderer;
+package Visuals;
 
 import Constants.Constants;
-import Visuals.ChunkRenderer.chunkRendering.RaycastRenderer;
+import Visuals.chunkRendering.RaycastRenderer;
 
 import javax.swing.*;
 import java.awt.*;

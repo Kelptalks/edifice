@@ -1,6 +1,5 @@
-package Visuals.ChunkRenderer.chunkRendering;
+package Visuals.chunkRendering;
 
-import World.Octree.Octree;
 import World.World;
 
 import java.awt.*;
@@ -20,10 +19,12 @@ public class RaycastRenderer extends BufferedImage {
     public RaycastRenderer(int width, int height) {
         super(width, height, TYPE_4BYTE_ABGR_PRE);
         this.drawingManager = new GridDrawingManager(width, height);
-        world.setBlock(0, 0 ,-1, 4);
+        world.setBlock(100, 0 ,-1, 4);
 
+        System.out.println(world.getBlock(100,0, -1));
+        System.out.println(world.getBlock(101,0, -1));
 
-        rayCast();
+        //rayCast();
 
         graphics.drawImage(drawingManager, 0, 0, null);
     }
@@ -81,6 +82,7 @@ public class RaycastRenderer extends BufferedImage {
                 blockZ--;
                 if (world.getBlock(blockX, blockY, blockZ) != transparent){
                     //return the blockType and face type
+                    System.out.println("Traversal distance : " + distance);
                     return new int[]{world.getBlock(blockX, blockY, blockZ), 0};
                 };
             }
@@ -88,9 +90,30 @@ public class RaycastRenderer extends BufferedImage {
 
         //if right facing
         else{
+            for (int distance = 0; distance < drawDistance; distance++) {
+                //y-1
+                blockY--;
+                if (world.getBlock(blockX, blockY, blockZ) != transparent) {
+                    //return the blockType and face type
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 5};
+                }
 
+                //x-1
+                blockX --;
+                if (world.getBlock(blockX, blockY, blockZ) != transparent){
+                    //return the blockType and face type
+                    System.out.println("Traversal distance : " + distance);
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 1};
+                };
+
+                //z-1
+                blockZ--;
+                if (world.getBlock(blockX, blockY, blockZ) != transparent){
+                    //return the blockType and face type
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 3};
+                };
+            }
         }
-
         return null;
     }
 
@@ -153,9 +176,9 @@ public class RaycastRenderer extends BufferedImage {
     private int yCamRez = 20;
 
     //Cam location
-    private long xCamCor = 0;
-    private long yCamCor = 0;
-    private long zCamCor = 0;
+    private long xCamCor = 100;
+    private long yCamCor = 10;
+    private long zCamCor = 10;
 
     private long getXCamCor(){
         return this.xCamCor;

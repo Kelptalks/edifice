@@ -1,11 +1,11 @@
-package Visuals.ChunkRenderer.chunkRendering;
+package Visuals.chunkRendering;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import Constants.Constants;
-import Visuals.ChunkRenderer.Textures.TextureManager;
+import Visuals.Textures.TextureManager;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  Grid Manager class

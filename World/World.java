@@ -76,6 +76,7 @@ public class World{
             // Update the nodeSize for the next depth level
             nodeSize = halfSize;
         }
+        System.out.println(key);
         return key;
     }
 

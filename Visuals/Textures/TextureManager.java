@@ -1,4 +1,4 @@
-package Visuals.ChunkRenderer.Textures;
+package Visuals.Textures;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,8 +16,8 @@ import javax.imageio.ImageIO;
 public class TextureManager {
 
     private BufferedImage [][]blockTextures = new BufferedImage[15][6];
-    private String blockFilePaths[] = {null, "Visuals/ChunkRenderer/Textures/Blorb.png", "Visuals/ChunkRenderer/Textures/Blorb.png", "Visuals/ChunkRenderer/Textures/Blorb.png"
-    , "Visuals/ChunkRenderer/Textures/Blorb.png"};
+    private String blockFilePaths[] = {null, "Visuals/Textures/Grass.png", "Visuals/Textures/Block.png", "Visuals/Textures/Sand.png"
+    , "Visuals/Textures/Blorb.png"};
 
     public TextureManager(){
         spliceAndStore(1);

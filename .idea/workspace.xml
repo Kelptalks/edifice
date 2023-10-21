@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5e20146c-a053-4fc2-ac87-0975c41d9042" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/chunkRendering/RaycastRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/ChunkRenderer/chunkRendering/RaycastRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/Textures/Block.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/Block.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/Textures/Blorb.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/Blorb.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/Textures/Grass.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/Grass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/Textures/Sand.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/Sand.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/Textures/TextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/TextureManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/ViewPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/ViewPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/chunkRendering/GridDrawingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/chunkRendering/GridDrawingManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/chunkRendering/RaycastRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/chunkRendering/RaycastRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/World/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/Textures/Block.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/Textures/Blorb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/Textures/Grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/Textures/Sand.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/Textures/TextureManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/ViewPort.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/chunkRendering/GridDrawingManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/chunkRendering/RaycastRenderer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/World.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/World/World.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -16,23 +49,27 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2X5R1Nm3S8q9pmVvWhfuMTJJjOg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Spencer\Desktop\Game\edifice\Visuals\ChunkRenderer\chunkRendering" />
@@ -56,7 +93,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1697916740246</updated>
-      <workItem from="1697916741266" duration="241000" />
+      <workItem from="1697916741266" duration="1255000" />
+      <workItem from="1697922734915" duration="1844000" />
     </task>
     <servers />
   </component>
