@@ -29,12 +29,12 @@ public class World{
      *  and track how the octree expands
      */
     public int getBlock(long x, long y, long z){
-        return octree.getBlock(corToKey(x, y, z));
+        return octree.getBlock(corToKey(z, y, x));
     }
 
     //set a block using with 3D cords create a negative system
     public void setBlock(long x, long y, long z, int block){
-        octree.setBlock(corToKey(x, y, z), block);
+        octree.setBlock(corToKey(z, y, x), block);
     }
 
     private long corToKey(long x, long y, long z){

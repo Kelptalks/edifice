@@ -15,17 +15,15 @@ public class RaycastRenderer extends BufferedImage {
     private GridDrawingManager drawingManager;
     private Graphics graphics = this.getGraphics();
     //private World world = new World();
-
+    World world = new World();
 
     public RaycastRenderer(int width, int height) {
         super(width, height, TYPE_4BYTE_ABGR_PRE);
         this.drawingManager = new GridDrawingManager(width, height);
+        world.setBlock(0, 0 ,-1, 4);
 
 
         rayCast();
-
-
-
 
         graphics.drawImage(drawingManager, 0, 0, null);
     }
@@ -42,18 +40,61 @@ public class RaycastRenderer extends BufferedImage {
             for (int yTriangle = 0; yTriangle < yCamRez; yTriangle++){
                 int[] relativeBlockCor = tryCorToBlockCor(xTriangle,yTriangle);
 
-                //get details
-                int blockX = relativeBlockCor[0];
-                int blockY = relativeBlockCor[1];
+                //get the block Cords based off the triangle.
+                long blockX = relativeBlockCor[0] + xCamCor;
+                long blockY = relativeBlockCor[1] + yCamCor;
+                long blockZ = zCamCor;
+
+                //Get What direction the triangle is facing based of the cords.
                 boolean leftFacing = isLeftFacing(xTriangle, yTriangle);
 
-
-
+                // cycle through all blocks that could possibly fill that triangle
+                // and break and draw the first non-translucent block.
+                int[] castedBlock = castBlockCor(blockX, blockY, blockZ, leftFacing);
+                if (castedBlock != null){
+                    drawingManager.drawTriangle(xTriangle, yTriangle, castedBlock[0], castedBlock[1]);
+                }
             }
         }
     }
 
-    public boolean isLeftFacing(int xTriangleCor, int yTriangleCor){
+    private int[] castBlockCor(long blockX, long blockY, long blockZ, boolean leftFacing){
+        int transparent = 0;
+        if (leftFacing){
+            for (int distance = 0; distance < drawDistance; distance++) {
+                //x-1
+                blockX --;
+                if (world.getBlock(blockX, blockY, blockZ) != transparent){
+                    //return the blockType and face type
+                    System.out.println("Traversal distance : " + distance);
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 4};
+                };
+
+                //y-1
+                blockY --;
+                if (world.getBlock(blockX, blockY, blockZ) != transparent){
+                    //return the blockType and face type
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 2};
+                };
+
+                //z-1
+                blockZ--;
+                if (world.getBlock(blockX, blockY, blockZ) != transparent){
+                    //return the blockType and face type
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 0};
+                };
+            }
+        }
+
+        //if right facing
+        else{
+
+        }
+
+        return null;
+    }
+
+    private boolean isLeftFacing(int xTriangleCor, int yTriangleCor){
         //Identify the face orientation
         boolean leftFacing = false;
         if (xTriangleCor % 2 == 0){
@@ -76,11 +117,9 @@ public class RaycastRenderer extends BufferedImage {
     }
 
     //Takes in triangle cords and returns the relative block location
-    public int[] tryCorToBlockCor(int xTriangleCor, int yTriangleCor){
+    private int[] tryCorToBlockCor(int xTriangleCor, int yTriangleCor){
         int blockXCor = (xTriangleCor/2) + (yTriangleCor/2);
         int blockYCor = (yTriangleCor/2) - (xTriangleCor/2);
-
-        System.out.println("Block cords are " + blockXCor + " | " + blockYCor);
 
         //drawingManager.drawTriangle(blockXCor+5, blockYCor+10, 1, 0);
 
@@ -105,14 +144,18 @@ public class RaycastRenderer extends BufferedImage {
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *
      */
+
+    //draw distance
+    private int drawDistance = 1000;
+
     //Render Size
     private int xCamRez = 20;
     private int yCamRez = 20;
 
     //Cam location
-    private long xCamCor = 20;
-    private long yCamCor = 20;
-    private long zCamCor = 20;
+    private long xCamCor = 0;
+    private long yCamCor = 0;
+    private long zCamCor = 0;
 
     private long getXCamCor(){
         return this.xCamCor;
