@@ -5,6 +5,9 @@ package World.Octree;
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
  */
+
+// ! need to add a test that checks if iver block in the tree is set to 0 exepet it.
+
 public class Octree {
 
     private long maxVal;
