@@ -22,9 +22,12 @@ public class Blueprint {
         for (int x = 0; x < 100; x++){
             setBlock(x+2, x, 9, 3);
         }
+        for (int x = 0; x < 100; x++){
+            setBlock(x+3, x, 9, 3);
+        }
 
-        for (int x = 0; x > -100; x--){
-            setBlock(x+2, x, 9, 3);
+        for (int x = 0; x < 100; x++){
+            setBlock(5, 5, x, 2);
         }
     }
 

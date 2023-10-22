@@ -51,7 +51,7 @@ public class RaycastRenderer extends BufferedImage {
 
                 // cycle through all blocks that could possibly fill that triangle
                 // and break and draw the first non-translucent block.
-                int[] castedBlock = castBlockCor(xTriangle, yTriangle, zCamCor, leftFacing);
+                int[] castedBlock = castBlockCor(blockX, blockY, blockZ, leftFacing);
                 if (castedBlock != null){
                     drawingManager.drawTriangle(xTriangle, yTriangle, castedBlock[0], castedBlock[1]);
                 }
@@ -59,27 +59,28 @@ public class RaycastRenderer extends BufferedImage {
         }
     }
 
+    //I think I need to reconfigure based off starting locations.
     private int[] castBlockCor(long blockX, long blockY, long blockZ, boolean leftFacing){
         int transparent = 0;
         if (leftFacing){
             for (int distance = 0; distance < drawDistance; distance++) {
                 //x-1
-                blockX --;
+                blockX ++;
                 if (world.getBlock(blockX, blockY, blockZ) != transparent){
                     //return the blockType and face type
                     //System.out.println("Traversal distance : " + distance);
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 4};
-                };
-
-                //y-1
-                blockY --;
-                if (world.getBlock(blockX, blockY, blockZ) != transparent){
-                    //return the blockType and face type
                     return new int[]{world.getBlock(blockX, blockY, blockZ), 2};
                 };
 
+                //y-1
+                blockY ++;
+                if (world.getBlock(blockX, blockY, blockZ) != transparent){
+                    //return the blockType and face type
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 4};
+                };
+
                 //z-1
-                blockZ--;
+                blockZ-- ;
                 if (world.getBlock(blockX, blockY, blockZ) != transparent){
                     //return the blockType and face type
                     //System.out.println("Traversal distance : " + distance);
@@ -92,18 +93,18 @@ public class RaycastRenderer extends BufferedImage {
         else{
             for (int distance = 0; distance < drawDistance; distance++) {
                 //y-1
-                blockY--;
+                blockY ++;
                 if (world.getBlock(blockX, blockY, blockZ) != transparent) {
                     //return the blockType and face type
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 5};
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 1};
                 }
 
                 //x-1
-                blockX --;
+                blockX ++;
                 if (world.getBlock(blockX, blockY, blockZ) != transparent){
                     //return the blockType and face type
                     //System.out.println("Traversal distance : " + distance);
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 1};
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 5};
                 };
 
                 //z-1
@@ -141,8 +142,8 @@ public class RaycastRenderer extends BufferedImage {
 
     //Takes in triangle cords and returns the relative block location
     private int[] tryCorToBlockCor(int xTriangleCor, int yTriangleCor){
-        int blockXCor = (xTriangleCor/2) + (yTriangleCor/2);
-        int blockYCor = (yTriangleCor/2) - (xTriangleCor/2);
+        int blockXCor = (xTriangleCor/2);
+        int blockYCor = (yTriangleCor/2);i
 
         //drawingManager.drawTriangle(blockXCor+5, blockYCor+10, 1, 0);
 
