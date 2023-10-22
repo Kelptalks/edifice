@@ -5,31 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e20146c-a053-4fc2-ac87-0975c41d9042" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/Textures/Block.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/Block.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/Textures/Blorb.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/Blorb.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/Textures/Grass.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/Grass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/Textures/Sand.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/Sand.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/Textures/TextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/TextureManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/ViewPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/ViewPort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/chunkRendering/GridDrawingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/chunkRendering/GridDrawingManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/ChunkRenderer/chunkRendering/RaycastRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/chunkRendering/RaycastRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/Textures/Block.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/Textures/Blorb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/Textures/Grass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/Textures/Sand.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/Textures/TextureManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/ViewPort.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/chunkRendering/GridDrawingManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ChunkRenderer/chunkRendering/RaycastRenderer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/World.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/World/World.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1697916740246</updated>
       <workItem from="1697916741266" duration="1255000" />
-      <workItem from="1697922734915" duration="1844000" />
+      <workItem from="1697922734915" duration="2529000" />
     </task>
     <servers />
   </component>

@@ -7,7 +7,7 @@ package World.Blueprint;
  */
 public class Blueprint {
     public Blueprint(int xSize, int ySize, int zSize){
-        
+
     }
 
 }
