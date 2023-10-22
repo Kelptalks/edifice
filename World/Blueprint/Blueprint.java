@@ -12,6 +12,20 @@ public class Blueprint {
     public Blueprint(int xSize, int ySize, int zSize){
         bluePrint = new int[xSize][ySize][zSize];
         centerOrigin(xSize, ySize, zSize);
+
+        for (int x = 0; x< xSize; x++){
+            for (int y = 0; y< ySize; y++){
+                setBlock(x, y, 8, 1);
+            }
+        }
+
+        for (int x = 0; x < 100; x++){
+            setBlock(x+2, x, 9, 3);
+        }
+
+        for (int x = 0; x > -100; x--){
+            setBlock(x+2, x, 9, 3);
+        }
     }
 
     //Creates an origin center so negative cords can be allowed.
@@ -23,9 +37,9 @@ public class Blueprint {
     }
 
     //Get the block
-    public int getBlock(int xCor, int yCor, int zCor){
-        if (checkIfInBounds(xCor, yCor, zCor)) {
-            return bluePrint[xCor + origin[0]][yCor + origin[1]][zCor + origin[2]];
+    public int getBlock(long xCor, long yCor, long zCor){
+        if (checkIfInBounds(xCor, yCor, zCor)){
+            return bluePrint[(int) (xCor + origin[0])][(int) (yCor + origin[1])][(int) (zCor + origin[2])];
         }
         return 0;
     }
@@ -38,14 +52,17 @@ public class Blueprint {
     }
 
     //Check cords
-    public boolean checkIfInBounds(int xCor, int yCor, int zCor){
-        if ((xCor >= - origin[0]) && xCor < (bluePrint.length - origin[0])){
-            if ((yCor >= - origin[1]) && yCor < (bluePrint[0].length - origin[1])){
-                if ((yCor >= - origin[2]) && yCor < (bluePrint[0][0].length - origin[2])){
+    public boolean checkIfInBounds(long xCor, long yCor, long zCor){
+        //System.out.print(xCor + " | " + yCor + " | " + zCor);
+        if ((xCor + origin[0] >= 0) && xCor < (bluePrint.length - origin[0])){
+            if ((yCor + origin[1] >= 0) && yCor < (bluePrint[0].length - origin[1])){
+                if ((zCor + origin[2] >= 0) && zCor < (bluePrint[0][0].length - origin[2])){
+                    //System.out.println("true");
                     return true;
                 }
             }
         }
+        //System.out.println("false");
         return false;
     }
 }

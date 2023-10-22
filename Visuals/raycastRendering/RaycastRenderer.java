@@ -1,5 +1,6 @@
-package Visuals.chunkRendering;
+package Visuals.raycastRendering;
 
+import World.Blueprint.Blueprint;
 import World.World;
 
 import java.awt.*;
@@ -13,8 +14,7 @@ public class RaycastRenderer extends BufferedImage {
 
     private GridDrawingManager drawingManager;
     private Graphics graphics = this.getGraphics();
-    //private World world = new World();
-    World world = new World();
+    private Blueprint world = new Blueprint(1000, 1000, 1000);
 
     public RaycastRenderer(int width, int height) {
         super(width, height, TYPE_4BYTE_ABGR_PRE);
@@ -24,7 +24,7 @@ public class RaycastRenderer extends BufferedImage {
         System.out.println(world.getBlock(100,0, -1));
         System.out.println(world.getBlock(101,0, -1));
 
-        //rayCast();
+        rayCast();
 
         graphics.drawImage(drawingManager, 0, 0, null);
     }
@@ -51,7 +51,7 @@ public class RaycastRenderer extends BufferedImage {
 
                 // cycle through all blocks that could possibly fill that triangle
                 // and break and draw the first non-translucent block.
-                int[] castedBlock = castBlockCor(blockX, blockY, blockZ, leftFacing);
+                int[] castedBlock = castBlockCor(xTriangle, yTriangle, zCamCor, leftFacing);
                 if (castedBlock != null){
                     drawingManager.drawTriangle(xTriangle, yTriangle, castedBlock[0], castedBlock[1]);
                 }
@@ -67,7 +67,7 @@ public class RaycastRenderer extends BufferedImage {
                 blockX --;
                 if (world.getBlock(blockX, blockY, blockZ) != transparent){
                     //return the blockType and face type
-                    System.out.println("Traversal distance : " + distance);
+                    //System.out.println("Traversal distance : " + distance);
                     return new int[]{world.getBlock(blockX, blockY, blockZ), 4};
                 };
 
@@ -82,7 +82,7 @@ public class RaycastRenderer extends BufferedImage {
                 blockZ--;
                 if (world.getBlock(blockX, blockY, blockZ) != transparent){
                     //return the blockType and face type
-                    System.out.println("Traversal distance : " + distance);
+                    //System.out.println("Traversal distance : " + distance);
                     return new int[]{world.getBlock(blockX, blockY, blockZ), 0};
                 };
             }
@@ -102,7 +102,7 @@ public class RaycastRenderer extends BufferedImage {
                 blockX --;
                 if (world.getBlock(blockX, blockY, blockZ) != transparent){
                     //return the blockType and face type
-                    System.out.println("Traversal distance : " + distance);
+                    //System.out.println("Traversal distance : " + distance);
                     return new int[]{world.getBlock(blockX, blockY, blockZ), 1};
                 };
 
@@ -172,13 +172,13 @@ public class RaycastRenderer extends BufferedImage {
     private int drawDistance = 1000;
 
     //Render Size
-    private int xCamRez = 20;
-    private int yCamRez = 20;
+    private int xCamRez = 50;
+    private int yCamRez = 50;
 
     //Cam location
-    private long xCamCor = 100;
-    private long yCamCor = 10;
-    private long zCamCor = 10;
+    private long xCamCor = 20;
+    private long yCamCor = 20;
+    private long zCamCor = 20;
 
     private long getXCamCor(){
         return this.xCamCor;

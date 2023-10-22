@@ -1,7 +1,7 @@
 package Visuals;
 
 import Constants.Constants;
-import Visuals.chunkRendering.RaycastRenderer;
+import Visuals.raycastRendering.RaycastRenderer;
 
 import javax.swing.*;
 import java.awt.*;

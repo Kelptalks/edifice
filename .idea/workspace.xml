@@ -7,12 +7,15 @@
     <list default="true" id="5e20146c-a053-4fc2-ac87-0975c41d9042" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/ViewPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/ViewPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/chunkRendering/GridDrawingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/raycastRendering/GridDrawingManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/chunkRendering/RaycastRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/Octree/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/Octree/Octree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/edifice/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ViewPort.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/ViewPort.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/chunkRendering/GridDrawingManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/chunkRendering/RaycastRenderer.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Blueprint/Blueprint.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/World/Blueprint/Blueprint.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Octree/Octree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/World/Octree/Octree.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +87,7 @@
       <workItem from="1697922734915" duration="2529000" />
       <workItem from="1697935257681" duration="1381000" />
       <workItem from="1697937112380" duration="595000" />
-      <workItem from="1697983393303" duration="1524000" />
+      <workItem from="1697983393303" duration="4652000" />
     </task>
     <servers />
   </component>
