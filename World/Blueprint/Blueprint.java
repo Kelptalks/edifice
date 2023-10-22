@@ -20,10 +20,10 @@ public class Blueprint {
         }
 
         for (int x = 0; x < 100; x++){
-            setBlock(x+2, x, 9, 3);
+            setBlock(x+2, x, 9, 5);
         }
         for (int x = 0; x < 100; x++){
-            setBlock(x+3, x, 9, 3);
+            setBlock(x+3, x, 9, 5);
         }
 
         for (int x = 0; x < 100; x++){

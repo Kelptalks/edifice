@@ -96,7 +96,7 @@ public class RaycastRenderer extends BufferedImage {
                 blockY ++;
                 if (world.getBlock(blockX, blockY, blockZ) != transparent) {
                     //return the blockType and face type
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 1};
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 5};
                 }
 
                 //x-1
@@ -104,7 +104,7 @@ public class RaycastRenderer extends BufferedImage {
                 if (world.getBlock(blockX, blockY, blockZ) != transparent){
                     //return the blockType and face type
                     //System.out.println("Traversal distance : " + distance);
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 5};
+                    return new int[]{world.getBlock(blockX, blockY, blockZ), 1};
                 };
 
                 //z-1
@@ -143,7 +143,7 @@ public class RaycastRenderer extends BufferedImage {
     //Takes in triangle cords and returns the relative block location
     private int[] tryCorToBlockCor(int xTriangleCor, int yTriangleCor){
         int blockXCor = (xTriangleCor/2);
-        int blockYCor = (yTriangleCor/2);i
+        int blockYCor = (yTriangleCor/2);
 
         //drawingManager.drawTriangle(blockXCor+5, blockYCor+10, 1, 0);
 

@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5e20146c-a053-4fc2-ac87-0975c41d9042" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/Textures/TextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/TextureManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Blueprint/Blueprint.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/World/Blueprint/Blueprint.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +80,8 @@
       <workItem from="1697935257681" duration="1381000" />
       <workItem from="1697937112380" duration="595000" />
       <workItem from="1697983393303" duration="4671000" />
-      <workItem from="1697988414656" duration="640000" />
+      <workItem from="1697988414656" duration="858000" />
+      <workItem from="1697989389675" duration="443000" />
     </task>
     <servers />
   </component>

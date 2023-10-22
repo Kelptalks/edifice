@@ -17,7 +17,7 @@ public class TextureManager {
 
     private BufferedImage [][]blockTextures = new BufferedImage[15][6];
     private String blockFilePaths[] = {null, "Visuals/Textures/Grass.png", "Visuals/Textures/Block.png", "Visuals/Textures/Sand.png"
-    , "Visuals/Textures/Blorb.png"};
+    , "Visuals/Textures/Blorb.png", "Visuals/Textures/Debug.png"};
 
     public TextureManager(){
         spliceAndStore(1);
