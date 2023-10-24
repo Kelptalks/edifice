@@ -36,118 +36,72 @@ public class RaycastRenderer extends BufferedImage {
      */
     public void rayCast(){
 
-        //cycle through projection cords
-        for (int xTriangle = 0; xTriangle < xCamRez; xTriangle++){
-            for (int yTriangle = 0; yTriangle < yCamRez; yTriangle++){
-                int[] relativeBlockCor = tryCorToBlockCor(xTriangle,yTriangle);
+        //cycle through all blocks in a flat plane
+        //each of these blocks will be used fo there top 2 triangles
+        //the starting locaiton of each cast will take place
+        //on top of each triangle
 
-                //get the block Cords based off the triangle.
-                long blockX = relativeBlockCor[0] + xCamCor;
-                long blockY = relativeBlockCor[1] + yCamCor;
-                long blockZ = zCamCor;
 
-                //Get What direction the triangle is facing based of the cords.
-                boolean leftFacing = isLeftFacing(xTriangle, yTriangle);
+        for (int y = 0; y < xCamRez; y++){
+           for (int x = 0; x < yCamRez; x++){
 
-                // cycle through all blocks that could possibly fill that triangle
-                // and break and draw the first non-translucent block.
-                int[] castedBlock = castBlockCor(blockX, blockY, blockZ, leftFacing);
-                if (castedBlock != null){
-                    drawingManager.drawTriangle(xTriangle, yTriangle, castedBlock[0], castedBlock[1]);
-                }
-            }
+               //This draws a block top based off 2 triangles inputs
+               drawingManager.drawTopBlock(x+12, y-14, pathLeftTop(x, y), pathRightTop(x, y));
+           }
         }
+        System.out.println(world.getBlock(-6, -6, -14));
     }
 
-    //I think I need to reconfigure based off starting locations.
-    private int[] castBlockCor(long blockX, long blockY, long blockZ, boolean leftFacing){
-        int transparent = 0;
-        if (leftFacing){
-            for (int distance = 0; distance < drawDistance; distance++) {
-                //x-1
-                blockX ++;
-                if (world.getBlock(blockX, blockY, blockZ) != transparent){
-                    //return the blockType and face type
-                    //System.out.println("Traversal distance : " + distance);
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 2};
-                };
+    private int[] pathLeftTop(int x, int y){
+        int z = 0;
+        int block = world.getBlock(x, y, z);
+        for (int distance = 0; distance < drawDistance; distance++)
+        {
+            x--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                return new int[]{block, 4};
+            }
 
-                //y-1
-                blockY ++;
-                if (world.getBlock(blockX, blockY, blockZ) != transparent){
-                    //return the blockType and face type
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 4};
-                };
+            y--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                return new int[]{block, 2};
+            }
 
-                //z-1
-                blockZ-- ;
-                if (world.getBlock(blockX, blockY, blockZ) != transparent){
-                    //return the blockType and face type
-                    //System.out.println("Traversal distance : " + distance);
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 0};
-                };
+            z--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                return new int[]{block, 0};
             }
         }
-
-        //if right facing
-        else{
-            for (int distance = 0; distance < drawDistance; distance++) {
-                //y-1
-                blockY ++;
-                if (world.getBlock(blockX, blockY, blockZ) != transparent) {
-                    //return the blockType and face type
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 5};
-                }
-
-                //x-1
-                blockX ++;
-                if (world.getBlock(blockX, blockY, blockZ) != transparent){
-                    //return the blockType and face type
-                    //System.out.println("Traversal distance : " + distance);
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 1};
-                };
-
-                //z-1
-                blockZ--;
-                if (world.getBlock(blockX, blockY, blockZ) != transparent){
-                    //return the blockType and face type
-                    return new int[]{world.getBlock(blockX, blockY, blockZ), 3};
-                };
-            }
-        }
-        return null;
+        return new int[]{1, 0};
     }
 
-    private boolean isLeftFacing(int xTriangleCor, int yTriangleCor){
-        //Identify the face orientation
-        boolean leftFacing = false;
-        if (xTriangleCor % 2 == 0){
-            if (yTriangleCor % 2 == 0){
-                leftFacing = true;
+    private int[] pathRightTop(int x, int y){
+        int z = 0;
+        int block = world.getBlock(x, y, z);
+        for (int distance = 0; distance < drawDistance; distance++)
+        {
+            y--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                return new int[]{block, 1};
             }
-            else {
-                leftFacing = false;
+
+            x--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                return new int[]{block, 5};
+            }
+
+            z--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                return new int[]{block, 3};
             }
         }
-        else {
-            if (yTriangleCor % 2 == 0){
-                leftFacing = false;
-            }
-            else {
-                leftFacing = true;
-            }
-        }
-        return leftFacing;
-    }
-
-    //Takes in triangle cords and returns the relative block location
-    private int[] tryCorToBlockCor(int xTriangleCor, int yTriangleCor){
-        int blockXCor = (xTriangleCor/2);
-        int blockYCor = (yTriangleCor/2);
-
-        //drawingManager.drawTriangle(blockXCor+5, blockYCor+10, 1, 0);
-
-        return new int[]{blockXCor, blockYCor};
+        return new int[]{1, 3};
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -170,16 +124,16 @@ public class RaycastRenderer extends BufferedImage {
      */
 
     //draw distance
-    private int drawDistance = 1000;
+    private int drawDistance = 50;
 
     //Render Size
-    private int xCamRez = 50;
-    private int yCamRez = 50;
+    private int xCamRez = 30;
+    private int yCamRez = 30;
 
     //Cam location
-    private long xCamCor = 20;
-    private long yCamCor = 20;
-    private long zCamCor = 20;
+    private long xCamCor = 0;
+    private long yCamCor = 0;
+    private long zCamCor = 0;
 
     private long getXCamCor(){
         return this.xCamCor;

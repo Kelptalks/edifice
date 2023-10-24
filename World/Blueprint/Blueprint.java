@@ -13,22 +13,35 @@ public class Blueprint {
         bluePrint = new int[xSize][ySize][zSize];
         centerOrigin(xSize, ySize, zSize);
 
-        for (int x = 0; x< xSize; x++){
-            for (int y = 0; y< ySize; y++){
-                setBlock(x, y, 8, 1);
+
+
+        for (int x = -5; x < 5; x++){
+            for (int y = -5; y < 5; y++){
+                setBlock(x, y, -13, 3);
             }
         }
 
-        for (int x = 0; x < 100; x++){
-            setBlock(x+2, x, 9, 5);
-        }
-        for (int x = 0; x < 100; x++){
-            setBlock(x+3, x, 9, 5);
+        for (int x = -5; x < 5; x++){
+            for (int y = -5; y < 5; y++){
+                setBlock(x, y, -13, 3);
+            }
         }
 
-        for (int x = 0; x < 100; x++){
-            setBlock(5, 5, x, 2);
+        for (int x = -3; x < 3; x++){
+            for (int y = -3; y < 3; y++){
+                for (int z = -13; z < -5; z++) {
+                    setBlock(x, y, z, 2);
+                }
+            }
         }
+
+        for (int x = -5; x < 5; x++){
+            for (int y = -5; y < 5; y++){
+                setBlock(x, y, -13, 3);
+            }
+        }
+
+
     }
 
     //Creates an origin center so negative cords can be allowed.

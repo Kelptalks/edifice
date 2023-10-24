@@ -24,6 +24,7 @@ public class TextureManager {
         spliceAndStore(2);
         spliceAndStore(3);
         spliceAndStore(4);
+        spliceAndStore(5);
     }
 
     public BufferedImage[] getBlockTexture(int blockType){
