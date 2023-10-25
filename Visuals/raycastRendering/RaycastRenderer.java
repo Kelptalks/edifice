@@ -1,8 +1,7 @@
 package Visuals.raycastRendering;
 
 import World.Blueprint.Blueprint;
-import World.World;
-import World.PlayerData;
+import Constants.PlayerData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -20,7 +19,6 @@ public class RaycastRenderer extends BufferedImage {
     public RaycastRenderer(int width, int height) {
         super(width, height, TYPE_4BYTE_ABGR_PRE);
         this.drawingManager = new GridDrawingManager(width, height);
-
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,11 +32,10 @@ public class RaycastRenderer extends BufferedImage {
         //each of these blocks will be used fo there top 2 triangles
         //the starting locaiton of each cast will take place
         //on top of each triangle
-
         for (long y = 0; y < yCamRez; y++){
            for (long x =  0; x < xCamRez; x++){
                //This draws a block top based off 2 triangles inputs
-               drawingManager.drawTopBlock((int) x, (int) y-25, pathLeftTop(x + PlayerData.playerXCamCor, y+PlayerData.playerYCamCor), pathRightTop(x + PlayerData.playerXCamCor, y+PlayerData.playerYCamCor));
+               drawingManager.drawTopBlock((int) x, (int) y, pathLeftTop(x + PlayerData.playerXCamCor, y+PlayerData.playerYCamCor), pathRightTop(x + PlayerData.playerXCamCor, y+PlayerData.playerYCamCor));
            }
         }
         graphics.drawImage(drawingManager, 0, 0, null);
@@ -97,16 +94,15 @@ public class RaycastRenderer extends BufferedImage {
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Drawing
+     *  Editing blocks
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *
      */
-    public void draw(){
-        drawingManager.testDrawTriangleGrid();
-        drawingManager.drawTriangle(+5, +5, 1, 2);
-        graphics.drawImage(drawingManager, 0, 0, null);
-    }
 
+    //take in the screen cords and return block cords to be modified
+    public void pathModBlock(int screenX, int screenY){
+        //convert screen cords to block cords
+    }
 
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -119,6 +115,6 @@ public class RaycastRenderer extends BufferedImage {
     private int drawDistance = 500;
 
     //Render Size
-    private int xCamRez = 100;
-    private int yCamRez = 100;
+    private int xCamRez = 75;
+    private int yCamRez = 75;
 }

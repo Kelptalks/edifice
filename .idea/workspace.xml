@@ -5,20 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e20146c-a053-4fc2-ac87-0975c41d9042" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/World/PlayerData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controls/KeyBoardInputs.java" beforeDir="false" afterPath="$PROJECT_DIR$/Controls/KeyBoardInputs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/ViewPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/ViewPort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Visuals/raycastRendering/GridDrawingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/raycastRendering/GridDrawingManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/World/PlayerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Constants/PlayerData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/edifice/Controls/KeyBoardInputs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Controls/KeyBoardInputs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ViewPort.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/ViewPort.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/GridDrawingManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/GridDrawingManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/RaycastRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/RaycastRenderer.class" afterDir="false" />
     </list>
@@ -47,24 +41,30 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2X5R1Nm3S8q9pmVvWhfuMTJJjOg" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Spencer\Desktop\Game\edifice\Visuals\ChunkRenderer\chunkRendering" />
@@ -97,11 +97,14 @@
       <workItem from="1697989389675" duration="6201000" />
       <workItem from="1698114116989" duration="938000" />
       <workItem from="1698159426533" duration="13843000" />
-      <workItem from="1698250903127" duration="301000" />
+      <workItem from="1698250903127" duration="1981000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

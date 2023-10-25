@@ -1,6 +1,6 @@
 package Controls;
 
-import World.PlayerData;
+import Constants.PlayerData;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,10 +21,8 @@ public class KeyBoardInputs implements KeyListener {
                 PlayerData.playerYCamCor += 1;
                 break;
             case KeyEvent.VK_W:
-                System.out.println("hello!");
                 PlayerData.playerYCamCor -= 1;
                 PlayerData.playerXCamCor -= 1;
-                System.out.println(PlayerData.playerYCamCor);
                 break;
             case KeyEvent.VK_S:
                 PlayerData.playerYCamCor += 1;

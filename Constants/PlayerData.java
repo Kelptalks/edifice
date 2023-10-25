@@ -1,4 +1,4 @@
-package World;
+package Constants;
 
 public class PlayerData {
 

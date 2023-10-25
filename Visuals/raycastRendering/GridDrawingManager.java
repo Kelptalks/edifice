@@ -19,6 +19,9 @@ public class GridDrawingManager extends BufferedImage {
     private static final TextureManager textureManager = new TextureManager();
     Graphics2D graphics = this.createGraphics();
 
+    private int xCenter = Constants.SCREEN_X_REZ/2;
+    private int yCenter = Constants.SCREEN_Y_REZ/2;
+
     GridDrawingManager(int xRez, int yRez) {
         super(xRez,yRez, TYPE_4BYTE_ABGR_PRE);
     }
@@ -31,7 +34,7 @@ public class GridDrawingManager extends BufferedImage {
 
     //Draws a triangle in a specific cord in the triangle grid
     public void drawTriangle(int x, int y, int blockType, int triangle) {
-        graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), x * Constants.BLOCK_WIDTH_FACTOR, y * Constants.BLOCK_HEIGHT_FACTOR, null);
+        graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), (x * Constants.BLOCK_WIDTH_FACTOR) + xCenter, (y * Constants.BLOCK_HEIGHT_FACTOR) - yCenter, null);
     }
 
     public void drawBlock(int x, int y, int blockType) {
@@ -70,7 +73,7 @@ public class GridDrawingManager extends BufferedImage {
                 offset = 0;
             }
             for (int y = 0; y < 34; y++) {
-                g2d.drawImage(textureManager.getFaceTexture(1, 1), x * 32, y * 32 + offset, null);
+                g2d.drawImage(textureManager.getFaceTexture(1, 1), (x * 32), (y * 32) + offset, null);
             }
         }
     }
