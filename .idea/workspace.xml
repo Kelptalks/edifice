@@ -5,16 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e20146c-a053-4fc2-ac87-0975c41d9042" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/World/PlayerData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/Textures/TextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/Textures/TextureManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controls/KeyBoardInputs.java" beforeDir="false" afterPath="$PROJECT_DIR$/Controls/KeyBoardInputs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visuals/ViewPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/ViewPort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Visuals/raycastRendering/GridDrawingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/raycastRendering/GridDrawingManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/Textures/TextureManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/Textures/TextureManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Controls/KeyBoardInputs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Controls/KeyBoardInputs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GameFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/ViewPort.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/ViewPort.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/GridDrawingManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/GridDrawingManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/RaycastRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/RaycastRenderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Blueprint/Blueprint.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/World/Blueprint/Blueprint.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +96,8 @@
       <workItem from="1697988414656" duration="858000" />
       <workItem from="1697989389675" duration="6201000" />
       <workItem from="1698114116989" duration="938000" />
-      <workItem from="1698159426533" duration="7017000" />
+      <workItem from="1698159426533" duration="13843000" />
+      <workItem from="1698250903127" duration="301000" />
     </task>
     <servers />
   </component>

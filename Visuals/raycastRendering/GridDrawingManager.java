@@ -52,6 +52,10 @@ public class GridDrawingManager extends BufferedImage {
         drawTriangle(x + 1, y, triangle2[0], triangle2[1]);
     }
 
+    public void screenCorToTopBlock(){
+
+    }
+
     public void testDrawTriangleGrid() {
         Graphics2D g2d = this.createGraphics();
         g2d.setColor(Color.BLACK);

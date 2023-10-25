@@ -2,6 +2,7 @@ package Visuals.raycastRendering;
 
 import World.Blueprint.Blueprint;
 import World.World;
+import World.PlayerData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,14 +20,7 @@ public class RaycastRenderer extends BufferedImage {
     public RaycastRenderer(int width, int height) {
         super(width, height, TYPE_4BYTE_ABGR_PRE);
         this.drawingManager = new GridDrawingManager(width, height);
-        world.setBlock(100, 0 ,-1, 4);
 
-        System.out.println(world.getBlock(100,0, -1));
-        System.out.println(world.getBlock(101,0, -1));
-
-        rayCast();
-
-        graphics.drawImage(drawingManager, 0, 0, null);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,18 +35,16 @@ public class RaycastRenderer extends BufferedImage {
         //the starting locaiton of each cast will take place
         //on top of each triangle
 
-
-        for (int y = 0; y < xCamRez; y++){
-           for (int x = 0; x < yCamRez; x++){
-
+        for (long y = 0; y < yCamRez; y++){
+           for (long x =  0; x < xCamRez; x++){
                //This draws a block top based off 2 triangles inputs
-               drawingManager.drawTopBlock(x+12, y-14, pathLeftTop(x, y), pathRightTop(x, y));
+               drawingManager.drawTopBlock((int) x, (int) y-25, pathLeftTop(x + PlayerData.playerXCamCor, y+PlayerData.playerYCamCor), pathRightTop(x + PlayerData.playerXCamCor, y+PlayerData.playerYCamCor));
            }
         }
-        System.out.println(world.getBlock(-6, -6, -14));
+        graphics.drawImage(drawingManager, 0, 0, null);
     }
 
-    private int[] pathLeftTop(int x, int y){
+    private int[] pathLeftTop(long x, long y){
         int z = 0;
         int block = world.getBlock(x, y, z);
         for (int distance = 0; distance < drawDistance; distance++)
@@ -78,7 +70,7 @@ public class RaycastRenderer extends BufferedImage {
         return new int[]{1, 0};
     }
 
-    private int[] pathRightTop(int x, int y){
+    private int[] pathRightTop(long x, long y){
         int z = 0;
         int block = world.getBlock(x, y, z);
         for (int distance = 0; distance < drawDistance; distance++)
@@ -124,26 +116,9 @@ public class RaycastRenderer extends BufferedImage {
      */
 
     //draw distance
-    private int drawDistance = 50;
+    private int drawDistance = 500;
 
     //Render Size
-    private int xCamRez = 30;
-    private int yCamRez = 30;
-
-    //Cam location
-    private long xCamCor = 0;
-    private long yCamCor = 0;
-    private long zCamCor = 0;
-
-    private long getXCamCor(){
-        return this.xCamCor;
-    }
-
-    private long getYCamCor(){
-        return this.yCamCor;
-    }
-
-    private long getZCamCor(){
-        return this.zCamCor;
-    }
+    private int xCamRez = 100;
+    private int yCamRez = 100;
 }

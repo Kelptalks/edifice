@@ -19,4 +19,9 @@ public class ViewPort extends JPanel {
         Graphics2D g2D = (Graphics2D) g;
         g2D.drawImage(rayCaster, 0, 0, this); // Assuming rayCaster is a BufferedImage
     }
+
+    public void renderView(){
+        rayCaster.rayCast();
+        paintComponent(this.getGraphics());
+    }
 }

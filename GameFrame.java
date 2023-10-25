@@ -1,4 +1,6 @@
 import Constants.Constants;
+import Controls.KeyBoardInputs;
+import Controls.MouseInputs;
 import Visuals.ViewPort;
 
 import javax.swing.*;
@@ -28,10 +30,15 @@ public class GameFrame extends JFrame {
 
         //mainMenu();
         this.add(viewPort);
+        this.addMouseListener(new MouseInputs());
+        this.addKeyListener(new KeyBoardInputs());
 
     }
 
-
+    public void renderView(){
+        viewPort.renderView();
+        this.repaint();
+    }
 
     public void mainMenu(){
         JButton Load = new JButton("Load Save");
