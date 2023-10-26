@@ -1,4 +1,4 @@
-package GUI.Controls;
+package GUI.Menus.Renderer.Controls;
 
 import GameData.GameData;
 

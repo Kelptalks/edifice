@@ -36,11 +36,11 @@ public class RaycastRenderer extends BufferedImage {
         for (long y = 0; y < yCamRez; y++){
            for (long x =  0; x < xCamRez; x++){
                //This draws a block top based off 2 triangles inputs
-               drawingManager.drawTopBlock((int) x, (int) y, pathLeftTop(x + GameData.playerXCamCor, y+ GameData.playerYCamCor), pathRightTop(x + GameData.playerXCamCor, y+ GameData.playerYCamCor));
+               drawingManager.drawTopBlock((int) x, (int) y, pathLeftTop(x + GameData.playerXCamCor, y+ GameData.playerYCamCor),
+                        pathRightTop(x + GameData.playerXCamCor, y+ GameData.playerYCamCor));
            }
         }
         graphics.drawImage(drawingManager, 0, 0, null);
-        System.out.println("drawing");
     }
 
     private int[] pathLeftTop(long x, long y){

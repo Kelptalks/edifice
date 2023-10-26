@@ -1,8 +1,7 @@
 package GUI;
 
-import GUI.Controls.KeyBoardInputs;
-import GUI.Controls.MouseInputs;
-import GUI.Menus.Main.Main;
+import GUI.Menus.Renderer.Controls.KeyBoardInputs;
+import GUI.Menus.Renderer.Controls.MouseInputs;
 import GameData.GameData;
 import GUI.Menus.Renderer.Renderer;
 
@@ -29,23 +28,20 @@ public class GUI extends JFrame {
 
         this.setSize(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        //add keyInputs
-        this.setVisible(true);
         this.setTitle("Telp");
 
         //add keyInputs
-        this.addMouseListener(new MouseInputs());
-        this.addKeyListener(new KeyBoardInputs());
 
         gameData.menu = new Renderer(gameData);
         this.updateMenu();
 
+        this.setVisible(true);
     }
 
     public void updateMenu(){
         this.add((Component) gameData.menu);
         this.revalidate();
+        this.repaint();
     }
 
 }

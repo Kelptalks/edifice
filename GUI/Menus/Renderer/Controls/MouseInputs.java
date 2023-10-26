@@ -1,4 +1,4 @@
-package GUI.Controls;
+package GUI.Menus.Renderer.Controls;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

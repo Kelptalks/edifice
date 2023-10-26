@@ -1,0 +1,36 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  Rendering
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *	1. Screen based blockCulling
+ *
+ *	2. Mouse to block screen Coords
+ *
+ *	3. Shadows
+ *
+ */
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  Menus
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  
+ *	1. Main Menu
+ *
+ *	2. Custom Windows
+ *
+ *	3. Settings Menu
+ *
+ *	4. Saving/Loading Menu
+ *
+ */
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  World
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  
+ *	1. Fix octree coord to key conversion
+ *
+ *	2. Saving worlds/Blueprints to file
+ *
+ *	3. Perlin noise terrain gen
+ *
+ */
