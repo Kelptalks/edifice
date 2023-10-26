@@ -1,10 +1,10 @@
-package GUI.Visuals.raycastRendering;
+package GUI.Menus.Renderer.raycastRendering;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import GUI.Visuals.Textures.TextureManager;
+import GUI.Menus.Renderer.Textures.TextureManager;
 import GameData.GameData;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

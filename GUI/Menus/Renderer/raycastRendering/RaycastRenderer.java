@@ -1,4 +1,4 @@
-package GUI.Visuals.raycastRendering;
+package GUI.Menus.Renderer.raycastRendering;
 
 import World.DataStorage.Blueprint.Blueprint;
 import GameData.GameData;
@@ -40,6 +40,7 @@ public class RaycastRenderer extends BufferedImage {
            }
         }
         graphics.drawImage(drawingManager, 0, 0, null);
+        System.out.println("drawing");
     }
 
     private int[] pathLeftTop(long x, long y){

@@ -2,11 +2,12 @@ package GUI;
 
 import GUI.Controls.KeyBoardInputs;
 import GUI.Controls.MouseInputs;
-import GUI.MainMenu.Menu;
+import GUI.Menus.Main.Main;
 import GameData.GameData;
-import GUI.Visuals.ViewPort;
+import GUI.Menus.Renderer.Renderer;
 
 import javax.swing.*;
+import java.awt.*;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  GameFrame
@@ -18,31 +19,33 @@ public class GUI extends JFrame {
      *  Constructor
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
-    private ViewPort viewPort;
+
     private GameData gameData;
-    private Menu menu;
+
     public GUI(GameData gameData){
         super();
 
         this.gameData = gameData;
-        this.menu = new Menu(gameData);
-        this.viewPort = new ViewPort(gameData);
 
         this.setSize(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-
+        //add keyInputs
         this.setVisible(true);
         this.setTitle("Telp");
 
-        //mainMenu();
+        //add keyInputs
         this.addMouseListener(new MouseInputs());
         this.addKeyListener(new KeyBoardInputs());
 
-        this.add(viewPort);
+        gameData.menu = new Renderer(gameData);
+        this.updateMenu();
+
     }
 
-    public void renderView(){
-        viewPort.renderView();
+    public void updateMenu(){
+        this.add((Component) gameData.menu);
+        this.revalidate();
     }
+
 }

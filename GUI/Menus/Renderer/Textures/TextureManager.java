@@ -1,4 +1,4 @@
-package GUI.Visuals.Textures;
+package GUI.Menus.Renderer.Textures;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,8 +16,8 @@ import javax.imageio.ImageIO;
 public class TextureManager {
 
     private BufferedImage [][]blockTextures = new BufferedImage[15][6];
-    private String blockFilePaths[] = {null, "GUI/Visuals/Textures/Grass.png", "GUI/Visuals/Textures/Block.png", "GUI/Visuals/Textures/Sand.png"
-    , "GUI/Visuals/Textures/Blorb.png", "GUI/Visuals/Textures/Debug.png"};
+    private String blockFilePaths[] = {null, "GUI/Menus/Renderer/Textures/Grass.png", "GUI/Menus/Renderer/Textures/Block.png", "GUI/Menus/Renderer/Textures/Sand.png"
+    , "GUI/Menus/Renderer/Textures/Blorb.png", "GUI/Menus/Renderer/Textures/Debug.png"};
 
     public TextureManager(){
         spliceAndStore(1);
