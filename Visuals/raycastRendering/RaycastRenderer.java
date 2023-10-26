@@ -1,6 +1,6 @@
 package Visuals.raycastRendering;
 
-import World.Blueprint.Blueprint;
+import World.DataStorage.Blueprint.Blueprint;
 import Constants.PlayerData;
 
 import java.awt.*;

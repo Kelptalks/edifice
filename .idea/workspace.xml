@@ -5,16 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e20146c-a053-4fc2-ac87-0975c41d9042" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GUI/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/World/TerrainGen/PerlinNoiseGen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controls/KeyBoardInputs.java" beforeDir="false" afterPath="$PROJECT_DIR$/Controls/KeyBoardInputs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/raycastRendering/GridDrawingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/raycastRendering/GridDrawingManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controls/KeyBoardInputs.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Controls/KeyBoardInputs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controls/MouseInputs.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Controls/MouseInputs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/MainMenu/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/PackageTests/OctreTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/PackageTests/OctreTesting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/PlayerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Constants/PlayerData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/DataStorage/Blueprint/Blueprint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/World/Octree/Branch.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/DataStorage/Octree/Branch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/World/Octree/Leaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/DataStorage/Octree/Leaf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/World/Octree/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/DataStorage/Octree/Octree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/World/TerrainGen/TestingTerrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/TerrainGen/TestingTerrain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/World/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/App.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/edifice/Controls/KeyBoardInputs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Controls/KeyBoardInputs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/GridDrawingManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/GridDrawingManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Testing/PackageTests/OctreTesting.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Testing/PackageTests/OctreTesting.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/RaycastRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/RaycastRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Blueprint/Blueprint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Octree/Branch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Octree/Leaf.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Octree/Octree.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/PlayerData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/TerrainGen/TestingTerrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/World/TerrainGen/TestingTerrain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/World.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/World/World.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,23 +68,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "17",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Spencer\Desktop\Game\edifice\Visuals\ChunkRenderer\chunkRendering" />
@@ -97,12 +117,24 @@
       <workItem from="1697989389675" duration="6201000" />
       <workItem from="1698114116989" duration="938000" />
       <workItem from="1698159426533" duration="13843000" />
-      <workItem from="1698250903127" duration="1981000" />
+      <workItem from="1698250903127" duration="2830000" />
+      <workItem from="1698255674881" duration="4834000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

@@ -1,4 +1,4 @@
-package World.Octree;
+package World.DataStorage.Octree;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Leaf Class
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~

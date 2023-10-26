@@ -1,11 +1,12 @@
+package GUI;
+
 import Constants.Constants;
-import Controls.KeyBoardInputs;
-import Controls.MouseInputs;
+import GUI.Controls.KeyBoardInputs;
+import GUI.Controls.MouseInputs;
+import GUI.MainMenu.Menu;
 import Visuals.ViewPort;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -13,13 +14,15 @@ import java.io.IOException;
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
  */
-public class GameFrame extends JFrame {
+public class GUI extends JFrame {
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Constructor
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
     private ViewPort viewPort = new ViewPort();
-    public GameFrame() throws IOException {
+
+    private Menu menu = new Menu();
+    public GUI() throws IOException {
         super();
         this.setSize(Constants.SCREEN_X_REZ, Constants.SCREEN_Y_REZ);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -29,14 +32,9 @@ public class GameFrame extends JFrame {
         this.setTitle("Telp");
 
         //mainMenu();
-        this.add(viewPort);
         this.addMouseListener(new MouseInputs());
         this.addKeyListener(new KeyBoardInputs());
 
-    }
-
-    public void renderView(){
-        viewPort.renderView();
-        this.repaint();
+        this.add(viewPort);
     }
 }

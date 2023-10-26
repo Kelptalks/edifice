@@ -1,4 +1,4 @@
-package Controls;
+package GUI.Controls;
 
 import Constants.PlayerData;
 

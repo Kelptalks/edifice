@@ -1,4 +1,4 @@
-package World.Blueprint;
+package World.DataStorage.Blueprint;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  blueprint
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~

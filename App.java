@@ -1,11 +1,9 @@
-import Testing.Testing;
-import World.Blueprint.Blueprint;
-import World.World;
+import GUI.GUI;
 
 public class App {
     public static void main(String[] args) throws Exception {
         //Testing testing = new Testing();
-        GameFrame gameFrame = new GameFrame();
+        GUI gameFrame = new GUI();
 
         while (true) {
             Thread.sleep(20);

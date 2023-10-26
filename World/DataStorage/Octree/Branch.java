@@ -1,4 +1,5 @@
-package World.Octree;
+package World.DataStorage.Octree;
+
 
 
 import java.util.Scanner;

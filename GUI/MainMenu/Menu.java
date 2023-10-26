@@ -1,4 +1,4 @@
-package GUI;
+package GUI.MainMenu;
 
 import Constants.Constants;
 
@@ -12,6 +12,13 @@ import java.awt.event.ActionListener;
  *  Allows access to settings, saving and loading worlds, and other tools.
  */
 public class Menu extends JLabel {
+
+    public Menu(){
+        mainMenu();
+    }
+
+
+    //LoadGui
     public void mainMenu(){
         JButton Load = new JButton("Load Save");
         this.add(Load);

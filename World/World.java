@@ -1,10 +1,8 @@
 package World;
 
-import World.Octree.Octree;
+import World.DataStorage.Octree.Octree;
 import World.TerrainGen.TerrainGen;
 import World.TerrainGen.TestingTerrain;
-
-import static java.lang.Long.toBinaryString;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  World

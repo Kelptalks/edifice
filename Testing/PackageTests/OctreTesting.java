@@ -1,7 +1,7 @@
 package Testing.PackageTests;
 import Testing.TestingTemplate;
-import World.Octree.Leaf;
-import World.Octree.Octree;
+import World.DataStorage.Octree.Leaf;
+import World.DataStorage.Octree.Octree;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
