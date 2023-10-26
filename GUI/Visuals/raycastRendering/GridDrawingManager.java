@@ -1,11 +1,11 @@
-package Visuals.raycastRendering;
+package GUI.Visuals.raycastRendering;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import Constants.Constants;
-import Visuals.Textures.TextureManager;
+import GUI.Visuals.Textures.TextureManager;
+import GameData.GameData;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  Grid Manager class
@@ -16,14 +16,33 @@ import Visuals.Textures.TextureManager;
 */
 
 public class GridDrawingManager extends BufferedImage {
+
+    //Textures
     private static final TextureManager textureManager = new TextureManager();
+
+
+    //graphics
     Graphics2D graphics = this.createGraphics();
 
-    private int xCenter = Constants.SCREEN_X_REZ/2;
-    private int yCenter = Constants.SCREEN_Y_REZ/2;
 
-    GridDrawingManager(int xRez, int yRez) {
+    //Screen center
+    private int xCenter;
+    private int yCenter;
+
+
+    //Triangle sizes
+    public final int BLOCK_WIDTH_FACTOR = 32;
+    public final int BLOCK_HEIGHT_FACTOR = 16;
+
+    //create gameData class
+    private final GameData gameData;
+
+    //constructor
+    GridDrawingManager(GameData gameData, int xRez, int yRez) {
         super(xRez,yRez, TYPE_4BYTE_ABGR_PRE);
+        this.gameData = gameData;
+
+        this.update();
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -33,10 +52,37 @@ public class GridDrawingManager extends BufferedImage {
      */
 
     //Draws a triangle in a specific cord in the triangle grid
-    public void drawTriangle(int x, int y, int blockType, int triangle) {
-        graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), (x * Constants.BLOCK_WIDTH_FACTOR) + xCenter, (y * Constants.BLOCK_HEIGHT_FACTOR) - yCenter, null);
+    private void drawTriangle(int x, int y, int blockType, int triangle) {
+        graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), (x * BLOCK_WIDTH_FACTOR) + xCenter, (y * BLOCK_HEIGHT_FACTOR) - yCenter, null);
     }
 
+    //draws the top 2 faces of a block, with 2 triangles inputs.
+    public void drawTopBlock(int x, int y, int[] triangle1, int[] triangle2){
+        x = x - y;
+        y = x + y * 2;
+        drawTriangle(x, y, triangle1[0], triangle1[1]);
+        drawTriangle(x + 1, y, triangle2[0], triangle2[1]);
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Update
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *Methods for drawing triangles at specific locations
+     */
+
+    //updates the center position
+    public void update(){
+        this.xCenter = gameData.SCREEN_X_REZ/2;
+        this.yCenter = gameData.SCREEN_Y_REZ/2;
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Debugging
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *Methods for drawing triangles at specific locations
+     */
+
+    //draws a block at a cord
     public void drawBlock(int x, int y, int blockType) {
         x = x - y;
         y = x + y * 2;
@@ -48,17 +94,7 @@ public class GridDrawingManager extends BufferedImage {
         drawTriangle(x + 1, y + 2, blockType, 5);
     }
 
-    public void drawTopBlock(int x, int y, int[] triangle1, int[] triangle2){
-        x = x - y;
-        y = x + y * 2;
-        drawTriangle(x, y, triangle1[0], triangle1[1]);
-        drawTriangle(x + 1, y, triangle2[0], triangle2[1]);
-    }
-
-    public void screenCorToTopBlock(){
-
-    }
-
+    //draws a grid using triangles
     public void testDrawTriangleGrid() {
         Graphics2D g2d = this.createGraphics();
         g2d.setColor(Color.BLACK);

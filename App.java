@@ -1,9 +1,12 @@
 import GUI.GUI;
+import GameData.GameData;
 
 public class App {
     public static void main(String[] args) throws Exception {
         //Testing testing = new Testing();
-        GUI gameFrame = new GUI();
+        GameData gameData = new GameData();
+
+        GUI gameFrame = new GUI(gameData);
 
         while (true) {
             Thread.sleep(20);

@@ -1,7 +1,7 @@
-package Visuals.raycastRendering;
+package GUI.Visuals.raycastRendering;
 
 import World.DataStorage.Blueprint.Blueprint;
-import Constants.PlayerData;
+import GameData.GameData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,9 +16,10 @@ public class RaycastRenderer extends BufferedImage {
     private Graphics graphics = this.getGraphics();
     private Blueprint world = new Blueprint(1000, 1000, 1000);
 
-    public RaycastRenderer(int width, int height) {
+    public RaycastRenderer(GameData gameData, int width, int height) {
         super(width, height, TYPE_4BYTE_ABGR_PRE);
-        this.drawingManager = new GridDrawingManager(width, height);
+
+        this.drawingManager = new GridDrawingManager(gameData ,width, height);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,7 +36,7 @@ public class RaycastRenderer extends BufferedImage {
         for (long y = 0; y < yCamRez; y++){
            for (long x =  0; x < xCamRez; x++){
                //This draws a block top based off 2 triangles inputs
-               drawingManager.drawTopBlock((int) x, (int) y, pathLeftTop(x + PlayerData.playerXCamCor, y+PlayerData.playerYCamCor), pathRightTop(x + PlayerData.playerXCamCor, y+PlayerData.playerYCamCor));
+               drawingManager.drawTopBlock((int) x, (int) y, pathLeftTop(x + GameData.playerXCamCor, y+ GameData.playerYCamCor), pathRightTop(x + GameData.playerXCamCor, y+ GameData.playerYCamCor));
            }
         }
         graphics.drawImage(drawingManager, 0, 0, null);

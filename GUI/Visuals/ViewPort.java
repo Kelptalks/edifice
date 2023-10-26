@@ -1,16 +1,18 @@
-package Visuals;
+package GUI.Visuals;
 
-import Constants.Constants;
-import Visuals.raycastRendering.RaycastRenderer;
+import GUI.Visuals.raycastRendering.RaycastRenderer;
+import GameData.GameData;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ViewPort extends JPanel {
-    private RaycastRenderer rayCaster = new RaycastRenderer(Constants.SCREEN_X_REZ, Constants.SCREEN_Y_REZ);
+    private RaycastRenderer rayCaster;
 
-    public ViewPort(){
-        this.setPreferredSize(new Dimension(Constants.SCREEN_X_REZ, Constants.SCREEN_Y_REZ));
+    public ViewPort(GameData gameData){
+        this.rayCaster = new RaycastRenderer(gameData, gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ);
+
+        this.setPreferredSize(new Dimension(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ));
     }
 
     @Override

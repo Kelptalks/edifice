@@ -1,13 +1,12 @@
 package GUI;
 
-import Constants.Constants;
 import GUI.Controls.KeyBoardInputs;
 import GUI.Controls.MouseInputs;
 import GUI.MainMenu.Menu;
-import Visuals.ViewPort;
+import GameData.GameData;
+import GUI.Visuals.ViewPort;
 
 import javax.swing.*;
-import java.io.IOException;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  GameFrame
@@ -19,12 +18,17 @@ public class GUI extends JFrame {
      *  Constructor
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
-    private ViewPort viewPort = new ViewPort();
-
-    private Menu menu = new Menu();
-    public GUI() throws IOException {
+    private ViewPort viewPort;
+    private GameData gameData;
+    private Menu menu;
+    public GUI(GameData gameData){
         super();
-        this.setSize(Constants.SCREEN_X_REZ, Constants.SCREEN_Y_REZ);
+
+        this.gameData = gameData;
+        this.menu = new Menu(gameData);
+        this.viewPort = new ViewPort(gameData);
+
+        this.setSize(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 

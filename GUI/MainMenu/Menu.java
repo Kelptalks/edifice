@@ -1,6 +1,6 @@
 package GUI.MainMenu;
 
-import Constants.Constants;
+import GameData.GameData;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,9 @@ import java.awt.event.ActionListener;
  */
 public class Menu extends JLabel {
 
-    public Menu(){
+    private GameData gameData;
+    public Menu(GameData gameData){
+        this.gameData = gameData;
         mainMenu();
     }
 
@@ -22,11 +24,11 @@ public class Menu extends JLabel {
     public void mainMenu(){
         JButton Load = new JButton("Load Save");
         this.add(Load);
-        Load.setBounds(Constants.SCREEN_X_REZ/100, Constants.SCREEN_Y_REZ/100, Constants.SCREEN_X_REZ/10, Constants.SCREEN_Y_REZ/15);
+        Load.setBounds(gameData.SCREEN_X_REZ/100, gameData.SCREEN_Y_REZ/100, gameData.SCREEN_X_REZ/10, gameData.SCREEN_Y_REZ/15);
 
         JButton newGame = new JButton("New Game");
         this.add(newGame);
-        newGame.setBounds(Constants.SCREEN_X_REZ/100, Constants.SCREEN_Y_REZ/10, Constants.SCREEN_X_REZ/10, Constants.SCREEN_Y_REZ/15);
+        newGame.setBounds(gameData.SCREEN_X_REZ/100, gameData.SCREEN_Y_REZ/10, gameData.SCREEN_X_REZ/10, gameData.SCREEN_Y_REZ/15);
 
         Load.addActionListener(new ActionListener() {
             @Override
