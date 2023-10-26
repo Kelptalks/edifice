@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e20146c-a053-4fc2-ac87-0975c41d9042" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Controls/KeyBoardInputs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Controls/MouseInputs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GUI/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/MainMenu/Menu$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/MainMenu/Menu$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/MainMenu/Menu.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +89,7 @@
       <workItem from="1698114116989" duration="938000" />
       <workItem from="1698159426533" duration="13843000" />
       <workItem from="1698250903127" duration="2830000" />
-      <workItem from="1698255674881" duration="6097000" />
+      <workItem from="1698255674881" duration="6588000" />
     </task>
     <servers />
   </component>

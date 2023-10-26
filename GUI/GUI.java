@@ -40,5 +40,6 @@ public class GUI extends JFrame {
 
     public void renderView(){
         viewPort.renderView();
+        //test git
     }
 }
