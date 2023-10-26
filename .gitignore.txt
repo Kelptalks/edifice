@@ -1,3 +1,0 @@
-edifice.iml
-.idea/
-out/
