@@ -5,36 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e20146c-a053-4fc2-ac87-0975c41d9042" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/World/TerrainGen/PerlinNoiseGen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controls/KeyBoardInputs.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Controls/KeyBoardInputs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controls/MouseInputs.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Controls/MouseInputs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/MainMenu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/PackageTests/OctreTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/PackageTests/OctreTesting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Visuals/raycastRendering/RaycastRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/Blueprint/Blueprint.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/DataStorage/Blueprint/Blueprint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/Octree/Branch.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/DataStorage/Octree/Branch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/Octree/Leaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/DataStorage/Octree/Leaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/Octree/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/DataStorage/Octree/Octree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/TerrainGen/TestingTerrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/TerrainGen/TestingTerrain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/World/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/World/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Controls/KeyBoardInputs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Controls/KeyBoardInputs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/GameFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Testing/PackageTests/OctreTesting.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Testing/PackageTests/OctreTesting.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/RaycastRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/Visuals/raycastRendering/RaycastRenderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Blueprint/Blueprint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Octree/Branch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Octree/Leaf.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/Octree/Octree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/PlayerData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/TerrainGen/TestingTerrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/World/TerrainGen/TestingTerrain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/edifice/World/World.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/World/World.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Controls/KeyBoardInputs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/Controls/MouseInputs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/edifice/GUI/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/MainMenu/Menu$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/MainMenu/Menu$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/edifice/MainMenu/Menu.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +96,7 @@
       <workItem from="1698114116989" duration="938000" />
       <workItem from="1698159426533" duration="13843000" />
       <workItem from="1698250903127" duration="2830000" />
-      <workItem from="1698255674881" duration="4834000" />
+      <workItem from="1698255674881" duration="6097000" />
     </task>
     <servers />
   </component>

@@ -37,4 +37,8 @@ public class GUI extends JFrame {
 
         this.add(viewPort);
     }
+
+    public void renderView(){
+        viewPort.renderView();
+    }
 }
