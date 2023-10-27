@@ -25,8 +25,7 @@ public class Renderer extends JPanel implements Menu {
         this.addKeyListener(new KeyBoardInputs());
 
         //Start rendering loop
-        //startRenderLoop();
-        repaint();
+        startRenderLoop();
     }
 
     private void startRenderLoop(){

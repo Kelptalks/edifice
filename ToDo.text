@@ -1,7 +1,6 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Rendering
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *	1. Screen based blockCulling
  *
  *	2. Mouse to block screen Coords
  *
