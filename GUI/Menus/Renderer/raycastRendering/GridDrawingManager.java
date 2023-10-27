@@ -53,7 +53,7 @@ public class GridDrawingManager extends BufferedImage {
 
     //Draws a triangle in a specific cord in the triangle grid
     private void drawTriangle(int x, int y, int blockType, int triangle) {
-        graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), (x * BLOCK_WIDTH_FACTOR) + xCenter, (y * BLOCK_HEIGHT_FACTOR) - yCenter, null);
+        graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), (x * BLOCK_WIDTH_FACTOR), (y * BLOCK_HEIGHT_FACTOR), null);
     }
 
     //draws the top 2 faces of a block, with 2 triangles inputs.

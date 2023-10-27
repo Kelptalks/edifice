@@ -16,10 +16,15 @@ public class RaycastRenderer extends BufferedImage {
     private Graphics graphics = this.getGraphics();
     private Blueprint world = new Blueprint(1000, 1000, 1000);
 
-    public RaycastRenderer(GameData gameData, int width, int height) {
-        super(width, height, TYPE_4BYTE_ABGR_PRE);
+    private int[][][] culledCoordMods;
 
-        this.drawingManager = new GridDrawingManager(gameData ,width, height);
+    public RaycastRenderer(GameData gameData) {
+        super(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ, TYPE_4BYTE_ABGR_PRE);
+        this.drawingManager = new GridDrawingManager(gameData ,gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ);
+        updateCulledCoordMods();
+
+        rayCastWithCulling();
+
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -29,18 +34,32 @@ public class RaycastRenderer extends BufferedImage {
      */
     public void rayCast(){
 
-        //cycle through all blocks in a flat plane
-        //each of these blocks will be used fo there top 2 triangles
-        //the starting locaiton of each cast will take place
-        //on top of each triangle
-        for (long y = 0; y < yCamRez; y++){
-           for (long x =  0; x < xCamRez; x++){
+        //cycle through all blocks on a flat plane
+
+        //I need to fix, so I get blocks that would fill the screen,
+        for (int y = 0; y < yCamRez; y++){
+           for (int x =  0; x < xCamRez; x++){
                //This draws a block top based off 2 triangles inputs
-               drawingManager.drawTopBlock((int) x, (int) y, pathLeftTop(x + GameData.playerXCamCor, y+ GameData.playerYCamCor),
+               drawingManager.drawTopBlock(x, y, pathLeftTop(x + GameData.playerXCamCor, y+ GameData.playerYCamCor),
                         pathRightTop(x + GameData.playerXCamCor, y+ GameData.playerYCamCor));
            }
         }
         graphics.drawImage(drawingManager, 0, 0, null);
+    }
+
+    public void rayCastWithCulling(){
+        for (int y = 0; y < yCamRez; y++){
+            for (int x =  0; x < xCamRez; x++) {
+                drawingManager.drawTopBlock(culledCoordMods[x][y][0], culledCoordMods[x][y][1], pathLeftTop(culledCoordMods[x][y][0] + GameData.playerXCamCor, culledCoordMods[x][y][1]+ GameData.playerYCamCor),
+                        pathRightTop(x + GameData.playerXCamCor, y+ GameData.playerYCamCor));
+            }
+        }
+        graphics.drawImage(drawingManager, 0, 0, null);
+    }
+
+    //separate casting from drawing to enable threading.
+    private void drawCast(){
+
     }
 
     private int[] pathLeftTop(long x, long y){
@@ -106,6 +125,33 @@ public class RaycastRenderer extends BufferedImage {
         //convert screen cords to block cords
     }
 
+    public void updateCulledCoordMods(){
+        int[][][] CoordMods = new int[xCamRez][yCamRez][2];
+
+        //cycle through cam cords
+        for (int y = 0; y < yCamRez; y++){
+            //used to each start
+            int[] rowOrginMod = new int[]{y, y};
+            for (int x = 0; x < xCamRez; x++) {
+                //set the cords to the modded cords.
+                CoordMods[x][y] = new int[]{rowOrginMod[0] + x, rowOrginMod[1] - x};
+
+                //for the first row the conversion would start at (0,0) and mod (x+1, y-1)
+                //for row conversion would need to be x+1, y+1
+
+                //I need to get the relative block cords that would be on camera
+                /* (0+0, 0+0), (0+1, 0-1), (1+1, -1-1)
+                 * (0+1, 0+1),
+                 *
+                 *
+                 *
+                 *
+                 */
+            }
+        }
+        this.culledCoordMods = CoordMods;
+    }
+
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Cam Control
@@ -117,6 +163,6 @@ public class RaycastRenderer extends BufferedImage {
     private int drawDistance = 500;
 
     //Render Size
-    private int xCamRez = 75;
-    private int yCamRez = 75;
+    private int xCamRez = 10;
+    private int yCamRez = 10;
 }

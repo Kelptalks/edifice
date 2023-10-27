@@ -20,8 +20,8 @@ public class GameData {
      *  Screen rez
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
-    public static final int SCREEN_X_REZ = 1920;
-    public static final int SCREEN_Y_REZ = 1080;
+    public int SCREEN_X_REZ = 1920;
+    public int SCREEN_Y_REZ = 1080;
 
 
 }

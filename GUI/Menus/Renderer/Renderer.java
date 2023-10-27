@@ -16,7 +16,7 @@ public class Renderer extends JPanel implements Menu {
     private GameData gameData;
 
     public Renderer(GameData gameData){
-        this.rayCaster = new RaycastRenderer(gameData, gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ);
+        this.rayCaster = new RaycastRenderer(gameData);
         this.setPreferredSize(new Dimension(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ));
 
         //add keyInputs
@@ -25,7 +25,8 @@ public class Renderer extends JPanel implements Menu {
         this.addKeyListener(new KeyBoardInputs());
 
         //Start rendering loop
-        startRenderLoop();
+        //startRenderLoop();
+        repaint();
     }
 
     private void startRenderLoop(){

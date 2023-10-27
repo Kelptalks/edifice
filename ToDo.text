@@ -5,8 +5,11 @@
  *
  *	2. Mouse to block screen Coords
  *
- *	3. Shadows
+ *	3. Ray Casted Shadows
  *
+ *  4. Multi Threading
+ *
+ *  5. Render Cashing
  */
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -27,7 +30,7 @@
  *  World
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  
- *	1. Fix octree coord to key conversion
+ *	1. Fix octree cord to key conversion
  *
  *	2. Saving worlds/Blueprints to file
  *
