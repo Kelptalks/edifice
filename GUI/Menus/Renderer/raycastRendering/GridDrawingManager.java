@@ -24,12 +24,6 @@ public class GridDrawingManager extends BufferedImage {
     //graphics
     Graphics2D graphics = this.createGraphics();
 
-
-    //Screen center
-    private int xCenter;
-    private int yCenter;
-
-
     //Triangle sizes
     public final int BLOCK_WIDTH_FACTOR = 32;
     public final int BLOCK_HEIGHT_FACTOR = 16;
@@ -41,8 +35,6 @@ public class GridDrawingManager extends BufferedImage {
     GridDrawingManager(GameData gameData, int xRez, int yRez) {
         super(xRez,yRez, TYPE_4BYTE_ABGR_PRE);
         this.gameData = gameData;
-
-        this.update();
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,12 +61,6 @@ public class GridDrawingManager extends BufferedImage {
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *Methods for drawing triangles at specific locations
      */
-
-    //updates the center position
-    public void update(){
-        this.xCenter = gameData.SCREEN_X_REZ/2;
-        this.yCenter = gameData.SCREEN_Y_REZ/2;
-    }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Debugging

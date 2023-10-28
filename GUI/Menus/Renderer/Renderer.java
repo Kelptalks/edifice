@@ -21,11 +21,15 @@ public class Renderer extends JPanel implements Menu {
 
         //add keyInputs
         this.setFocusable(true); //set the focus
-        this.addMouseListener(new MouseInputs());
+        this.addMouseListener(new MouseInputs(gameData));
         this.addKeyListener(new KeyBoardInputs());
 
         //Start rendering loop
         startRenderLoop();
+    }
+
+    public void modBlock(int x, int y){
+        rayCaster.pathModBlock(x, y);
     }
 
     private void startRenderLoop(){
