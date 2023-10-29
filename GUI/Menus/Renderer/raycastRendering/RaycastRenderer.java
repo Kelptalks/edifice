@@ -111,7 +111,7 @@ public class RaycastRenderer extends BufferedImage {
     public void pathModBlock(int screenX, int screenY){
         //convert screen cords to block cords
         System.out.println("Mouse clicked at component coordinates: [" + screenX + ", " + screenY + "]");
-        
+
         world.setBlock(0, 0, 0, 0);
     }
 
@@ -166,8 +166,8 @@ public class RaycastRenderer extends BufferedImage {
     private int drawDistance = 500;
 
     //Render Size
-    private int xCamRez = 25;
-    private int yCamRez = 50;
+    private int xCamRez = 29;
+    private int yCamRez = 61;
 
 
 }
