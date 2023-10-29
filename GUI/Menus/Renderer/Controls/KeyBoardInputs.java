@@ -15,20 +15,26 @@ public class KeyBoardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
+        //move the camera based off (WASD)
+        //can add key setting customization later
         switch (key) {
             case KeyEvent.VK_A:
+                //move the camera left
                 GameData.playerXCamCor -= 1;
                 GameData.playerYCamCor += 1;
                 break;
             case KeyEvent.VK_W:
+                //move the camera up
                 GameData.playerYCamCor -= 1;
                 GameData.playerXCamCor -= 1;
                 break;
             case KeyEvent.VK_S:
+                //move the camera down
                 GameData.playerYCamCor += 1;
                 GameData.playerXCamCor += 1;
                 break;
             case KeyEvent.VK_D:
+                //move the camera right
                 GameData.playerXCamCor += 1;
                 GameData.playerYCamCor -= 1;
                 break;

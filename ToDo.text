@@ -31,6 +31,8 @@
  *  
  *	1. Fix octree cord to key conversion
  *
+ *  4. re organise depths so leaves are at depth 4
+ *
  *	2. Saving worlds/Blueprints to file
  *
  *	3. Perlin noise terrain gen

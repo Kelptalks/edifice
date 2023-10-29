@@ -1,6 +1,7 @@
 package Testing;
 
-import Testing.PackageTests.OctreTesting;
+import Testing.Tests.OctreTesting;
+import Testing.Tests.WorldTesting;
 
 import java.util.Scanner;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -26,6 +27,9 @@ public class Testing {
     public void test(String test){
         //runes tests based off string input.
         switch (test){
+            //return the help menu
+            case "runAll": runAll();
+                break;
             //return the help menu
             case "help": help();
                 break;
@@ -72,17 +76,16 @@ public class Testing {
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * Used for testing classes
      */
+    public void runAll(){
+        testOctre();
+        testWorld();
+    }
 
     //test my octree class
-    public void testOctre(String test){
-        OctreTesting octreTesting = new OctreTesting();
-        switch (test){
-            //return the help menu
-            case "run": octreTesting.run();
-                break;
-            //return the help menu
-            case "menu": menu();
-                break;
-        }
+    public void testOctre(){
+        new OctreTesting().run();
+    }
+    public void testWorld() {
+        new WorldTesting().run();
     }
 }

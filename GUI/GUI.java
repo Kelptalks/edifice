@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.Menus.PerlinNoise.PerlinNoiseMenu;
 import GUI.Menus.Renderer.Controls.KeyBoardInputs;
 import GUI.Menus.Renderer.Controls.MouseInputs;
 import GameData.GameData;
@@ -32,7 +33,8 @@ public class GUI extends JFrame {
 
         //add keyInputs
 
-        gameData.menu = new Renderer(gameData);
+        gameData.menu = new PerlinNoiseMenu(gameData);
+
         this.updateMenu();
 
         this.setVisible(true);

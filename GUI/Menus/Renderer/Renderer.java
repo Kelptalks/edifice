@@ -10,7 +10,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  Renderer
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  Manages the rendering of the
+ *  the actual game.
+ */
 public class Renderer extends JPanel implements Menu {
     private RaycastRenderer rayCaster;
     private GameData gameData;
@@ -28,9 +33,11 @@ public class Renderer extends JPanel implements Menu {
         startRenderLoop();
     }
 
-    public void modBlock(int x, int y){
-        rayCaster.pathModBlock(x, y);
-    }
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Rendering
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     */
 
     private void startRenderLoop(){
         int delay = 16; // milliseconds
@@ -44,6 +51,13 @@ public class Renderer extends JPanel implements Menu {
         new Timer(delay, taskPerformer).start();
     }
 
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Other
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     */
+
+    //paint the rendered buffered image to screen
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -51,8 +65,19 @@ public class Renderer extends JPanel implements Menu {
         g2D.drawImage(rayCaster, 0, 0, this); // Assuming rayCaster is a BufferedImage
     }
 
+    //sets this object as the current menu
     @Override
     public void setCurrentMenu(){
         gameData.menu = this;
+    }
+
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Debugging
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     */
+    public void modBlock(int x, int y){
+        rayCaster.pathModBlock(x, y);
     }
 }

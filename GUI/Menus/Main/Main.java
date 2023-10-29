@@ -5,7 +5,12 @@ import GameData.GameData;
 
 import javax.swing.*;
 import java.awt.*;
-
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  Main menu
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A menu that has a set of buttons
+ * That direct to other menus
+ */
 public class Main extends JPanel implements Menu {
     private GameData gameData;
     public Main(GameData gameData){

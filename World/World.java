@@ -17,7 +17,13 @@ public class World{
 
 
     public World(){
-        testingTerrain.genTerrain(octree);
+        octree.expand(1);
+        octree.expand(1);
+        octree.expand(1);
+        octree.expand(1);
+        octree.expand(1);
+        octree.expand(1);
+        octree.expand(1);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

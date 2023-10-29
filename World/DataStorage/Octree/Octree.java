@@ -27,6 +27,7 @@ public class Octree {
         calculateMax();
     }
 
+    //IF this to take into leaf nodes
     private void calculateMax(){
         this.maxVal = (int) Math.pow(2, topDepth);
     }
@@ -100,7 +101,6 @@ public class Octree {
             }
             branch = newBranch;
         }
-
 
         //get the leaf from depth 1 and set the block from depth 0
         int leafKey = (int) (OctreeKey & 0x7);

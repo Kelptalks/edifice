@@ -9,6 +9,7 @@ public class App {
         GameData gameData = new GameData();
         GUI gameFrame = new GUI(gameData);
         Testing testing = new Testing();
-        testing.testOctre("run");
+
+        testing.runAll();
     }
 }
