@@ -23,14 +23,22 @@ public class PerlinVisualiser extends BufferedImage {
     //draw a grid based off a perlin scale
     public void drawGrid(int[] points){
         graphics.setColor(Color.BLACK);
+        int[] oldPoint = new int[]{0, 0};
         for (int x = 0; x < points.length; x++){
+            graphics.drawLine(oldPoint[0], oldPoint[1], x*50, 500 + points[x]);
             graphics.fillOval(x*50, 500 + points[x], 10, 10);
+            oldPoint[0] = x*50;
+            oldPoint[1] = 500 + points[x];
         }
 
-        graphics.setColor(Color.GREEN);
+        graphics.setColor(Color.RED);
         int[] octivePoints = perlinNoiseGen.genOctave(4);
+        oldPoint = new int[]{0, 0};
         for (int x = 0; x < octivePoints.length; x++){
+            graphics.drawLine(oldPoint[0], oldPoint[1], x*50, 500 + octivePoints[x]);
             graphics.fillOval(x*50, 500 + octivePoints[x] , 10, 10);
+            oldPoint[0] = x*50;
+            oldPoint[1] = 500 + octivePoints[x];
         }
     }
 

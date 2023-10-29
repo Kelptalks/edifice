@@ -71,13 +71,4 @@ public class Renderer extends JPanel implements Menu {
         gameData.menu = this;
     }
 
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Debugging
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *
-     */
-    public void modBlock(int x, int y){
-        rayCaster.pathModBlock(x, y);
-    }
 }

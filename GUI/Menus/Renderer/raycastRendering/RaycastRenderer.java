@@ -108,38 +108,6 @@ public class RaycastRenderer extends BufferedImage {
      */
 
     //take in the screen cords and return block cords to be modified
-    public void pathModBlock(int screenX, int screenY){
-        //convert screen cords to block cords
-        System.out.println("Mouse clicked at component coordinates: [" + screenX + ", " + screenY + "]");
-
-        world.setBlock(0, 0, 0, 0);
-    }
-
-    private long[] pathLeftTopCoords(long x, long y){
-        int z = 0;
-        int block = world.getBlock(x, y, z);
-        for (int distance = 0; distance < drawDistance; distance++)
-        {
-            x--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                return new long[]{x, y, z};
-            }
-
-            y--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                return new long[]{x, y, z};
-            }
-
-            z--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                return new long[]{x, y, z};
-            }
-        }
-        return new long[]{x, y, z};
-    }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Cam Control
