@@ -3,11 +3,8 @@ package World.DataStorage.Octree;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Octree
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * I would like this octree version
- * to have a solid coordinate system
- * build in the idea of relative to
- * center cords
- *
+ * This octree is designed to
+ * load branches from file
  *
  */
 
@@ -35,8 +32,8 @@ public class Octree {
     private final int nodeSize = 8;
 
     // Get the octree side length in blocks
-    public int getDimension(){
-        return 2 << depth-1; //exponential function
+    public long getDimension(){
+        return 2L << depth-1; //exponential function
     }
 
     // Get the octree volume
@@ -78,26 +75,11 @@ public class Octree {
 
     //set the branch currently loaded.
     public void setActiveBranch(Branch branch){
-        //will load a branch from file
 
     }
 
     //save a branch to file
-    public void saveBranch(Branch branch){
-        //will save a branch to file
+    public void unloadBranch(Branch branch){
+
     }
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Block Management
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *
-     */
-
-    public void setBlock(int key, int block) {
-    }
-
-    public int getBlock(int x) {
-        return 1;
-    }
-
 }
