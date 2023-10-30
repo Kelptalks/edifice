@@ -1,6 +1,5 @@
 package World.TerrainGen;
-import World.Octree.Branch;
-import World.Octree.Octree;
+import World.DataStorage.Octree.Octree;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Testing Terrain
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~

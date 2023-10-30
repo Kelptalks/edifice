@@ -1,10 +1,8 @@
 package World;
 
-import World.Octree.Octree;
+import World.DataStorage.Octree.Octree;
 import World.TerrainGen.TerrainGen;
 import World.TerrainGen.TestingTerrain;
-
-import static java.lang.Long.toBinaryString;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  World
@@ -19,7 +17,13 @@ public class World{
 
 
     public World(){
-        testingTerrain.genTerrain(octree);
+        octree.expand(1);
+        octree.expand(1);
+        octree.expand(1);
+        octree.expand(1);
+        octree.expand(1);
+        octree.expand(1);
+        octree.expand(1);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
