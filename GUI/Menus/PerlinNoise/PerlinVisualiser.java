@@ -25,19 +25,19 @@ public class PerlinVisualiser extends BufferedImage {
         graphics.setColor(Color.BLACK);
         int[] oldPoint = new int[]{0, 0};
         for (int x = 0; x < points.length; x++){
-            graphics.drawLine(oldPoint[0], oldPoint[1], x*50, 500 + points[x]);
-            graphics.fillOval(x*50, 500 + points[x], 10, 10);
-            oldPoint[0] = x*50;
+            graphics.drawLine(oldPoint[0], oldPoint[1], x*20, 500 + points[x]);
+            graphics.fillOval(x*20, 500 + points[x], 10, 10);
+            oldPoint[0] = x*20;
             oldPoint[1] = 500 + points[x];
         }
 
         graphics.setColor(Color.RED);
-        int[] octivePoints = perlinNoiseGen.genOctave(4);
+        int[] octivePoints = perlinNoiseGen.genOctave(8);
         oldPoint = new int[]{0, 0};
         for (int x = 0; x < octivePoints.length; x++){
-            graphics.drawLine(oldPoint[0], oldPoint[1], x*50, 500 + octivePoints[x]);
-            graphics.fillOval(x*50, 500 + octivePoints[x] , 10, 10);
-            oldPoint[0] = x*50;
+            graphics.drawLine(oldPoint[0], oldPoint[1], x*20, 500 + octivePoints[x]);
+            graphics.fillOval(x*20, 500 + octivePoints[x] , 10, 10);
+            oldPoint[0] = x*20;
             oldPoint[1] = 500 + octivePoints[x];
         }
     }

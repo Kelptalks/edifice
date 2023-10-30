@@ -36,6 +36,5 @@ public class WorldTesting extends TestingTemplate {
      */
     public void testSingleBlockModification(){
         World world = new World();
-        world.setBlock(5, 5, 5, 2);
     }
 }

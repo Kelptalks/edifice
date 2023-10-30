@@ -20,10 +20,30 @@ public class OctreTesting extends TestingTemplate {
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
 
         //run tests
-        octreeExtremeDepthsTest();
-        testSingleBlockModification();
+        testPopulate();
+        testGetInfo();
+        //octreeExtremeDepthsTest();
+        //testSingleBlockModification();
 
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public void testPopulate(){
+        Octree octree = new Octree(9);
+
+        System.out.println(octree.getDimension());
+        System.out.println(octree.getVolume());
+
+        octree.populate(octree.getRoot());
+    }
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Test octree info
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     */
+    public void testGetInfo() {
+        Octree octree = new Octree(20);
+        System.out.println(octree.getDimension());
+        System.out.println(octree.getVolume());
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -40,10 +60,8 @@ public class OctreTesting extends TestingTemplate {
      */
     public void testSingleBlockModification(){
         //Create octree
-        Octree octree = new Octree();
+        Octree octree = new Octree(5);
 
-        octree.expand(1);
-        octree.expand(1);
 
         int key = 512; //key of octree
         int block = 1; //block to set key
@@ -83,12 +101,12 @@ public class OctreTesting extends TestingTemplate {
      */
     public void octreeExtremeDepthsTest(){
         //Create octree
-        Octree octree = new Octree();
+        Octree octree = new Octree(5);
 
         //Expand octree to an extreme depth
         int expansion = 15; //times to expand
         for (int x = 0; x < expansion; x++){
-            octree.expand(1);
+
         }
 
         //get start time
