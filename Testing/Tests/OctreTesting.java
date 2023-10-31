@@ -20,10 +20,30 @@ public class OctreTesting extends TestingTemplate {
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
 
         //run tests
-        octreeExtremeDepthsTest();
-        testSingleBlockModification();
+        testPopulate();
+        testGetInfo();
+        //octreeExtremeDepthsTest();
+        //testSingleBlockModification();
 
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public void testPopulate(){
+        Octree octree = new Octree(9);
+
+        System.out.println(octree.getDimension());
+        System.out.println(octree.getVolume());
+
+        octree.populate(octree.getRoot());
+    }
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Test octree info
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     */
+    public void testGetInfo() {
+        Octree octree = new Octree(21);
+        System.out.println(octree.getDimension());
+        System.out.println(octree.getVolume());
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -39,34 +59,7 @@ public class OctreTesting extends TestingTemplate {
      * is not causing other blocks to change
      */
     public void testSingleBlockModification(){
-        //Create octree
-        Octree octree = new Octree();
 
-        octree.expand(1);
-        octree.expand(1);
-
-        int key = 512; //key of octree
-        int block = 1; //block to set key
-        int totalBlocks = 262144; //the total blocks in this expanded octree
-
-        octree.setBlock(key, block); //set block in octree
-
-        //check that only one block in the octree was changed
-        int blocksChanged = 0;
-        for (int x = 0; x < totalBlocks; x++){
-            if (octree.getBlock(x) != 0){
-                blocksChanged++;
-            }
-        }
-
-        //print test details to terminal
-        if (blocksChanged == 1){
-            System.out.println("-(pass) set and get test passed");
-        }
-        else {
-            System.out.println("-(fail) set and get test failed");
-            System.out.println(" Expected 1 block modified but " + blocksChanged + " were changed");
-        }
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -82,51 +75,6 @@ public class OctreTesting extends TestingTemplate {
      * blocks are unmodified.
      */
     public void octreeExtremeDepthsTest(){
-        //Create octree
-        Octree octree = new Octree();
 
-        //Expand octree to an extreme depth
-        int expansion = 15; //times to expand
-        for (int x = 0; x < expansion; x++){
-            octree.expand(1);
-        }
-
-        //get start time
-        long t1 = System.nanoTime();
-
-        //set 10,000,000/5 blocks in the octree
-        long blocks = 10000000L;;
-        for (int x = 0; x < blocks; x+=5){
-            octree.setBlock(x, 12);
-        }
-
-        //calculate time taken
-        long timeToComplete = (System.nanoTime() - t1)/(1000000);
-
-        // Check for errors in block setting/getting
-        boolean test = true;
-        for (int x = 0; x < blocks; x+=5){
-
-            // Check that all intended blocks are modified correctly
-            if ((x%5 == 0) && (octree.getBlock(x) != 12)){
-                System.out.println("-(fail) Octree extreme depths test Failed when adding block at octree key : " + x);
-                System.out.println("Expected value 12 but was " + octree.getBlock(x));
-                test = false;
-                break;
-            }
-
-            // Check that all unintended blocks remain unmodified
-            if ((x%5 != 0) && octree.getBlock(x) != 0){
-                System.out.println("-(fail) Octree extreme depths test Failed when adding block at octree key : " + x);
-                System.out.println("Expected value 0 but was " + octree.getBlock(x));
-                test = false;
-                break;
-            }
-        }
-
-        //if no errors where found print pass
-        if (test){
-            System.out.println("-(pass) octree extreme depths test");
-        }
     }
 }

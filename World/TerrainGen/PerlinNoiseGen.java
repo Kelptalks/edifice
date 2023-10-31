@@ -9,7 +9,7 @@ public class PerlinNoiseGen {
 
     private int maxVectorLength = 5;
 
-    private int[] points = new int[16]; //needs to be a factor of 2
+    private int[] points = new int[256]; //needs to be a factor of 2
 
     public PerlinNoiseGen(){
         genRandomVectors();
@@ -18,7 +18,7 @@ public class PerlinNoiseGen {
     public void genRandomVectors(){
         Random random = new Random();
         for (int x = 0; x < points.length; x++){
-            points[x] = random.nextInt(-300, 300);
+            points[x] = random.nextInt(-200, 200);
         }
     }
 
@@ -39,7 +39,7 @@ public class PerlinNoiseGen {
          *
          * The third array is 4, then 8, then 16...
          */
-        int scaleFactor = 16;
+        int scaleFactor = 256;
         double amplitude = 1;
 
         //cycle through all octaves

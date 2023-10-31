@@ -33,7 +33,7 @@ public class GUI extends JFrame {
 
         //add keyInputs
 
-        gameData.menu = new PerlinNoiseMenu(gameData);
+        gameData.menu = new Renderer(gameData);
 
         this.updateMenu();
 

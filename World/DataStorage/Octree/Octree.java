@@ -3,133 +3,83 @@ package World.DataStorage.Octree;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Octree
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * This octree is designed to
+ * load branches from file
  *
  */
 
-// ! need to add a test that checks if iver block in the tree is set to 0 exepet it.
+import java.util.Timer;
 
 public class Octree {
 
-    private long maxVal;
-    private int topDepth = 1;
-    private Branch root = new Branch(1);
-
-    public Octree() {
-        calculateMax();
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Constructor
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     */
+    public Octree(int depth){
+        this.depth = depth;
+        this.root = new Branch(depth);
     }
 
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Octree Info
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     */
+    private int depth;
+    private Branch root;
+    private final int nodeSize = 8;
 
-    public void expand(int direction){
-        Branch newRoot = new Branch(topDepth+1);
-        newRoot.setBranch(root, direction);
-        this.root = newRoot;
-        topDepth++;
-        calculateMax();
+    // Get the octree side length in blocks
+    public long getDimension(){
+        return 2L << depth-1; //exponential function
     }
 
-    //IF this to take into leaf nodes
-    private void calculateMax(){
-        this.maxVal = (int) Math.pow(2, topDepth);
+    // Get the octree volume
+    public long getVolume(){
+        return (long) Math.pow(getDimension(), 3); //cube the length
     }
 
-    public long getMaxVal(){
-        return maxVal;
-    }
-
+    //get the root branch
     public Branch getRoot(){
-        return root;
-    }
-
-    public int getTopDepth(){
-        return topDepth;
-    }
-
-    public int[] unpackOctreeKey(long key){
-        //based off the key load a specific quadrant.
-        //origin 0,0 then negatives and positives.
-        int[] octreeCoords = new int[21];
-        //mask key based on depth 3 bits forEvery depth increase
-        //loop through key(21 is 64 bits/3 bits)
-        for (int x = 20; x > -1; x--){
-            octreeCoords[x] = (int) (key >> x*3) & 0x7;
-        }
-        return octreeCoords;
+        return this.root;
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Block manipulation
+     *  Branch Management
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *
      */
 
-    //Get a block from the octree
-    public int getBlock(long key){
+    public void populate(Branch branch){
+        int currentDepth = branch.getDepth();
 
-        Branch branch = root;
-        long OctreeKey = (key >> 12);
-        //Cycle through octree until a depth of 1 is hit
-        for (int x = topDepth-1; x > 0; x--){
-            int branchIndex = (int) (OctreeKey >> 3*x) & 0x7; //this will get the index based off the branches depth
-            Branch newBranch = branch.getBranch(branchIndex);
-            if (newBranch == null){
-                return 0;
+        //if the branches depth on branch level
+        if (branch.getDepth() > 4){
+            for (int x = 0; x < nodeSize; x++){
+                Branch newBranch = new Branch(currentDepth - 1);
+                populate(newBranch);
+                branch.setBranch(newBranch, x);
             }
-            branch = newBranch;
         }
 
-
-        //get the leaf from depth 1 and set the block from depth 0
-        int leafKey = (int) (OctreeKey & 0x7);
-        Leaf leaf = branch.getLeaf(leafKey);
-        if (leaf == null){
-            return 0;
-        }
-        return leaf.getBlock((int) (key & 0x0FFF));
-    }
-
-    //Set a block in the octree will generate new branches if block
-    public void setBlock(long key, int block){
-        Branch branch = root;
-        long OctreeKey = (key >> 12);
-        //Cycle through octree until a depth of 1 is hit
-        for (int x = topDepth-1; x > 0; x--){
-            int branchIndex = (int) (OctreeKey >> 3*x) & 0x7; //this will get the index based off the branches depth
-            Branch newBranch = branch.getBranch(branchIndex);
-            if (newBranch == null){
-                newBranch = new Branch(x);
-                branch.setBranch(newBranch, branchIndex);
+        //if the branches depth is on leave level
+        if (branch.getDepth() == 4){
+            for (int x = 0; x < nodeSize; x++) {
+                Leaf newLeaf = new Leaf();
+                branch.setLeaf(newLeaf, x);
             }
-            branch = newBranch;
         }
-
-        //get the leaf from depth 1 and set the block from depth 0
-        int leafKey = (int) (OctreeKey & 0x7);
-        Leaf leaf = branch.getLeaf(leafKey);
-        if (leaf == null){
-            leaf = new Leaf();
-            branch.setLeaf(leaf, leafKey);
-        }
-        leaf.setBlock((int) (key & 0x0FFF), block);
     }
 
+    //set the branch currently loaded.
+    public void setActiveBranch(Branch branch){
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     * Debugging
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *
-     */
-    //print a text based tree.
-    public void printTree(){
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        root.printTree();
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    //use a scanner to take inputs and allow traversal and review of a text based tree
-    public void navTree(){
-        Branch currentBranch = root;
-        int currentDepth = this.topDepth;
-        currentBranch.navTree(root, topDepth);
-    }
+    //save a branch to file
+    public void unloadBranch(Branch branch){
 
+    }
 }
