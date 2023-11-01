@@ -1,6 +1,9 @@
 package Testing.Tests;
 import Testing.TestingTemplate;
+import World.DataStorage.Octree.Branch;
 import World.DataStorage.Octree.Octree;
+
+import static java.lang.Integer.toBinaryString;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Octree Testing
@@ -21,29 +24,77 @@ public class OctreTesting extends TestingTemplate {
 
         //run tests
         testPopulate();
-        testGetInfo();
-        //octreeExtremeDepthsTest();
-        //testSingleBlockModification();
+        System.out.println(" ");
+        testLoadBranch();
+        System.out.println(" ");
+        testSavingBranch();
+
 
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
     }
 
     public void testPopulate(){
         Octree octree = new Octree(9);
-
-        System.out.println(octree.getDimension());
-        System.out.println(octree.getVolume());
-
         octree.populate(octree.getRoot());
+
+        System.out.println("-(pass) populate test");
     }
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Test octree info
+     *  Branch access
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Test the accessing of branches at different
+     * depths, and verify keys are working.
+     * Branches should be accessed based on the
+     * key and there the desired depth.
      */
-    public void testGetInfo() {
-        Octree octree = new Octree(21);
-        System.out.println(octree.getDimension());
-        System.out.println(octree.getVolume());
+    public void testLoadBranch() {
+        //setUp
+        Octree octree = new Octree(9);
+        octree.populate(octree.getRoot());
+        int key = 293823232;
+        int depth = 4;
+
+        //run test
+        Branch returnedBranch = octree.loadBranch(key, depth);
+
+        //verifie results
+        //if the expected depth does not equal the returned branches depth
+        if (returnedBranch.getDepth() != depth){
+            System.out.println("Key : " + toBinaryString(key));
+            System.out.println("Returned Branch depth(" + returnedBranch.getDepth() + ") | Expected(" + depth + ")");
+        }
+
+        //if the expected depth does not equal the returned branches depth
+        else{
+            System.out.println("-(pass) branch loading");
+        }
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Branch saving/loading
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Test the saving and loading of branches
+     * from file.
+     *
+     * Note:
+     * The depth of saved branches
+     * needs to be based upon the depth of the
+     * active branch loader.
+     */
+    public void testSavingBranch(){
+        //setup
+        Octree octree = new Octree(9);
+        octree.populate(octree.getRoot());
+        String fileName = "test";
+
+
+        //test saving branch to file
+        octree.getRoot().saveBranch(fileName);
+        System.out.println(fileName + " Saved");
+
+        //test loading branch from file
+        octree.getRoot().loadBranch(fileName);
+        System.out.println(fileName + " unloaded");
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

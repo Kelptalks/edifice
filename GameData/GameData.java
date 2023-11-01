@@ -30,4 +30,5 @@ public class GameData {
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
 
+    public String SaveDirectory = "World/DataStorage/Octree/SaveData";
 }
