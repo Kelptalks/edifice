@@ -33,6 +33,36 @@ public class Branch implements Serializable {
         }
     }
 
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  getter/setters
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * For getting and setting values
+     */
+    public void setBranch(Branch branch, int index){
+        branches[index] = branch;
+    }
+
+    public Branch getBranch(int index){
+        return branches[index];
+    }
+
+    public Branch[] getBranches(){
+        return branches;
+    }
+
+    public void setLeaf(Leaf newLeaf, int index) {
+        leaves[index] = newLeaf;
+    }
+
+    public Leaf[] getLeaves(){
+        return leaves;
+    }
+
+    public int getDepth(){
+        return this.depth;
+    }
+
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  File management
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,35 +111,5 @@ public class Branch implements Serializable {
         else {
             this.branches = loadedBranch.getBranches();
         }
-    }
-
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  getter/setters
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     * For getting and setting values
-     */
-    public void setBranch(Branch branch, int index){
-        branches[index] = branch;
-    }
-
-    public Branch getBranch(int index){
-        return branches[index];
-    }
-
-    public Branch[] getBranches(){
-        return branches;
-    }
-
-    public void setLeaf(Leaf newLeaf, int index) {
-        leaves[index] = newLeaf;
-    }
-
-    public Leaf[] getLeaves(){
-        return leaves;
-    }
-
-    public int getDepth(){
-        return this.depth;
     }
 }

@@ -10,15 +10,23 @@ package World.DataStorage.Octree;
  * methods for changing its loaded
  * location
  *
+ * Relative keys:
  * Based on the current size
  * and node location, I should
  * be able to find the branches
  * in directions relative to the
  * active branch
  *
- * Store 27 branches 1 branch for
- * the main center, and the others
- * for each direction
+ * Cashing:
+ * Store 27 branches in a 3D
+ * array of 3 by 3 by 3
+ * Array[1][1][1] is the core
+ *
+ * Saving/Loading:
+ * The depth of the octree the
+ * active branch loads from
+ * is also the depth at which branches
+ * are saved to file.
  */
 public class ActiveBranch{
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -30,10 +38,18 @@ public class ActiveBranch{
      * and intertwine with a link list
      */
 
-    int branchLoadingScale = 4;
+    int branchLoadingScale = 4; //the depth at which the active branch loads octrees from
+
+    long coreKey; //the core key is an octree key linked to the core location
+    Branch[][][] branches;
     public ActiveBranch(int scale){
-        Branch[][][] branches = new Branch[3][3][3];
-        long coreBranchKey = 0;
+        this.branches = new Branch[3][3][3];
+        this.coreKey = 0;
+    }
+
+    //set the core key
+    public void setCoreKey(long key){
+        this.coreKey = key;
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

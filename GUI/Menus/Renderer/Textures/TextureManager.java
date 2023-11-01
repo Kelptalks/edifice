@@ -35,9 +35,6 @@ public class TextureManager {
         return blockTextures[blockType][blockFace];
     }
 
-    public void test(){
-
-    }
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     *  Loading and storing textures
     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -46,7 +43,7 @@ public class TextureManager {
     * |BLOCK ARRAY STORAGE|
     *   Explanation : Blocks are stored in a 3d array with each dimention corasponding to a more specific version of the block
     *   Dimentions :
-    *       1.[] corasponds to the the block type
+    *       1.[] corasponds to the block type
     *       2.[][] corasponds to the block face
     *       3.[][][] Corraspons to block shader used for shadows
     */

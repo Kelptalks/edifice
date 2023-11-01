@@ -62,7 +62,7 @@ public class Renderer extends JPanel implements Menu {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
-        g2D.drawImage(rayCaster, 0, 0, this); // Assuming rayCaster is a BufferedImage
+        g2D.drawImage(rayCaster, -15, -15, this); // Assuming rayCaster is a BufferedImage
     }
 
     //sets this object as the current menu

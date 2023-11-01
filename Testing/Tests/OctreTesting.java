@@ -3,6 +3,8 @@ import Testing.TestingTemplate;
 import World.DataStorage.Octree.Branch;
 import World.DataStorage.Octree.Octree;
 
+import java.util.Arrays;
+
 import static java.lang.Integer.toBinaryString;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -57,7 +59,7 @@ public class OctreTesting extends TestingTemplate {
         //run test
         Branch returnedBranch = octree.loadBranch(key, depth);
 
-        //verifie results
+        //verify results
         //if the expected depth does not equal the returned branches depth
         if (returnedBranch.getDepth() != depth){
             System.out.println("Key : " + toBinaryString(key));
@@ -83,18 +85,32 @@ public class OctreTesting extends TestingTemplate {
      */
     public void testSavingBranch(){
         //setup
-        Octree octree = new Octree(9);
+        Octree octree = new Octree(5);
         octree.populate(octree.getRoot());
         String fileName = "test";
+        boolean unloadedTest = false;
 
-
-        //test saving branch to file
+        //sav branch to file
         octree.getRoot().saveBranch(fileName);
-        System.out.println(fileName + " Saved");
 
-        //test loading branch from file
+        //Check file was unloaded
+        if (octree.getRoot().getBranches() == null){
+            unloadedTest = true;
+        }
+
+        //load branch from file
         octree.getRoot().loadBranch(fileName);
-        System.out.println(fileName + " unloaded");
+
+        //verify results
+        if (octree.getRoot().getBranches() != null && unloadedTest){
+            System.out.println("-(pass) Saving/Loading Branches");
+        }
+        else{
+            System.out.println("-(fail) SavingBranch");
+            System.out.println("After unloading : " + unloadedTest + " | Expected true");
+            System.out.println("After saving branches were :" + Arrays.toString(octree.getRoot().getBranches()) + "| expected !null" );
+        }
+
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

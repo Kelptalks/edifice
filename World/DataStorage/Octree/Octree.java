@@ -51,33 +51,9 @@ public class Octree {
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Branch Management
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *
+     * Methods for managing branch data
+     * and accessing branches
      */
-
-    public void getBranchAtDepth(long Key, int depth){
-
-    }
-
-    public void populate(Branch branch){
-        int currentDepth = branch.getDepth();
-
-        //if the branches depth on branch level
-        if (branch.getDepth() > 4){
-            for (int x = 0; x < nodeSize; x++){
-                Branch newBranch = new Branch(currentDepth - 1);
-                populate(newBranch);
-                branch.setBranch(newBranch, x);
-            }
-        }
-
-        //if the branches depth is on leave level
-        if (branch.getDepth() == 4){
-            for (int x = 0; x < nodeSize; x++) {
-                Leaf newLeaf = new Leaf();
-                branch.setLeaf(newLeaf, x);
-            }
-        }
-    }
 
     //!WARNING!
     // depths < 4 not allowed!
@@ -100,8 +76,37 @@ public class Octree {
         return branch;
     }
 
-    //save a branch to disk
-    public void unloadBranch(Branch branch){
+    //populate a branch
+    public void populate(Branch branch){
+        int currentDepth = branch.getDepth();
 
+        //if the branches depth on branch level
+        if (branch.getDepth() > 4){
+            for (int x = 0; x < nodeSize; x++){
+                Branch newBranch = new Branch(currentDepth - 1);
+                populate(newBranch);
+                branch.setBranch(newBranch, x);
+            }
+        }
+
+        //if the branches depth is on leave level
+        if (branch.getDepth() == 4){
+            for (int x = 0; x < nodeSize; x++) {
+                Leaf newLeaf = new Leaf();
+                branch.setLeaf(newLeaf, x);
+            }
+        }
+    }
+
+    //save a branch to disk
+    public void unloadBranch(Branch branch, long key){
+        String keyString = String.valueOf(key);
+        branch.saveBranch(keyString);
+    }
+
+    //load a branch from file
+    public void loadBranch(Branch branch, long key){
+        String keyString = String.valueOf(key);
+        branch.loadBranch(keyString);
     }
 }
