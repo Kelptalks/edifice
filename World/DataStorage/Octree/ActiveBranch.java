@@ -38,11 +38,11 @@ public class ActiveBranch{
      * and intertwine with a link list
      */
 
-    int branchLoadingScale = 4; //the depth at which the active branch loads octrees from
+    int branchLoadingScale = 7; //the depth at which the active branch loads octrees from 128
 
     long coreKey; //the core key is an octree key linked to the core location
     Branch[][][] branches;
-    public ActiveBranch(int scale){
+    public ActiveBranch(){
         this.branches = new Branch[3][3][3];
         this.coreKey = 0;
     }
@@ -69,6 +69,7 @@ public class ActiveBranch{
     public void loadDown(){
 
     }
+    //x++
     public void loadNorth(){
 
     }
@@ -81,5 +82,28 @@ public class ActiveBranch{
 
     public void loadWest(){
 
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Relative key coords
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Get keys relative to input
+     * key
+     */
+
+    //Y++
+    public long posYKey(Long key){
+        //based on the branchLoadingScale create a relative key,
+        //it also depends on what parent in the octree the key is.
+        //keys in the sector located in along.
+
+
+        //find starting sector
+        int index = (int) ((key >> (3 * branchLoadingScale)) & 0x07);
+        System.out.println(index);
+
+
+
+        return key;
     }
 }

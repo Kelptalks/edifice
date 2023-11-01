@@ -1,5 +1,6 @@
 package Testing;
 
+import Testing.Tests.ActiveBranchTesting;
 import Testing.Tests.OctreTesting;
 import Testing.Tests.WorldTesting;
 
@@ -77,8 +78,9 @@ public class Testing {
      * Used for testing classes
      */
     public void runAll(){
-        testOctre();
-        testWorld();
+        //testOctre();
+        testActiveBranch();
+        //testWorld();
     }
 
     //test my octree class
@@ -87,5 +89,9 @@ public class Testing {
     }
     public void testWorld() {
         new WorldTesting().run();
+    }
+
+    public void testActiveBranch() {
+        new ActiveBranchTesting().run();
     }
 }

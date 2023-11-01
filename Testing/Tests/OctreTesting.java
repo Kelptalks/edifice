@@ -1,5 +1,4 @@
 package Testing.Tests;
-import Testing.TestingTemplate;
 import World.DataStorage.Octree.Branch;
 import World.DataStorage.Octree.Octree;
 
@@ -16,9 +15,8 @@ import static java.lang.Integer.toBinaryString;
  * unit test the octree class
  */
 
-public class OctreTesting extends TestingTemplate {
+public class OctreTesting {
 
-    @Override
     public void run(){
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
         System.out.println("~~ Octree Testing ~~");
@@ -38,7 +36,7 @@ public class OctreTesting extends TestingTemplate {
     public void testPopulate(){
         Octree octree = new Octree(9);
         octree.populate(octree.getRoot());
-
+        System.out.println(octree.getDimension());
         System.out.println("-(pass) populate test");
     }
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,7 +52,7 @@ public class OctreTesting extends TestingTemplate {
         Octree octree = new Octree(9);
         octree.populate(octree.getRoot());
         int key = 293823232;
-        int depth = 4;
+        int depth = 5;
 
         //run test
         Branch returnedBranch = octree.loadBranch(key, depth);
@@ -85,7 +83,7 @@ public class OctreTesting extends TestingTemplate {
      */
     public void testSavingBranch(){
         //setup
-        Octree octree = new Octree(5);
+        Octree octree = new Octree(7);
         octree.populate(octree.getRoot());
         String fileName = "test";
         boolean unloadedTest = false;
