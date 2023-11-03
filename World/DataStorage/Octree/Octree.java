@@ -6,6 +6,15 @@ package World.DataStorage.Octree;
  * This octree is designed to
  * load branches from file
  *
+ * I need to find a method to
+ * place massive shapes in the
+ * world, shapes that haven't yet
+ * been generated. Maybe mark an octree
+ * for reconstruction at a higher level
+ * depth, and that contails the shape
+ * mod info, only apply the shape
+ * once rendered.
+ *
  */
 
 import java.util.Timer;
@@ -35,7 +44,7 @@ public class Octree {
 
     // Get the octree side length in blocks
     public long getDimension(){
-        return 2L << depth-1; //exponential function
+        return 2L << depth; //exponential function
     }
 
     // Get the octree volume
@@ -109,4 +118,5 @@ public class Octree {
         String keyString = String.valueOf(key);
         branch.loadBranch(keyString);
     }
+
 }

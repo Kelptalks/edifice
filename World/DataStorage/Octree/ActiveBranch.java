@@ -40,6 +40,7 @@ public class ActiveBranch{
 
     int branchLoadingScale = 7; //the depth at which the active branch loads octrees from 128
 
+    Octree octree = new Octree(20);
     long coreKey; //the core key is an octree key linked to the core location
     Branch[][][] branches;
     public ActiveBranch(){
@@ -84,26 +85,50 @@ public class ActiveBranch{
 
     }
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Relative key coords
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     * Get keys relative to input
-     * key
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  axis based key bit manipulation
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Manipulate key based on a cord system
+     *
+     *
+     * bitmask(0) = x axis
+     * bitmask(1) = y axis
+     * bitmask(2) = z axis
+     *
+     *
      */
 
-    //Y++
-    public long posYKey(Long key){
-        //based on the branchLoadingScale create a relative key,
-        //it also depends on what parent in the octree the key is.
-        //keys in the sector located in along.
+    public long addToBit(long key, int depth, int bitMask){
+        long mask = 1L << ((depth * 3) + bitMask);
 
+        //if the z bit is != 0, then the sector on a higher branch level needs to be set.
+        if ((key & mask) != 0){
+            key &= ~mask;
+            // Recursively add to the bit at the next higher level.
+            key = addToBit(key, depth + 1, bitMask);
+        }
 
-        //find starting sector
-        int index = (int) ((key >> (3 * branchLoadingScale)) & 0x07);
-        System.out.println(index);
-
-
-
+        //else the key can be increased and remain in the same sector;
+        else {
+            key |= mask;
+        }
         return key;
     }
+
+    public long subtractToBit(long key, int depth, int bitMask){
+        long mask = 1L << ((depth * 3) + bitMask);
+
+        // if the bit is == 0, then the sector on a lower branch level needs to be set.
+        if ((key & mask) == 0){
+            key |= mask;
+            key = subtractToBit(key, depth + 1, bitMask);
+        }
+
+        // else the bit is already set and can be cleared to represent subtraction.
+        else {
+            key &= ~mask;
+        }
+        return key;
+    }
+
 }
