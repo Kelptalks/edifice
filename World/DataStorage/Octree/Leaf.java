@@ -1,10 +1,13 @@
 package World.DataStorage.Octree;
+
+import java.io.Serializable;
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Leaf Class
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * This class is for interpreting, manipulating and debugging the bitPacked leaf which is the final level of the octree.
  */
-public class Leaf{
+public class Leaf implements Serializable{
 
     public Leaf(){
         //System.out.println("new leaf");

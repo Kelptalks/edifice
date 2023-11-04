@@ -14,4 +14,5 @@ import java.awt.event.ActionListener;
  */
 public interface Menu {
     public void setCurrentMenu();
+
 }

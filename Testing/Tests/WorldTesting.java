@@ -1,6 +1,5 @@
 package Testing.Tests;
 
-import Testing.TestingTemplate;
 import World.World;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -9,8 +8,8 @@ import World.World;
  * Testing world cord conversion
  * and world generation
  */
-public class WorldTesting extends TestingTemplate {
-    @Override
+public class WorldTesting {
+
     public void run(){
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
         System.out.println("~~ World Testing ~~");

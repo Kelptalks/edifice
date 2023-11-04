@@ -6,9 +6,20 @@ package World.DataStorage.Octree;
  * This octree is designed to
  * load branches from file
  *
+ * I need to find a method to
+ * place massive shapes in the
+ * world, shapes that haven't yet
+ * been generated. Maybe mark an octree
+ * for reconstruction at a higher level
+ * depth, and that contails the shape
+ * mod info, only apply the shape
+ * once rendered.
+ *
  */
 
 import java.util.Timer;
+
+import static java.lang.Integer.toBinaryString;
 
 public class Octree {
 
@@ -33,7 +44,7 @@ public class Octree {
 
     // Get the octree side length in blocks
     public long getDimension(){
-        return 2L << depth-1; //exponential function
+        return 2L << depth; //exponential function
     }
 
     // Get the octree volume
@@ -49,9 +60,32 @@ public class Octree {
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Branch Management
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *
+     * Methods for managing branch data
+     * and accessing branches
      */
 
+    //!WARNING!
+    // depths < 4 not allowed!
+    // as leaf objects cannot be accessed through the
+    // branch loading function.
+
+    //load a branch from disk
+    public Branch loadBranch(long key, int depth){
+        //get staring branch
+        Branch branch = this.root;
+
+        //cycle through depths, stop when the desired depth is reached
+        for (int currentDepth = this.depth; currentDepth > depth; currentDepth--) {
+            //get 3 bits of the key based on depth
+            int index = (int) ((key >> (3 * currentDepth)) & 0x07);
+
+            //return the branch with that key
+            branch = branch.getBranch(index);
+        }
+        return branch;
+    }
+
+    //populate a branch
     public void populate(Branch branch){
         int currentDepth = branch.getDepth();
 
@@ -73,13 +107,16 @@ public class Octree {
         }
     }
 
-    //set the branch currently loaded.
-    public void setActiveBranch(Branch branch){
-
+    //save a branch to disk
+    public void unloadBranch(Branch branch, long key){
+        String keyString = String.valueOf(key);
+        branch.saveBranch(keyString);
     }
 
-    //save a branch to file
-    public void unloadBranch(Branch branch){
-
+    //load a branch from file
+    public void loadBranch(Branch branch, long key){
+        String keyString = String.valueOf(key);
+        branch.loadBranch(keyString);
     }
+
 }

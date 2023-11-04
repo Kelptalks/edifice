@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.Menus.Main.Main;
 import GUI.Menus.PerlinNoise.PerlinNoiseMenu;
 import GUI.Menus.Renderer.Controls.KeyBoardInputs;
 import GUI.Menus.Renderer.Controls.MouseInputs;
@@ -32,8 +33,7 @@ public class GUI extends JFrame {
         this.setTitle("Telp");
 
         //add keyInputs
-
-        gameData.menu = new Renderer(gameData);
+        gameData.menu = new Main(gameData, this);
 
         this.updateMenu();
 
@@ -42,6 +42,28 @@ public class GUI extends JFrame {
 
     public void updateMenu(){
         this.add((Component) gameData.menu);
+        this.revalidate();
+        this.repaint();
+    }
+
+    public void setMenu(String menu){
+        //remove the old menu
+        this.remove((Component) gameData.menu);
+
+        //set the game menu to the correct menu
+        switch (menu) {
+            case "renderer" :
+                gameData.menu = new Renderer(gameData);
+                break;
+            case "perlinTest" :
+                gameData.menu = new PerlinNoiseMenu(gameData);
+                break;
+        }
+
+        //add the new menu
+        this.add((Component) gameData.menu);
+
+        ((Component) gameData.menu).requestFocus();
         this.revalidate();
         this.repaint();
     }
