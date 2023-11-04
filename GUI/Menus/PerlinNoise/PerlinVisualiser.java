@@ -12,39 +12,38 @@ import java.awt.image.BufferedImage;
  *  of perlin generated perlin noise
  */
 public class PerlinVisualiser extends BufferedImage {
-    private Graphics graphics = this.getGraphics();
+    private Graphics2D graphics = (Graphics2D) this.getGraphics();
     private PerlinNoiseGen perlinNoiseGen = new PerlinNoiseGen();
     public PerlinVisualiser(GameData gameData) {
         super(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ, TYPE_4BYTE_ABGR_PRE);
 
-        drawGrid(perlinNoiseGen.getPoints());
-    }
-
-    //draw a grid based off a perlin scale
-    public void drawGrid(int[] points){
-        graphics.setColor(Color.BLACK);
-        int[] oldPoint = new int[]{0, 0};
-        for (int x = 0; x < points.length; x++){
-            graphics.drawLine(oldPoint[0], oldPoint[1], x*20, 500 + points[x]);
-            graphics.fillOval(x*20, 500 + points[x], 10, 10);
-            oldPoint[0] = x*20;
-            oldPoint[1] = 500 + points[x];
-        }
-
-        graphics.setColor(Color.RED);
-        int[] octivePoints = perlinNoiseGen.genOctave(8);
-        oldPoint = new int[]{0, 0};
-        for (int x = 0; x < octivePoints.length; x++){
-            graphics.drawLine(oldPoint[0], oldPoint[1], x*20, 500 + octivePoints[x]);
-            graphics.fillOval(x*20, 500 + octivePoints[x] , 10, 10);
-            oldPoint[0] = x*20;
-            oldPoint[1] = 500 + octivePoints[x];
-        }
+        //drawVector();
+        drawGrid(50);
+        perlinNoiseGen.generateVector();
     }
 
     //drawing arrows based off vector cords
-    public void drawVector(){
-        graphics.setColor(Color.BLACK);
+    public void drawGrid(int scale){
+        for (int y = 0; y < 50; y++){
+            for (int x = 0; x < 50; x++){
+                int pointX = x * scale;
+                int pointY = y * scale;
 
+                graphics.setColor(Color.BLACK);
+                graphics.fillOval(pointX- 8, pointY- 8, 16, 16);
+
+                drawVector(pointX, pointY, scale);
+            }
+        }
+    }
+
+    public void drawVector(int x, int y, int scale){
+
+
+        double[] vector = perlinNoiseGen.generateVector();
+        graphics.setColor(Color.RED);
+
+        graphics.setStroke(new BasicStroke(2));
+        graphics.drawLine(x, y, (int) (x + (vector[0] * scale)), (int) (y + (vector[1] * scale)));
     }
 }
