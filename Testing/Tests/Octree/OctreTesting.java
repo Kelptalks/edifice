@@ -1,4 +1,4 @@
-package Testing.Tests;
+package Testing.Tests.Octree;
 import World.DataStorage.Octree.Branch;
 import World.DataStorage.Octree.Octree;
 
@@ -9,7 +9,6 @@ import static java.lang.Integer.toBinaryString;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Octree Testing
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Spencer Frank
  *
  * A set of tests used to debug and
  * unit test the octree class
@@ -36,7 +35,6 @@ public class OctreTesting {
     public void testPopulate(){
         Octree octree = new Octree(9);
         octree.populate(octree.getRoot());
-        System.out.println(octree.getDimension());
         System.out.println("-(pass) populate test");
     }
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

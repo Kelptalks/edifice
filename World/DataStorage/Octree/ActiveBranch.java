@@ -29,6 +29,20 @@ package World.DataStorage.Octree;
  * are saved to file.
  */
 public class ActiveBranch{
+
+    //the scale at which branches are loaded.
+    private int branchLoadingScale = 7; //the depth at which the active branch loads octrees from 128
+
+    //key manipulation tool
+    private KeyMod keyMod = new KeyMod();
+
+    //octree
+    private Octree octree = new Octree(20);
+
+    //the core key is an octree key linked to the core location
+    private long coreKey;
+    Branch[][][] activeArea;
+
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Constructor
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -38,19 +52,23 @@ public class ActiveBranch{
      * and intertwine with a link list
      */
 
-    int branchLoadingScale = 7; //the depth at which the active branch loads octrees from 128
-
-    Octree octree = new Octree(20);
-    long coreKey; //the core key is an octree key linked to the core location
-    Branch[][][] branches;
     public ActiveBranch(){
-        this.branches = new Branch[3][3][3];
-        this.coreKey = 0;
+        this.activeArea = new Branch[3][3][3];
+
+        //set the center octree
+        setCoreKey(576460750000000000L);
+        setBranchVolume();
+        loadUp();
+        loadUp();
+        loadUp();
     }
 
     //set the core key
     public void setCoreKey(long key){
         this.coreKey = key;
+
+        //load area around core
+        activeArea[0][0][0] = octree.loadBranch(key, branchLoadingScale);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -65,70 +83,57 @@ public class ActiveBranch{
      *  to core branch or branches[1][1][1]
      */
     public void loadUp(){
+        //shift an array down
 
+        //cycle through plane and shift it down one.
+        for (int z = 1; z < 3; z++){
+            for (int y = 0; y < 3; y++){
+                for (int x = 0; x < 3; x++){
+                    activeArea[x][y][z - 1] = activeArea[x][y][z];
+                }
+            }
+        }
+
+        for (int y = 0; y < 3; y++){
+            for (int x = 0; x < 3; x++){
+                long key = keyMod.getRelativeKey(coreKey, branchLoadingScale, x - 1, y - 1, 1);
+                activeArea[x][y][2] = octree.loadBranch(key, branchLoadingScale);
+            }
+        }
     }
-    public void loadDown(){
 
-    }
-    //x++
-    public void loadNorth(){
-
-    }
-    public void loadEast(){
-
-    }
-    public void loadSouth(){
-
-    }
-
-    public void loadWest(){
-
-    }
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  axis based key bit manipulation
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     * Manipulate key based on a cord system
-     *
-     *
-     * bitmask(0) = x axis
-     * bitmask(1) = y axis
-     * bitmask(2) = z axis
-     *
-     *
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Key to Cord conversion
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Converting x, y, z cords to
+     * relative key cords in the
+     * active branch
      */
 
-    public long addToBit(long key, int depth, int bitMask){
-        long mask = 1L << ((depth * 3) + bitMask);
+    //the volume of each branch in the tree.
+    private int branchDimension = 0;
 
-        //if the z bit is != 0, then the sector on a higher branch level needs to be set.
-        if ((key & mask) != 0){
-            key &= ~mask;
-            // Recursively add to the bit at the next higher level.
-            key = addToBit(key, depth + 1, bitMask);
-        }
-
-        //else the key can be increased and remain in the same sector;
-        else {
-            key |= mask;
-        }
-        return key;
+    private void setBranchVolume(){
+        branchDimension = (int) octree.getDimension(branchLoadingScale);
     }
 
-    public long subtractToBit(long key, int depth, int bitMask){
-        long mask = 1L << ((depth * 3) + bitMask);
+    public void corToKey(int xCor, int yCor, int zCor){
+        //find what branch node the cords are in
+        int x = xCor / branchDimension;
+        int y = yCor / branchDimension;
+        int z = zCor / branchDimension;
 
-        // if the bit is == 0, then the sector on a lower branch level needs to be set.
-        if ((key & mask) == 0){
-            key |= mask;
-            key = subtractToBit(key, depth + 1, bitMask);
-        }
+        Branch branch = activeArea[x][y][z];
 
-        // else the bit is already set and can be cleared to represent subtraction.
-        else {
-            key &= ~mask;
-        }
-        return key;
+        //create a key for that a block in that branch
+        x = xCor % branchDimension;
+        y = yCor % branchDimension;
+        z = zCor % branchDimension;
+
+        long key = keyMod.getRelativeKey(0,0, x % branchDimension, y, z);
+        int block = branch.getBlock(key);
+
+        System.out.println(block);
     }
 
 }

@@ -43,13 +43,13 @@ public class Octree {
     private final int nodeSize = 8;
 
     // Get the octree side length in blocks
-    public long getDimension(){
-        return 2L << depth; //exponential function
+    public long getDimension(long scale){
+        return 2L << scale; //exponential function
     }
 
     // Get the octree volume
-    public long getVolume(){
-        return (long) Math.pow(getDimension(), 3); //cube the length
+    public long getVolume(long scale){
+        return (long) Math.pow(getDimension(scale), 3); //cube the length
     }
 
     //get the root branch
@@ -69,7 +69,7 @@ public class Octree {
     // as leaf objects cannot be accessed through the
     // branch loading function.
 
-    //load a branch from disk
+    //load a branch from octree
     public Branch loadBranch(long key, int depth){
         //get staring branch
         Branch branch = this.root;
@@ -78,6 +78,12 @@ public class Octree {
         for (int currentDepth = this.depth; currentDepth > depth; currentDepth--) {
             //get 3 bits of the key based on depth
             int index = (int) ((key >> (3 * currentDepth)) & 0x07);
+
+            //generate a branch if null
+            if (branch.getBranch(index) == null){
+                //System.out.println("Generating Branch at depth: " + currentDepth + " | index : " + index);
+                branch.setBranch(new Branch(currentDepth), index);
+            }
 
             //return the branch with that key
             branch = branch.getBranch(index);
