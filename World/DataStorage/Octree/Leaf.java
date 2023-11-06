@@ -11,6 +11,11 @@ public class Leaf implements Serializable{
 
     public Leaf(){
         //System.out.println("new leaf");
+
+        for (int x = 0; x < 15; x++){
+            setBlock(x, 5);
+        }
+
     }
 
     private long[] leafs = new long[512];
@@ -36,43 +41,17 @@ public class Leaf implements Serializable{
      */
 
     //Returns block based off the key.
-    public int getBlock(int linearKey) {
-        int arrayIndex = linearKey >> 3;  // Equivalent to key / 8
-        int bitIndex = linearKey & 0x7;   // Equivalent to key % 8
+    public int getBlock(int key) {
+        int arrayIndex = (key & 0xFFF) >> 3;  // Equivalent to key / 8
+        int bitIndex = key & 0x7;   // Equivalent to key % 8
         return (int) ((leafs[arrayIndex] >> (bitIndex << 3)) & 0xFF);
-    }
-
-    public int getBlockFromKey(int key) {
-        int linearKey = calculateLinearIndex(key);
-        return getBlock(linearKey);
     }
 
     //change a block in the leaf
     public void setBlock(int key, int blockType){
-        int arrayIndex = key >> 3;
+        int arrayIndex = (key & 0xFFF) >> 3;
         int bitIndex = key & 7;
         leafs[arrayIndex] = (leafs[arrayIndex] & ~(0xFFL << (bitIndex * BITS_PER_BLOCK))) | ((blockType & 0xFFL) << (bitIndex * BITS_PER_BLOCK));
-    }
-
-    public void setBlockFromKey(int key, int blockType) {
-        int linearKey = calculateLinearIndex(key);
-        setBlock(linearKey, blockType);
-    }
-
-    public int calculateLinearIndex(int key) {
-        int x = (key & 0b100) >> 2;
-        int y = (key & 0b010) >> 1;
-        int z = (key & 0b001);
-
-        return x * 4 + y * 2 + z;
-    }
-
-    public void setBlock(int x, int y, int z, int blockType){
-        setBlock(x+y*16+z*64, blockType);
-    }
-
-    public int getBlock(int x, int y, int z){
-        return getBlock(x+y*16+z*64);
     }
 
 }

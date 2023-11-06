@@ -73,12 +73,24 @@ public class Branch implements Serializable {
     public int getBlock(long key){
         int index = (int) ((key >> (3 * this.depth)) & 0x07);
         if (depth > 4 && branches[index] != null){
-            branches[index].getBlock(key);
+            return branches[index].getBlock(key);
         }
-        else if (depth < 4) {
-            leaves[0].getBlock((int) key);
+        else if (depth == 4) {
+            return leaves[index].getBlock((int) key);
         }
         return 0;
+    }
+
+    //get block from octree cords
+    public void setBlock(long key, int block){
+        int index = (int) ((key >> (3 * this.depth)) & 0x07);
+        if (depth > 4 && branches[index] != null){
+            branches[index].setBlock(key, block);
+        }
+        else if (depth == 4) {
+            leaves[index].setBlock((int) key, block);
+            System.out.println("setting block");
+        }
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

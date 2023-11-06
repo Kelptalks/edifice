@@ -97,7 +97,10 @@ public class ActiveBranch{
         for (int y = 0; y < 3; y++){
             for (int x = 0; x < 3; x++){
                 long key = keyMod.getRelativeKey(coreKey, branchLoadingScale, x - 1, y - 1, 1);
-                activeArea[x][y][2] = octree.loadBranch(key, branchLoadingScale);
+
+                Branch branch = octree.loadBranch(key, branchLoadingScale);
+                octree.populate(branch);
+                activeArea[x][y][2] = branch;
             }
         }
     }
@@ -112,28 +115,29 @@ public class ActiveBranch{
 
     //the volume of each branch in the tree.
     private int branchDimension = 0;
+    private int branchVolume = 0;
 
     private void setBranchVolume(){
         branchDimension = (int) octree.getDimension(branchLoadingScale);
+        branchVolume = (branchDimension * branchDimension * branchDimension)/2;
     }
 
-    public void corToKey(int xCor, int yCor, int zCor){
+    public int getBlock(long xCor, long yCor, long zCor){
+
         //find what branch node the cords are in
-        int x = xCor / branchDimension;
-        int y = yCor / branchDimension;
-        int z = zCor / branchDimension;
+        int x = (int) (xCor / branchDimension);
+        int y = (int) (yCor / branchDimension);
+        int z = (int) (zCor / branchDimension);
 
         Branch branch = activeArea[x][y][z];
 
         //create a key for that a block in that branch
-        x = xCor % branchDimension;
-        y = yCor % branchDimension;
-        z = zCor % branchDimension;
+        x = (int) (xCor % branchDimension);
+        y = (int) (yCor % branchDimension);
+        z = (int) (zCor % branchDimension);
 
-        long key = keyMod.getRelativeKey(0,0, x % branchDimension, y, z);
-        int block = branch.getBlock(key);
-
-        System.out.println(block);
+        long key = keyMod.getRelativeKey(0,0, x % branchDimension, y, z) - branchVolume;
+        return branch.getBlock(key);
     }
 
 }

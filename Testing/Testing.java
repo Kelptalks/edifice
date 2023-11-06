@@ -2,6 +2,7 @@ package Testing;
 
 import Testing.Tests.Octree.ActiveBranchTesting;
 import Testing.Tests.Octree.KeyTesting;
+import Testing.Tests.Octree.LeafTesting;
 import Testing.Tests.Octree.OctreTesting;
 import Testing.Tests.WorldTesting;
 
@@ -95,6 +96,10 @@ public class Testing {
 
     public void testActiveBranch() {
         new ActiveBranchTesting().run();
+    }
+
+    public void testLeaf(){
+        new LeafTesting().run();
     }
 
     public void testKey(){

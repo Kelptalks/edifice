@@ -2,6 +2,7 @@ package GUI.Menus.Renderer.raycastRendering;
 
 import World.DataStorage.Blueprint.Blueprint;
 import GameData.GameData;
+import World.DataStorage.Octree.ActiveBranch;
 import World.World;
 
 import java.awt.*;
@@ -16,7 +17,7 @@ public class RaycastRenderer extends BufferedImage {
     private GridDrawingManager drawingManager;
     private Graphics graphics = this.getGraphics();
 
-    private Blueprint world = new Blueprint(1000, 1000, 1000);
+    private ActiveBranch world = new ActiveBranch();
     //private World world = new World();
 
     private int[][][] culledCoordMods;
@@ -131,7 +132,7 @@ public class RaycastRenderer extends BufferedImage {
     }
 
     //draw distance
-    private int drawDistance = 500;
+    private int drawDistance = 100;
 
     //Render Size
     private int xCamRez = 29;
