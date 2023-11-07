@@ -3,9 +3,7 @@ package GUI.Menus.Renderer;
 import GUI.Menus.Menu;
 import GUI.Menus.Renderer.Controls.KeyBoardInputs;
 import GUI.Menus.Renderer.Controls.MouseInputs;
-import GUI.Menus.Renderer.raycastRendering.GridDrawingManager;
 import GUI.Menus.Renderer.raycastRendering.RaycastRenderer;
-import GameData.GameData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,16 +17,16 @@ import java.awt.event.ActionListener;
  */
 public class Renderer extends JPanel implements Menu {
     private RaycastRenderer rayCaster;
-    private GameData gameData;
+    private GameData.gameData gameData;
 
-    public Renderer(GameData gameData){
+    public Renderer(GameData.gameData gameData){
         this.rayCaster = new RaycastRenderer(gameData);
         this.setPreferredSize(new Dimension(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ));
 
         //add keyInputs
         this.setFocusable(true); //set the focus
         this.addMouseListener(new MouseInputs(gameData));
-        this.addKeyListener(new KeyBoardInputs(rayCaster));
+        this.addKeyListener(new KeyBoardInputs(gameData, rayCaster));
 
         //Start rendering loop
         startRenderLoop();

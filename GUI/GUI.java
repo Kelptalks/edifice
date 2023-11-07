@@ -2,9 +2,6 @@ package GUI;
 
 import GUI.Menus.Main.Main;
 import GUI.Menus.PerlinNoise.PerlinNoiseMenu;
-import GUI.Menus.Renderer.Controls.KeyBoardInputs;
-import GUI.Menus.Renderer.Controls.MouseInputs;
-import GameData.GameData;
 import GUI.Menus.Renderer.Renderer;
 
 import javax.swing.*;
@@ -21,9 +18,9 @@ public class GUI extends JFrame {
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
 
-    private GameData gameData;
+    private GameData.gameData gameData;
 
-    public GUI(GameData gameData){
+    public GUI(GameData.gameData gameData){
         super();
 
         this.gameData = gameData;

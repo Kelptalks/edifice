@@ -1,5 +1,5 @@
 package GUI.Menus.PerlinNoise;
-import GameData.GameData;
+import GameData.gameData;
 import World.TerrainGen.PerlinNoiseGen;
 
 import java.awt.*;
@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 public class PerlinVisualiser extends BufferedImage {
     private Graphics2D graphics = (Graphics2D) this.getGraphics();
     private PerlinNoiseGen perlinNoiseGen = new PerlinNoiseGen();
-    public PerlinVisualiser(GameData gameData) {
+    public PerlinVisualiser(gameData gameData) {
         super(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ, TYPE_4BYTE_ABGR_PRE);
 
         //drawVector();

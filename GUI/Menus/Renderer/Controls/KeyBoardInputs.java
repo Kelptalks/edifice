@@ -1,16 +1,18 @@
 package GUI.Menus.Renderer.Controls;
 
 import GUI.Menus.Renderer.raycastRendering.RaycastRenderer;
-import GameData.GameData;
+import GameData.gameData;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 public class KeyBoardInputs implements KeyListener {
 
+    private gameData gameData;
     private int currentBlock = 1;
     private RaycastRenderer rayCaster;
-    public KeyBoardInputs(RaycastRenderer rayCaster) {
+    public KeyBoardInputs(gameData gameData, RaycastRenderer rayCaster) {
         this.rayCaster = rayCaster;
+        this.gameData = gameData;
     }
 
     @Override
@@ -27,27 +29,27 @@ public class KeyBoardInputs implements KeyListener {
         switch (key) {
             case KeyEvent.VK_A:
                 //move the camera left
-                GameData.playerYCamCor += 1;
+                gameData.playerYCamCor += 1;
                 break;
             case KeyEvent.VK_W:
                 //move the camera up
-                GameData.playerXCamCor -= 1;
+                gameData.playerXCamCor -= 1;
                 break;
             case KeyEvent.VK_S:
                 //move the camera down
-                GameData.playerXCamCor += 1;
+                gameData.playerXCamCor += 1;
                 break;
             case KeyEvent.VK_D:
                 //move the camera right
-                GameData.playerYCamCor -= 1;
+                gameData.playerYCamCor -= 1;
                 break;
             case KeyEvent.VK_E:
                 //move the camera right
-                GameData.playerZCamCor += 1;
+                gameData.playerZCamCor += 1;
                 break;
             case KeyEvent.VK_Q:
                 //move the camera right
-                GameData.playerZCamCor -= 1;
+                gameData.playerZCamCor -= 1;
                 break;
             case KeyEvent.VK_SPACE:
                 //move the camera right

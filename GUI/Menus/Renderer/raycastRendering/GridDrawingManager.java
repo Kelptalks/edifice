@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import GUI.Menus.Renderer.Textures.TextureManager;
-import GameData.GameData;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  Grid Manager class
@@ -29,10 +28,10 @@ public class GridDrawingManager extends BufferedImage {
     public final int BLOCK_HEIGHT_FACTOR = 16;
 
     //create gameData class
-    private final GameData gameData;
+    private final GameData.gameData gameData;
 
     //constructor
-    GridDrawingManager(GameData gameData, int xRez, int yRez) {
+    GridDrawingManager(GameData.gameData gameData, int xRez, int yRez) {
         super(xRez,yRez, TYPE_4BYTE_ABGR_PRE);
         this.gameData = gameData;
     }

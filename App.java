@@ -1,14 +1,10 @@
 import GUI.GUI;
-import GUI.Menus.Renderer.raycastRendering.RaycastRenderer;
-import GameData.GameData;
+import GameData.gameData;
 import Testing.Testing;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        GameData gameData = new GameData();
+        gameData gameData = new gameData();
         GUI gameFrame = new GUI(gameData);
 
 
