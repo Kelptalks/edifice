@@ -10,11 +10,6 @@ import java.io.Serializable;
 public class Leaf implements Serializable{
 
     public Leaf(){
-        //System.out.println("new leaf");
-
-        for (int x = 0; x < 15; x++){
-            setBlock(x, 5);
-        }
 
     }
 

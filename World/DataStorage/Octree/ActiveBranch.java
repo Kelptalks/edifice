@@ -57,10 +57,17 @@ public class ActiveBranch{
 
         //set the center octree
         setCoreKey(576460750000000000L);
-        setBranchVolume();
+        setBranchDimension();
         loadUp();
         loadUp();
         loadUp();
+
+
+        for (int x = 0; x <  100; x++){
+            for (int y = 0; y < 100; y++){
+                setBlock(x, y, -10, 3);
+            }
+        }
     }
 
     //set the core key
@@ -115,29 +122,31 @@ public class ActiveBranch{
 
     //the volume of each branch in the tree.
     private int branchDimension = 0;
-    private int branchVolume = 0;
+    private long branchCenterKey = 0;
 
-    private void setBranchVolume(){
-        branchDimension = (int) octree.getDimension(branchLoadingScale);
-        branchVolume = (branchDimension * branchDimension * branchDimension)/2;
+    private void setBranchDimension(){
+        branchDimension = (int) octree.getDimension(branchLoadingScale)/2;
+
+        branchCenterKey = keyMod.getRelativeKey(0, branchLoadingScale, branchDimension, branchDimension, branchDimension);
     }
 
+    //return a block relative to the center of the core
     public int getBlock(long xCor, long yCor, long zCor){
 
-        //find what branch node the cords are in
-        int x = (int) (xCor / branchDimension);
-        int y = (int) (yCor / branchDimension);
-        int z = (int) (zCor / branchDimension);
+        long relativeKey = keyMod.getRelativeKey(branchCenterKey, 0, xCor, yCor, zCor);
 
-        Branch branch = activeArea[x][y][z];
+        //System.out.println(activeArea[1][1][1].getBlock(relativeKey));
 
-        //create a key for that a block in that branch
-        x = (int) (xCor % branchDimension);
-        y = (int) (yCor % branchDimension);
-        z = (int) (zCor % branchDimension);
+        return activeArea[1][1][1].getBlock(relativeKey);
 
-        long key = keyMod.getRelativeKey(0,0, x % branchDimension, y, z) - branchVolume;
-        return branch.getBlock(key);
+
+    }
+
+    public void setBlock(long xCor, long yCor, long zCor, int BlockType){
+
+        long relativeKey = keyMod.getRelativeKey(branchCenterKey, 0, xCor, yCor, zCor);
+
+        activeArea[1][1][1].setBlock(relativeKey, BlockType);
     }
 
 }

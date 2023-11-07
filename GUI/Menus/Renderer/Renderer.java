@@ -3,6 +3,7 @@ package GUI.Menus.Renderer;
 import GUI.Menus.Menu;
 import GUI.Menus.Renderer.Controls.KeyBoardInputs;
 import GUI.Menus.Renderer.Controls.MouseInputs;
+import GUI.Menus.Renderer.raycastRendering.GridDrawingManager;
 import GUI.Menus.Renderer.raycastRendering.RaycastRenderer;
 import GameData.GameData;
 
@@ -27,7 +28,7 @@ public class Renderer extends JPanel implements Menu {
         //add keyInputs
         this.setFocusable(true); //set the focus
         this.addMouseListener(new MouseInputs(gameData));
-        this.addKeyListener(new KeyBoardInputs());
+        this.addKeyListener(new KeyBoardInputs(rayCaster));
 
         //Start rendering loop
         startRenderLoop();

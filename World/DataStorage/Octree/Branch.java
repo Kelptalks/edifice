@@ -89,7 +89,6 @@ public class Branch implements Serializable {
         }
         else if (depth == 4) {
             leaves[index].setBlock((int) key, block);
-            System.out.println("setting block");
         }
     }
 

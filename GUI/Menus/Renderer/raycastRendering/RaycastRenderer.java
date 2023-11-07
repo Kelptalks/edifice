@@ -26,7 +26,6 @@ public class RaycastRenderer extends BufferedImage {
         super(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ, TYPE_4BYTE_ABGR_PRE);
         this.drawingManager = new GridDrawingManager(gameData ,gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ);
         updateCulledCoordMods();
-
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,6 +42,8 @@ public class RaycastRenderer extends BufferedImage {
             }
         }
         graphics.drawImage(drawingManager, 0, 0, null);
+        graphics.setColor(Color.BLACK);
+        graphics.fillOval(((xCamRez) * 32)-5, ((xCamRez) * 16)+25, 10, 10);
     }
 
     //separate casting from drawing to enable threading.
@@ -51,7 +52,7 @@ public class RaycastRenderer extends BufferedImage {
     }
 
     private int[] pathLeftTop(long x, long y){
-        int z = 0;
+        long z = GameData.playerZCamCor;
         int block = world.getBlock(x, y, z);
         for (int distance = 0; distance < drawDistance; distance++)
         {
@@ -73,11 +74,11 @@ public class RaycastRenderer extends BufferedImage {
                 return new int[]{block, 0};
             }
         }
-        return new int[]{1, 0};
+        return new int[]{0, 0};
     }
 
     private int[] pathRightTop(long x, long y){
-        int z = 0;
+        long z = GameData.playerZCamCor;
         int block = world.getBlock(x, y, z);
         for (int distance = 0; distance < drawDistance; distance++)
         {
@@ -99,7 +100,7 @@ public class RaycastRenderer extends BufferedImage {
                 return new int[]{block, 3};
             }
         }
-        return new int[]{1, 3};
+        return new int[]{0, 3};
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,6 +108,76 @@ public class RaycastRenderer extends BufferedImage {
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *
      */
+
+    public void pathAndPlace(int placingBlock){
+
+        long x = culledCoordMods[xCamRez/2][yCamRez/2][0] + GameData.playerXCamCor;
+        long y = culledCoordMods[xCamRez/2][yCamRez/2][1] + GameData.playerYCamCor;
+
+        long z = GameData.playerZCamCor;
+
+        System.out.println(x);
+        System.out.println(y);
+        int block = world.getBlock(x, y, z);
+        for (int distance = 0; distance < drawDistance; distance++)
+        {
+            y--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                world.setBlock(x, y + 1, z, placingBlock);
+                break;
+            }
+
+            x--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                world.setBlock(x + 1, y, z, placingBlock);
+                break;
+            }
+
+            z--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                world.setBlock(x, y, z + 1, placingBlock);
+                break;
+            }
+        }
+    }
+
+    public void pathAndRemove(){
+
+        long x = culledCoordMods[xCamRez/2][yCamRez/2][0] + GameData.playerXCamCor;
+        long y = culledCoordMods[xCamRez/2][yCamRez/2][1] + GameData.playerYCamCor;
+
+        long z = GameData.playerZCamCor;
+
+        System.out.println(x);
+        System.out.println(y);
+        int block = world.getBlock(x, y, z);
+        for (int distance = 0; distance < drawDistance; distance++)
+        {
+            y--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                world.setBlock(x, y, z, 0);
+                break;
+            }
+
+            x--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                world.setBlock(x, y, z, 0);
+                break;
+            }
+
+            z--;
+            block = world.getBlock(x, y, z);
+            if (block != 0){
+                world.setBlock(x, y, z, 0);
+                break;
+            }
+        }
+    }
 
     //take in the screen cords and return block cords to be modified
 
@@ -132,7 +203,7 @@ public class RaycastRenderer extends BufferedImage {
     }
 
     //draw distance
-    private int drawDistance = 100;
+    private int drawDistance = 150;
 
     //Render Size
     private int xCamRez = 29;

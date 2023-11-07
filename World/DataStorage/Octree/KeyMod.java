@@ -23,7 +23,7 @@ public class KeyMod {
 
 
     //adding/subtracting from all axis's
-    public long getRelativeKey(long key, int depth, int xMod, int yMod, int zMod){
+    public long getRelativeKey(long key, int depth, long xMod, long yMod, long zMod){
 
         key = modAxis(key, depth, 0, xMod);
         key = modAxis(key, depth, 1, yMod);
@@ -33,7 +33,7 @@ public class KeyMod {
     }
 
     //adding/subtracting multiple bits from an axis
-    public long modAxis(long key, int depth, int mask, int mod){
+    public long modAxis(long key, int depth, int mask, long mod){
         if (mod > 0){
             //Adds bits to x-axis
             for (int x = 0; x < mod; x++) {

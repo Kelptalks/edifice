@@ -22,7 +22,13 @@ public class ActiveBranchTesting {
 
     public void testCorToKey(){
         ActiveBranch activeBranch = new ActiveBranch();
-        activeBranch.getBlock(512, 512, 23);
+
+        activeBranch.setBlock(1, 1, 1, 5);
+        activeBranch.setBlock(1, 1, -1, 5);
+
+        System.out.println("testing");
+        System.out.println(activeBranch.getBlock(1, 1, 1));
+
     }
 
     private void testLoadUp(){

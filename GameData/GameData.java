@@ -11,6 +11,7 @@ public class GameData {
     public static long playerYCamCor = 0;
     public static long playerZCamCor = 0;
 
+    public static boolean block = false;
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Menu
