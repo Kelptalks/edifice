@@ -2,39 +2,32 @@
  *  Rendering
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
- *	2. Mouse to block screen Coords
+ *	1. Mouse to block screen Coords
  *
- *	3. Ray Casted Shadows
+ *	2. Ray Casted Shadows
  *
- *  4. Multi Threading
+ *  3. Multi Threading
  *
- *  5. Render Cashing
+ *  4. Render Cashing
  */
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Menus
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  
- *	1. Main Menu
  *
- *	2. Custom Windows
+ *	1. Custom Windows
  *
- *	3. Settings Menu
+ *	2. Settings Menu
  *
- *	4. Saving/Loading Menu
+ *	3. Saving/Loading Menu
  *
  */
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  World
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  
- *	1. Fix octree cord to key conversion
  *
- *  4. re organise depths so leaves are at depth 4
+ *	1. Perlin noise terrain gen
  *
- *	2. Saving worlds/Blueprints to file
- *
- *	3. Perlin noise terrain gen
- *
+ *  2. terrain generation
  */
