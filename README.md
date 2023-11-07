@@ -1,6 +1,6 @@
 # Edifice: Infinite Isometric Voxel Rendering Engine
 
-Edifice is a cutting-edge isometric voxel rendering engine capable of generating and managing an infinite world. Leveraging Java AWT for custom rendering processes, it offers a rich set of features for world building and dynamic rendering.
+Edifice isometric voxel rendering engine capable of generating and managing an infinite world. Utilising Java AWT for custom rendering processes, it enables world building and dynamic rendering.
 
 ## World Storage
 
