@@ -16,15 +16,13 @@ import javax.imageio.ImageIO;
 public class TextureManager {
 
     private BufferedImage [][]blockTextures = new BufferedImage[15][6];
-    private String blockFilePaths[] = {null, "GUI/Menus/Renderer/Textures/Grass.png", "GUI/Menus/Renderer/Textures/Block.png", "GUI/Menus/Renderer/Textures/Sand.png"
-    , "GUI/Menus/Renderer/Textures/Blorb.png", "GUI/Menus/Renderer/Textures/Debug.png"};
+    private String blockFilePaths[] = {null, "Textures/1.png", "Textures/2.png", "Textures/3.png"
+    , "Textures/4.png", "Textures/5.png", "Textures/6.png", "Textures/7.png"};
 
     public TextureManager(){
-        spliceAndStore(1);
-        spliceAndStore(2);
-        spliceAndStore(3);
-        spliceAndStore(4);
-        spliceAndStore(5);
+        for (int x = 1; x < blockFilePaths.length; x++){
+            spliceAndStore(x);
+        }
     }
 
     public BufferedImage[] getBlockTexture(int blockType){
@@ -79,14 +77,14 @@ public class TextureManager {
     private BufferedImage[] splicedBlock(BufferedImage blockTexture){
         BufferedImage splices[] = new BufferedImage[6];
 
+        //generate the normal set
         splices[0] = splice(blockTexture, 0, 32, 0, 32, (x, y) -> (y >= 16 + x / 2) || (y >= 15 - (x / 2) + 32));//Left top
         splices[1] = splice(blockTexture, 0, 32, 0, 64, (x, y) -> (y<15+x/2) || (y >= 15 - (x / 2) + 32));//Left middle
         splices[2] = splice(blockTexture, 0, 32, 32, 64, (x, y) -> (y < 14 - (x / 2) + 32 || y >= 49 + x / 2));//Left bottom
         splices[3] = splice(blockTexture, 32, 64, 0, 32, (x, y) -> (y >= 16 + x / 2) || (y >= 15 - (x / 2) + 32));//Right top
-        splices[4] = splice(shade(blockTexture), 32, 64, 15, 48, (x, y) -> (y >= 16 + x / 2) || (y < 14 - (x / 2) + 32));//Right middle
+        shade(blockTexture);//shades the left side
+        splices[4] = splice(blockTexture, 32, 64, 15, 48, (x, y) -> (y >= 16 + x / 2) || (y < 14 - (x / 2) + 32));//Right middle
         splices[5] = splice(blockTexture, 32, 64, 31, 64, (x, y) -> (y < 15 + x / 2) || (y < 16 - (x / 2) + 32));//Right bottom
-
-
         return splices;
     }
 

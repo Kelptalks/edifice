@@ -49,7 +49,7 @@ public class Main extends JPanel implements Menu {
         tests.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GUI.setMenu("perlinTest");
+                GUI.setMenu("VisualTester");
             }
         });
         this.add(tests);

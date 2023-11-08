@@ -58,7 +58,7 @@ public class KeyBoardInputs implements KeyListener {
             case KeyEvent.VK_R:
                 //move the camera right
                 currentBlock++;
-                if (currentBlock > 5){
+                if (currentBlock > 7){
                     currentBlock = 1;
                 }
                 break;

@@ -3,6 +3,7 @@ package GUI;
 import GUI.Menus.Main.Main;
 import GUI.Menus.PerlinNoise.PerlinNoiseMenu;
 import GUI.Menus.Renderer.Renderer;
+import GUI.Menus.VisualTester.VisualTester;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,6 +56,8 @@ public class GUI extends JFrame {
             case "perlinTest" :
                 gameData.menu = new PerlinNoiseMenu(gameData);
                 break;
+            case "VisualTester":
+                gameData.menu = new VisualTester(gameData);
         }
 
         //add the new menu

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import GUI.Menus.Renderer.Textures.FaceShaders;
 import GUI.Menus.Renderer.Textures.TextureManager;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -17,8 +18,8 @@ import GUI.Menus.Renderer.Textures.TextureManager;
 public class GridDrawingManager extends BufferedImage {
 
     //Textures
-    private static final TextureManager textureManager = new TextureManager();
-
+    private final TextureManager textureManager = new TextureManager();
+    private final FaceShaders faceShader = new FaceShaders();
 
     //graphics
     Graphics2D graphics = this.createGraphics();
@@ -33,6 +34,9 @@ public class GridDrawingManager extends BufferedImage {
     //constructor
     GridDrawingManager(GameData.gameData gameData, int xRez, int yRez) {
         super(xRez,yRez, TYPE_4BYTE_ABGR_PRE);
+        graphics.drawImage(textureManager.getFaceTexture(1, 3), 20, 1000, null);
+        BufferedImage shadedFull = faceShader.shadeTopFaceTop(textureManager.getFaceTexture(1, 3));
+        graphics.drawImage(shadedFull, 50, 1000, null);
         this.gameData = gameData;
     }
 

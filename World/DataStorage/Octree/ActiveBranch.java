@@ -63,9 +63,9 @@ public class ActiveBranch{
         loadUp();
 
 
-        for (int x = 0; x <  100; x++){
-            for (int y = 0; y < 100; y++){
-                setBlock(x, y, -10, 3);
+        for (int x = -200; x <  200; x++){
+            for (int y = -200; y < 200; y++){
+                setBlock(x, y, -10, 4);
             }
         }
     }

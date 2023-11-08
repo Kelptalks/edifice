@@ -23,6 +23,13 @@ public class gameData {
     public int SCREEN_X_REZ = 1920;
     public int SCREEN_Y_REZ = 1080;
 
+    //draw distance
+    public int drawDistance = 150;
+
+    //Render Size
+    public int xCamRez = 29;
+    public int yCamRez = 61;
+
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  World
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
