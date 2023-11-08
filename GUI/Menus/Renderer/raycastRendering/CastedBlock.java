@@ -3,7 +3,7 @@ package GUI.Menus.Renderer.raycastRendering;
 public class CastedBlock {
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    *  ActiveBranch
+    *  CastedBlock
     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     * A CastedBlock block is a class
     * to store info about a block's
@@ -17,18 +17,26 @@ public class CastedBlock {
     private long[] blockCords;//[0] = x, [1] = y, [2] = z.
 
     //The type of block it is.
-    private int[] type; //[0] block id, [1] = face
+    private int[][] type; //[0] block id, [1] = face
 
     //The location on the screen. The cast block is located
     private int[] screenCords; //[0] = x, //[1] = y
     public CastedBlock(int[] screenCords){
         this.screenCords = screenCords;
+        this.type = new int[2][2];
+    }
+
+    public void setScreenY(int newY){
+        this.screenCords[1] = newY;
     }
 
     //set the cast blocks info
-    public void set(long[] newCords, int[] newType){
+    public void set(long[] newCords){
         this.blockCords = newCords;
-        this.type = newType;
+    }
+
+    public void setTriangle(int triangle, int[] newType){
+        this.type[triangle] = newType;
     }
 
     public int getScreenX(){
@@ -43,7 +51,7 @@ public class CastedBlock {
         return blockCords;
     }
     //get the type of block
-    public int[] getType(){
-        return type;
+    public int[] getType(int triangle){
+        return type[triangle];
     }
 }
