@@ -64,6 +64,35 @@ public class Branch implements Serializable {
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Traversal
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * For traversing the branch
+     */
+
+    //get block from octree cords
+    public int getBlock(long key){
+        int index = (int) ((key >> (3 * this.depth)) & 0x07);
+        if (depth > 4 && branches[index] != null){
+            return branches[index].getBlock(key);
+        }
+        else if (depth == 4) {
+            return leaves[index].getBlock((int) key);
+        }
+        return 0;
+    }
+
+    //get block from octree cords
+    public void setBlock(long key, int block){
+        int index = (int) ((key >> (3 * this.depth)) & 0x07);
+        if (depth > 4 && branches[index] != null){
+            branches[index].setBlock(key, block);
+        }
+        else if (depth == 4) {
+            leaves[index].setBlock((int) key, block);
+        }
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  File management
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * For getting and setting values
@@ -92,7 +121,6 @@ public class Branch implements Serializable {
 
     //load a branch from file
     public void loadBranch(String fileName) {
-
         //
         Branch loadedBranch = null;
         File directory = new File("World/DataStorage/Octree/SaveData");

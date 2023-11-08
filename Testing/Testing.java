@@ -1,7 +1,9 @@
 package Testing;
 
-import Testing.Tests.ActiveBranchTesting;
-import Testing.Tests.OctreTesting;
+import Testing.Tests.Octree.ActiveBranchTesting;
+import Testing.Tests.Octree.KeyTesting;
+import Testing.Tests.Octree.LeafTesting;
+import Testing.Tests.Octree.OctreTesting;
 import Testing.Tests.WorldTesting;
 
 import java.util.Scanner;
@@ -29,7 +31,7 @@ public class Testing {
         //runes tests based off string input.
         switch (test){
             //return the help menu
-            case "runAll": runAll();
+            case "testAll": testAll();
                 break;
             //return the help menu
             case "help": help();
@@ -77,10 +79,11 @@ public class Testing {
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * Used for testing classes
      */
-    public void runAll(){
-        //testOctre();
+    public void testAll(){
+        testKey();
+        testOctre();
         testActiveBranch();
-        //testWorld();
+        testWorld();
     }
 
     //test my octree class
@@ -93,5 +96,13 @@ public class Testing {
 
     public void testActiveBranch() {
         new ActiveBranchTesting().run();
+    }
+
+    public void testLeaf(){
+        new LeafTesting().run();
+    }
+
+    public void testKey(){
+        new KeyTesting().run();
     }
 }

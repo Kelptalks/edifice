@@ -1,16 +1,14 @@
 package GameData;
 
-import GUI.Menus.Main.Main;
 import GUI.Menus.Menu;
-import World.DataStorage.Octree.ActiveBranch;
-import World.DataStorage.Octree.Octree;
 
-public class GameData {
+public class gameData {
 
-    public static long playerXCamCor = 0;
-    public static long playerYCamCor = 0;
-    public static long playerZCamCor = 0;
+    public long playerXCamCor = 0;
+    public long playerYCamCor = 0;
+    public long playerZCamCor = 0;
 
+    public boolean block = false;
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Menu

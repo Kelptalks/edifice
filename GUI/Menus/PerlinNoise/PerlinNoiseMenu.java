@@ -1,6 +1,6 @@
 package GUI.Menus.PerlinNoise;
 import GUI.Menus.Menu;
-import GameData.GameData;
+import GameData.gameData;
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,10 +12,10 @@ import java.awt.*;
  *  Allowing me to debug more easily
  */
 public class PerlinNoiseMenu extends JPanel implements Menu {
-    private GameData gameData;
+    private GameData.gameData gameData;
     private PerlinVisualiser perlinVisualiser;
-    public PerlinNoiseMenu(GameData gameData){
-        this.gameData = new GameData();
+    public PerlinNoiseMenu(GameData.gameData gameData){
+        this.gameData = new gameData();
         this.perlinVisualiser = new PerlinVisualiser(gameData);
         repaint();
     }

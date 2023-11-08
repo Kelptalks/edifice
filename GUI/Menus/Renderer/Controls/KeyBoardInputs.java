@@ -1,10 +1,19 @@
 package GUI.Menus.Renderer.Controls;
 
-import GameData.GameData;
+import GUI.Menus.Renderer.raycastRendering.RaycastRenderer;
+import GameData.gameData;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 public class KeyBoardInputs implements KeyListener {
+
+    private gameData gameData;
+    private int currentBlock = 1;
+    private RaycastRenderer rayCaster;
+    public KeyBoardInputs(gameData gameData, RaycastRenderer rayCaster) {
+        this.rayCaster = rayCaster;
+        this.gameData = gameData;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -20,24 +29,44 @@ public class KeyBoardInputs implements KeyListener {
         switch (key) {
             case KeyEvent.VK_A:
                 //move the camera left
-                GameData.playerXCamCor -= 1;
-                GameData.playerYCamCor += 1;
+                gameData.playerYCamCor += 1;
                 break;
             case KeyEvent.VK_W:
                 //move the camera up
-                GameData.playerYCamCor -= 1;
-                GameData.playerXCamCor -= 1;
+                gameData.playerXCamCor -= 1;
                 break;
             case KeyEvent.VK_S:
                 //move the camera down
-                GameData.playerYCamCor += 1;
-                GameData.playerXCamCor += 1;
+                gameData.playerXCamCor += 1;
                 break;
             case KeyEvent.VK_D:
                 //move the camera right
-                GameData.playerXCamCor += 1;
-                GameData.playerYCamCor -= 1;
+                gameData.playerYCamCor -= 1;
                 break;
+            case KeyEvent.VK_E:
+                //move the camera right
+                gameData.playerZCamCor += 1;
+                break;
+            case KeyEvent.VK_Q:
+                //move the camera right
+                gameData.playerZCamCor -= 1;
+                break;
+            case KeyEvent.VK_SPACE:
+                //move the camera right
+                rayCaster.pathAndPlace(currentBlock);
+                break;
+            case KeyEvent.VK_R:
+                //move the camera right
+                currentBlock++;
+                if (currentBlock > 5){
+                    currentBlock = 1;
+                }
+                break;
+            case KeyEvent.VK_X:
+                //move the camera right
+                rayCaster.pathAndRemove();
+                break;
+
             default:
                 break;
         }

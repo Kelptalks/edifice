@@ -1,16 +1,12 @@
 package GUI.Menus.Main;
 import GUI.GUI;
 import GUI.Menus.Menu;
-import GameData.GameData;
+import GameData.gameData;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Main menu
@@ -19,10 +15,10 @@ import java.io.IOException;
  * That direct to other menus
  */
 public class Main extends JPanel implements Menu {
-    private GameData gameData;
+    private GameData.gameData gameData;
     private GUI GUI;
-    public Main(GameData gameData, GUI GUI){
-        this.gameData = new GameData();
+    public Main(GameData.gameData gameData, GUI GUI){
+        this.gameData = new gameData();
         this.GUI = GUI;
         this.setPreferredSize(new Dimension(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ));
         this.setLayout(null);
