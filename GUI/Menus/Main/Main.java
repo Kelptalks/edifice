@@ -1,7 +1,7 @@
 package GUI.Menus.Main;
 import GUI.GUI;
 import GUI.Menus.Menu;
-import GameData.gameData;
+import GameData.GameData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +15,10 @@ import java.awt.event.ActionListener;
  * That direct to other menus
  */
 public class Main extends JPanel implements Menu {
-    private GameData.gameData gameData;
+    private GameData gameData;
     private GUI GUI;
-    public Main(GameData.gameData gameData, GUI GUI){
-        this.gameData = new gameData();
+    public Main(GameData gameData, GUI GUI){
+        this.gameData = new GameData();
         this.GUI = GUI;
         this.setPreferredSize(new Dimension(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ));
         this.setLayout(null);

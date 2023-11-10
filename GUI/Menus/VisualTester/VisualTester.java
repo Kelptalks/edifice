@@ -1,7 +1,7 @@
 package GUI.Menus.VisualTester;
 
 import GUI.Menus.Menu;
-import GameData.gameData;
+import GameData.GameData;
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,10 +13,10 @@ import java.awt.*;
  *  Allowing me to debug more easily
  */
 public class VisualTester extends JPanel implements Menu {
-    private GameData.gameData gameData;
+    private GameData gameData;
     private TextureVisualiser textureVisualiser;
-    public VisualTester(GameData.gameData gameData){
-        this.gameData = new gameData();
+    public VisualTester(GameData gameData){
+        this.gameData = new GameData();
         this.textureVisualiser = new TextureVisualiser(gameData);
         repaint();
     }

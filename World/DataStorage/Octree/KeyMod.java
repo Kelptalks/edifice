@@ -21,7 +21,6 @@ public class KeyMod {
      * level axis.
      */
 
-
     //adding/subtracting from all axis's
     public long getRelativeKey(long key, int depth, long xMod, long yMod, long zMod){
 
@@ -32,7 +31,7 @@ public class KeyMod {
         return key;
     }
 
-    //adding/subtracting multiple bits from an axis
+    //adding or subtracting multiple bits from an axis
     public long modAxis(long key, int depth, int mask, long mod){
         if (mod > 0){
             //Adds bits to x-axis
@@ -40,7 +39,7 @@ public class KeyMod {
                 key = addToBit(key, depth, mask);
             }
         }
-        else{
+        else if (mod < 0){
             //Subtracts bits to x-axis
             for (int x = 0; x > mod; x--) {
                 key = subtractToBit(key, depth, mask);
@@ -49,6 +48,13 @@ public class KeyMod {
         return key;
     }
 
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Custom arithmetical key axis manipulation
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * tools for adding and subtracting to bits
+     * based off there axis.
+     */
 
     //adding a single bit to an axis
     public long addToBit(long key, int depth, int bitMask){
@@ -84,6 +90,38 @@ public class KeyMod {
             key &= ~mask;
         }
         return key;
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Axis based cord conversion
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Converting a key into coordinates.
+     */
+
+    //convert a cord to an axis
+    public long[] keyToCords(long key){
+
+        int maxDepth = 21;
+        long[] cords = new long[3];
+
+        //cycle through the key
+        for (int axis = 0; axis < 3; axis++){
+            cords[axis] = axisToCord(key, axis);
+        }
+        return cords;
+    }
+
+    //convert an axis to a cord
+    public long axisToCord(long key, int axis){
+        long cord = 0;
+        int maxDepth = 21;
+        for (int depth = 0; depth < maxDepth; depth++){
+            long mask = 1L << ((depth * 3) + axis);
+            if ((key & mask) != 0){
+                cord |= 1L << depth;
+            }
+        }
+        return cord;
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

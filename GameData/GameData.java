@@ -1,8 +1,9 @@
 package GameData;
 
 import GUI.Menus.Menu;
+import World.DataStorage.Octree.Octree;
 
-public class gameData {
+public class GameData {
 
     public long playerXCamCor = 0;
     public long playerYCamCor = 0;
@@ -35,5 +36,10 @@ public class gameData {
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
 
+    public Octree octree;
+
+
+
     public String SaveDirectory = "World/DataStorage/Octree/SaveData";
+
 }

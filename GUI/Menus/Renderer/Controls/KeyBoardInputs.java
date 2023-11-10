@@ -1,16 +1,16 @@
 package GUI.Menus.Renderer.Controls;
 
 import GUI.Menus.Renderer.raycastRendering.RaycastRenderer;
-import GameData.gameData;
+import GameData.GameData;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 public class KeyBoardInputs implements KeyListener {
 
-    private gameData gameData;
+    private GameData gameData;
     private int currentBlock = 1;
     private RaycastRenderer rayCaster;
-    public KeyBoardInputs(gameData gameData, RaycastRenderer rayCaster) {
+    public KeyBoardInputs(GameData gameData, RaycastRenderer rayCaster) {
         this.rayCaster = rayCaster;
         this.gameData = gameData;
     }

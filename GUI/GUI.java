@@ -4,6 +4,7 @@ import GUI.Menus.Main.Main;
 import GUI.Menus.PerlinNoise.PerlinNoiseMenu;
 import GUI.Menus.Renderer.Renderer;
 import GUI.Menus.VisualTester.VisualTester;
+import GameData.GameData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +20,9 @@ public class GUI extends JFrame {
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
 
-    private GameData.gameData gameData;
+    private GameData gameData;
 
-    public GUI(GameData.gameData gameData){
+    public GUI(GameData gameData){
         super();
 
         this.gameData = gameData;

@@ -2,8 +2,7 @@ package GUI.Menus.VisualTester;
 
 import GUI.Menus.Renderer.Textures.FaceShaders;
 import GUI.Menus.Renderer.Textures.TextureManager;
-import GUI.Menus.Renderer.raycastRendering.GridDrawingManager;
-import GameData.gameData;
+import GameData.GameData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,7 +12,7 @@ public class TextureVisualiser extends BufferedImage {
 
     private TextureManager textureManager;
     private FaceShaders faceShaders;
-    public TextureVisualiser(gameData gameData) {
+    public TextureVisualiser(GameData gameData) {
         super(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ, TYPE_4BYTE_ABGR_PRE);
         this.textureManager = new TextureManager();
         this.faceShaders = new FaceShaders();

@@ -23,7 +23,7 @@ public class Branch implements Serializable {
      * initialized the correct array-based
      * depth, depths below 4 are leaf branches
      */
-    Branch(int depth){
+    public Branch(int depth){
         this.depth = depth;
         if (depth == 4){
             this.leaves = new Leaf[8];
@@ -64,7 +64,55 @@ public class Branch implements Serializable {
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Traversal
+     *  Traversal on branch level
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * For traversing the branch
+     */
+
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Traversal leaf level
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * For traversing the branch
+     */
+
+    //Returns a leaf that gets loaded from the octree. If the leaf/branch does not exist, then it is created
+    public Leaf getLeaf(long key){
+        int index = (int) ((key >> (3 * this.depth)) & 0x07);
+
+        if (depth > 4){
+            //generate branch if the branch is empty
+            if (branches[index] == null){
+                branches[index] = new Branch(this.depth - 1);
+            }
+            return branches[index].getLeaf(key);
+        }
+
+        else if (depth == 4) {
+            if (leaves[index] == null){
+                leaves[index] = new Leaf();
+            }
+            return leaves[index];
+        }
+        return null;
+    }
+
+    public void fillLeaves(){
+        if (this.depth > 4){
+            for(Branch branch : branches){
+                branch.fillLeaves();
+            }
+        }
+
+        else if (depth == 4) {
+            for (Leaf leaf : leaves){
+                leaf.fill(4);
+            }
+        }
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Traversal on block level
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * For traversing the branch
      */
@@ -78,6 +126,7 @@ public class Branch implements Serializable {
         else if (depth == 4) {
             return leaves[index].getBlock((int) key);
         }
+        System.out.println("empty");
         return 0;
     }
 
@@ -90,6 +139,14 @@ public class Branch implements Serializable {
         else if (depth == 4) {
             leaves[index].setBlock((int) key, block);
         }
+    }
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Tools
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * get leaf count
+     */
+    public long getLeafCount(){
+        return (long) Math.pow(8, (depth - 4));
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

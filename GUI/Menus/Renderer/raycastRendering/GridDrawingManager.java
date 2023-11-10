@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import GUI.Menus.Renderer.Textures.FaceShaders;
 import GUI.Menus.Renderer.Textures.TextureManager;
+import GameData.GameData;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  Grid Manager class
@@ -29,10 +30,10 @@ public class GridDrawingManager extends BufferedImage {
     public final int BLOCK_HEIGHT_FACTOR = 16;
 
     //create gameData class
-    private final GameData.gameData gameData;
+    private final GameData gameData;
 
     //constructor
-    GridDrawingManager(GameData.gameData gameData, int xRez, int yRez) {
+    GridDrawingManager(GameData gameData, int xRez, int yRez) {
         super(xRez,yRez, TYPE_4BYTE_ABGR_PRE);
         graphics.drawImage(textureManager.getFaceTexture(1, 3), 20, 1000, null);
         BufferedImage shadedFull = faceShader.shadeTopFaceTop(textureManager.getFaceTexture(1, 3));

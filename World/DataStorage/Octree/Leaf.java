@@ -1,5 +1,7 @@
 package World.DataStorage.Octree;
 
+import World.TerrainGen.TerrainGen;
+
 import java.io.Serializable;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -10,7 +12,6 @@ import java.io.Serializable;
 public class Leaf implements Serializable{
 
     public Leaf(){
-
     }
 
     private long[] leafs = new long[512];
@@ -27,6 +28,12 @@ public class Leaf implements Serializable{
             blockSet[bitIndex] = (int) ((leafs[bitIndex/BLOCKS_PER_LONG]>>bitIndex*BITS_PER_BLOCK) & 0xFF);
         }
         return blockSet;
+    }
+
+    public void fill(int block){
+        for (int x = 0; x < BLOCKS_PER_LEAF; x++){
+            this.setBlock(x, block);
+        }
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

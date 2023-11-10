@@ -1,5 +1,6 @@
 package Testing.Tests;
 
+import GameData.GameData;
 import World.World;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,6 +35,6 @@ public class WorldTesting {
      * is not causing other blocks to change
      */
     public void testSingleBlockModification(){
-        World world = new World();
+        //World world = new World();
     }
 }

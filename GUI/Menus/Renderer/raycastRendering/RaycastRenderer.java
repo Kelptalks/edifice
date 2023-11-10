@@ -1,6 +1,9 @@
 package GUI.Menus.Renderer.raycastRendering;
 
-import World.DataStorage.Octree.ActiveBranch;
+import GameData.GameData;
+import World.ActiveBranch.ActiveArea;
+import World.ActiveBranch.ActiveBranch;
+import World.World;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,18 +17,19 @@ public class RaycastRenderer extends BufferedImage {
     private GridDrawingManager drawingManager;
     private Graphics graphics = this.getGraphics();
 
-    private ActiveBranch world = new ActiveBranch();
+    private ActiveArea world;
 
-    GameData.gameData gameData;
+    GameData gameData;
     //private World world = new World();
 
     private int[][][] culledCoordMods;
     private CastedBlock[][] castedBlocks;
 
-    public RaycastRenderer(GameData.gameData gameData) {
+    public RaycastRenderer(GameData gameData) {
         super(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ, TYPE_4BYTE_ABGR_PRE);
         this.drawingManager = new GridDrawingManager(gameData ,gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ);
         this.gameData = gameData;
+        this.world = new ActiveArea(new World(), 576460750000000000L, 7);
         updateCulledCoordMods();
     }
 
