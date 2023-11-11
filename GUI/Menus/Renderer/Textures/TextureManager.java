@@ -71,20 +71,31 @@ public class TextureManager {
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
     *  Splicing textures
     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    * Splice Textures into there 6 diffrent triangles
+    * Splice Textures into there 6 different triangles
     */
 
     private BufferedImage[] splicedBlock(BufferedImage blockTexture){
         BufferedImage splices[] = new BufferedImage[6];
 
-        //generate the normal set
-        splices[0] = splice(blockTexture, 0, 32, 0, 32, (x, y) -> (y >= 16 + x / 2) || (y >= 15 - (x / 2) + 32));//Left top
-        splices[1] = splice(blockTexture, 0, 32, 0, 64, (x, y) -> (y<15+x/2) || (y >= 15 - (x / 2) + 32));//Left middle
-        splices[2] = splice(blockTexture, 0, 32, 32, 64, (x, y) -> (y < 14 - (x / 2) + 32 || y >= 49 + x / 2));//Left bottom
-        splices[3] = splice(blockTexture, 32, 64, 0, 32, (x, y) -> (y >= 16 + x / 2) || (y >= 15 - (x / 2) + 32));//Right top
+        //left-pointing
+
+
+        //splices[0] = splice(blockTexture, 32, 64, 15, 48, (x, y) -> (y >= 16 + x / 2) || (y < 14 - (x / 2) + 32)); //4
+
+        splices[1] = splice(blockTexture, 0, 32, 32, 64, (x, y) -> (y < 14 - (x / 2) + 32 || y >= 49 + x / 2)); //2
+
+        splices[2] = splice(blockTexture, 0, 32, 0, 32, (x, y) -> (y >= 16 + x / 2) || (y >= 15 - (x / 2) + 32)); //0
+
+        splices[5] = splice(blockTexture, 32, 64, 0, 32, (x, y) -> (y >= 16 + x / 2) || (y >= 15 - (x / 2) + 32)); //3
+
+        //splices[4] = splice(blockTexture, 32, 64, 31, 64, (x, y) -> (y < 15 + x / 2) || (y < 16 - (x / 2) + 32)); //1
+
+        splices[4] = splice(blockTexture, 0, 32, 0, 64, (x, y) -> (y<15+x/2) || (y >= 15 - (x / 2) + 32)); //5
+
         shade(blockTexture);//shades the left side
-        splices[4] = splice(blockTexture, 32, 64, 15, 48, (x, y) -> (y >= 16 + x / 2) || (y < 14 - (x / 2) + 32));//Right middle
-        splices[5] = splice(blockTexture, 32, 64, 31, 64, (x, y) -> (y < 15 + x / 2) || (y < 16 - (x / 2) + 32));//Right bottom
+
+        splices[0] = splice(blockTexture, 32, 64, 15, 48, (x, y) -> (y >= 16 + x / 2) || (y < 14 - (x / 2) + 32)); //4
+        splices[3] = splice(blockTexture, 32, 64, 31, 64, (x, y) -> (y < 15 + x / 2) || (y < 16 - (x / 2) + 32)); //1
         return splices;
     }
 

@@ -53,7 +53,7 @@ public class KeyBoardInputs implements KeyListener {
                 break;
             case KeyEvent.VK_SPACE:
                 //move the camera right
-                rayCaster.pathAndPlace(currentBlock);
+                rayCaster.rayCastAndPlace(currentBlock);
                 break;
             case KeyEvent.VK_R:
                 //move the camera right

@@ -28,10 +28,14 @@ public class TerrainGen{
         branch.getBranch(6).fillLeaves();
         branch.getBranch(7).fillLeaves();
 
-        genTree(branch, 0, 0);
-        genTree(branch, 8, 16);
-        genTree(branch, 18, 12);
-        genTree(branch, -5, 10);
+        Random random = new Random();
+        for (int x = -200; x < 200; x++){
+            for (int y = -200; y < 200; y++){
+                if (random.nextInt(0, 200) == 0){
+                    genTree(branch, x, y);
+                }
+            }
+        }
 
         System.out.println(branch.getLeafCount());
 
@@ -41,6 +45,11 @@ public class TerrainGen{
 
     }
 
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Generate a tree
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * generate a tree
+     */
     public void genTree(Branch branch, int x, int y){
         long root =(long) Math.pow(8, 2L << branch.getDepth());
         root = keyMod.getRelativeKey(root, 0, 10 + x, +10 + y, 1);
@@ -51,7 +60,7 @@ public class TerrainGen{
 
         for (int z = 0; z < height; z++){
             branch.setBlock(keyMod.getRelativeKey(root, 0, 0, 0, z), 5);
-
+            //branch generation
             if (height > 8 && z == 5){
                 int xMod = 0;
                 int yMod = 1;
@@ -59,12 +68,15 @@ public class TerrainGen{
                     xMod = 1;
                     yMod = 0;
                 }
+                if (random.nextBoolean()){
+                    xMod *= -1;
+                    yMod *= -1;
+                }
                 branch.setBlock(keyMod.getRelativeKey(root, 0, yMod, xMod, z), 5);
                 branch.setBlock(keyMod.getRelativeKey(root, 0, yMod * 2, xMod * 2, z), 5);
                 branch.setBlock(keyMod.getRelativeKey(root, 0, yMod * 2, xMod * 2, z + 1), 5);
                 genTreeTop(branch, keyMod.getRelativeKey(root, 0, yMod * 2, xMod * 2, z + 1));
             }
-
         }
 
         root = keyMod.modAxis(root, 0, 2, height);
@@ -76,10 +88,8 @@ public class TerrainGen{
     public void genTreeTop(Branch branch, long key){
         branch.setBlock(keyMod.modAxis(key, 0, 0, -1), 7);
         branch.setBlock(keyMod.modAxis(key, 0, 0, 1), 7);
-
         branch.setBlock(keyMod.modAxis(key, 0, 1, -1), 7);
         branch.setBlock(keyMod.modAxis(key, 0, 1, 1), 7);
-
         branch.setBlock(keyMod.modAxis(key, 0, 2, 1), 7);
     }
 
