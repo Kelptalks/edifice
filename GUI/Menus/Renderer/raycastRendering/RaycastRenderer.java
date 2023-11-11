@@ -43,15 +43,15 @@ public class RaycastRenderer extends BufferedImage {
             for (int x =  0; x < gameData.xCamRez; x++) {
                 castedBlocks[x][y] = rayCast(castedBlocks[x][y], new int[]{1, 0, 2}, 1);
                 castedBlocks[x][y] = rayCast(castedBlocks[x][y], new int[]{0, 1, 2}, 0);
+                castedBlocks[x][y] = castShadows(castedBlocks[x][y]);
 
-                drawingManager.drawTopBlock(castedBlocks[x][y].getScreenX(), castedBlocks[x][y].getScreenY(),
-                        castedBlocks[x][y].getType(0),
-                        castedBlocks[x][y].getType(1));
+                drawingManager.drawTopBlock(castedBlocks[x][y]);
             }
         }
         graphics.drawImage(drawingManager, 0, 0, null);
         graphics.setColor(Color.BLACK);
         graphics.fillOval(((gameData.xCamRez) * 32)-5, ((gameData.xCamRez) * 16)+25, 10, 10);
+        castShadows(castedBlocks[gameData.xCamRez/2][gameData.yCamRez/2]);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,6 +89,30 @@ public class RaycastRenderer extends BufferedImage {
      * if a block is hit, then draw
      * shadow on that triangle.
      */
+
+    public CastedBlock castShadows(CastedBlock castedBlock){
+        long[] blockCords = castedBlock.getBlockCords();
+        blockCords[2]++;
+
+        for (int distance = 0; distance < 25; distance++)
+        {
+            for (int axis = 0; axis < 3; axis++){
+                if (axis == 0){
+                    blockCords[axis]--;
+                }
+                else {
+                    blockCords[axis]++;
+                }
+                int block = world.getBlock(blockCords[0], blockCords[1], blockCords[2]);
+                if (block != 0){
+                    castedBlock.setShaded(true);
+                    return castedBlock;
+                }
+            }
+        }
+        castedBlock.setShaded(false);
+        return castedBlock;
+    }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Editing blocks

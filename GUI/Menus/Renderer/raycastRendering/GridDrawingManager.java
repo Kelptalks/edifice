@@ -50,14 +50,26 @@ public class GridDrawingManager extends BufferedImage {
     //Draws a triangle in a specific cord in the triangle grid
     private void drawTriangle(int x, int y, int blockType, int triangle) {
         graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), (x * BLOCK_WIDTH_FACTOR), (y * BLOCK_HEIGHT_FACTOR), null);
+
+    }
+    private void drawShadedTriangle(int x, int y, int blockType, int triangle) {
+        graphics.drawImage(faceShader.shadeWhole(textureManager.getFaceTexture(blockType, triangle)), (x * BLOCK_WIDTH_FACTOR), (y * BLOCK_HEIGHT_FACTOR), null);
     }
 
     //draws the top 2 faces of a block, with 2 triangles inputs.
-    public void drawTopBlock(int x, int y, int[] triangle1, int[] triangle2){
+    public void drawTopBlock(CastedBlock castedBlock){
+        int x = castedBlock.getScreenX();
+        int y = castedBlock.getScreenY();
         x = x - y;
         y = x + y * 2;
-        drawTriangle(x, y, triangle1[0], triangle1[1]);
-        drawTriangle(x + 1, y, triangle2[0], triangle2[1]);
+        if (castedBlock.isShaded()){
+            drawShadedTriangle(x, y, castedBlock.getType(0)[0], castedBlock.getType(0)[1]);
+            drawShadedTriangle(x + 1, y, castedBlock.getType(1)[0], castedBlock.getType(1)[1]);
+        }
+        else {
+            drawTriangle(x, y, castedBlock.getType(0)[0], castedBlock.getType(0)[1]);
+            drawTriangle(x + 1, y, castedBlock.getType(1)[0], castedBlock.getType(1)[1]);
+        }
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

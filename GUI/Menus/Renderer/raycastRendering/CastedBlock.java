@@ -21,6 +21,9 @@ public class CastedBlock {
 
     //The location on the screen. The cast block is located
     private int[] screenCords; //[0] = x, //[1] = y
+    //if the block is shaded
+    private boolean isShaded;
+
     public CastedBlock(int[] screenCords){
         this.screenCords = screenCords;
         this.type = new int[2][2];
@@ -53,5 +56,13 @@ public class CastedBlock {
     //get the type of block
     public int[] getType(int triangle){
         return type[triangle];
+    }
+
+    public void setShaded(boolean b) {
+        this.isShaded = b;
+    }
+
+    public boolean isShaded() {
+        return this.isShaded;
     }
 }
