@@ -8,8 +8,8 @@ public class App {
         GUI gameFrame = new GUI(gameData);
 
 
-        Testing testing = new Testing();
-        testing.testKey();
+        //Testing testing = new Testing();
+        //testing.testKey();
         //testing.testActiveBranch();
     }
 }

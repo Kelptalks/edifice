@@ -35,45 +35,45 @@ public class TextureVisualiser extends BufferedImage {
         y += 50;
         graphics.drawImage(textureManager.getFaceTexture(4, 2), 32, y, null);
         graphics.drawImage(textureManager.getFaceTexture(4, 5), 64, y, null);
-        graphics.drawImage(faceShaders.getShader(1), 32, 100, null);
+        graphics.drawImage(faceShaders.getShader(0, 0), 32, 100, null);
         //shaded bot face left
         y += 50;
         graphics.drawImage(textureManager.getFaceTexture(4, 2), 32, y, null);
         graphics.drawImage(textureManager.getFaceTexture(4, 5), 64, y, null);
-        graphics.drawImage(faceShaders.getShader(2), 32, 150, null);
+        graphics.drawImage(faceShaders.getShader(0, 1), 32, 150, null);
 
         //shaded top face right
         y += 50;
         graphics.drawImage(textureManager.getFaceTexture(4, 2), 32, y, null);
         graphics.drawImage(textureManager.getFaceTexture(4, 5), 64, y, null);
-        graphics.drawImage(faceShaders.getShader(3), 32, 200, null);
+        graphics.drawImage(faceShaders.getShader(1, 0), 32, 200, null);
         //shaded bot face right
         y += 50;
         graphics.drawImage(textureManager.getFaceTexture(4, 2), 32, y, null);
         graphics.drawImage(textureManager.getFaceTexture(4, 5), 64, y, null);
-        graphics.drawImage(faceShaders.getShader(4), 32, 250, null);
+        graphics.drawImage(faceShaders.getShader(1, 1), 32, 250, null);
 
         y += 50;
         int x = 25;
         y += 50;
         graphics.drawImage(textureManager.getFaceTexture(4, 1), x, y+16, null);
         graphics.drawImage(textureManager.getFaceTexture(4, 4), x, y, null);
-        graphics.drawImage(faceShaders.getShader(5), x, y, null);
+        graphics.drawImage(faceShaders.getShader(3, 0), x, y, null);
 
         y += 50;
         graphics.drawImage(textureManager.getFaceTexture(4, 1), x, y+16, null);
         graphics.drawImage(textureManager.getFaceTexture(4, 4), x, y, null);
-        graphics.drawImage(faceShaders.getShader(6), x, y, null);
+        graphics.drawImage(faceShaders.getShader(3, 1), x, y, null);
 
         y += 50;
         graphics.drawImage(textureManager.getFaceTexture(4, 1), x, y+16, null);
         graphics.drawImage(textureManager.getFaceTexture(4, 4), x, y, null);
-        graphics.drawImage(faceShaders.getShader(7), x, y, null);
+        graphics.drawImage(faceShaders.getShader(4, 0), x, y, null);
 
         y += 50;
         graphics.drawImage(textureManager.getFaceTexture(4, 1), x, y+16, null);
         graphics.drawImage(textureManager.getFaceTexture(4, 4), x, y, null);
-        graphics.drawImage(faceShaders.getShader(8), x, y, null);
+        graphics.drawImage(faceShaders.getShader(4, 1), x, y, null);
 
     }
 

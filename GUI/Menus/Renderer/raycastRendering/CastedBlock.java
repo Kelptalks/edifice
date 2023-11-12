@@ -20,7 +20,7 @@ public class CastedBlock {
     private int[][] triangleData; //[] block id, [][] = face
 
     private int[] triangleShadeData;
-
+    private boolean isShaded;
     //The location on the screen. The cast block is located
     private int[] screenCords; //[0] = x, //[1] = y
     //if the block is shaded
@@ -67,6 +67,14 @@ public class CastedBlock {
      * Stores the block type
      * and triangle texture type
      */
+
+    public void setShaded(boolean newIsShaded){
+        this.isShaded = newIsShaded;
+    }
+
+    public boolean isShaded(){
+        return isShaded;
+    }
 
     public void setTriangleTexture(int triangle, int[] newType){
         this.triangleData[triangle] = newType;

@@ -90,26 +90,12 @@ public class RaycastRenderer extends BufferedImage {
      */
 
     public CastedBlock castShadows(CastedBlock castedBlock){
+
+
         int side = 0;
-        long[] cords = castedBlock.getTriangleBlockCords(side);
-        int[] order = new int[]{0, 1, 2};
+        castedBlock.setTriangleShader(0, 1);
+        castedBlock.setTriangleShader(1, 1);
 
-        for (int distance = 0; distance < gameData.drawDistance; distance++)
-        {
-            for (int axis = 0; axis < 3; axis++){
-                if (order[axis] == 2){
-                    cords[order[axis]]++;
-                }
-                else{
-                    cords[order[axis]]--;
-                }
-                int block = world.getBlock(cords[0], cords[1], cords[2]);
-                if (block != 0){
-
-                    return castedBlock;
-                }
-            }
-        }
 
         return castedBlock;
     }

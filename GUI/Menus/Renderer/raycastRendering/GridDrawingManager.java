@@ -58,6 +58,22 @@ public class GridDrawingManager extends BufferedImage {
         //texture drawing | 32 needs to be added shift second texture over
         drawTriangle(cords[0], cords[1], castedBlock.getTriangleTexture(0)[0], castedBlock.getTriangleTexture(0)[1]);
         drawTriangle(cords[0] + 32, cords[1], castedBlock.getTriangleTexture(1)[0], castedBlock.getTriangleTexture(1)[1]);
+
+        //drawShader(cords[0], cords[1], 1);
+        //drawShader(cords[0], cords[1], 2);
+
+        if (castedBlock.getTriangleShader(0) != 0){
+            drawShader(cords[0], cords[1], 0, castedBlock.getTriangleShader(0));
+        }
+
+        if (castedBlock.getTriangleShader(1) != 0){
+            drawShader(cords[0], cords[1], 1, castedBlock.getTriangleShader(1));
+        }
+
+    }
+
+    public void drawShader(int x, int y, int face, int shade) {
+        graphics.drawImage(faceShader.getShader(face, shade), x, y, null);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
