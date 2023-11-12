@@ -21,27 +21,59 @@ public class TextureVisualiser extends BufferedImage {
     }
 
     public void drawTextures(){
-        graphics.drawImage(textureManager.getFaceTexture(5, 0), 35 * 1, 50, null);
-        graphics.drawImage(textureManager.getFaceTexture(5, 1), 35 * 2, 50, null);
-        graphics.drawImage(textureManager.getFaceTexture(5, 2), 35 * 3, 50, null);
-        graphics.drawImage(textureManager.getFaceTexture(5, 3), 35 * 4, 50, null);
-        graphics.drawImage(textureManager.getFaceTexture(5, 4), 35 * 5, 50, null);
-        graphics.drawImage(textureManager.getFaceTexture(5, 5), 35 * 6, 50, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 0), 35 * 1, 50, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 1), 35 * 2, 50, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 2), 35 * 3, 50, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 3), 35 * 4, 50, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 4), 35 * 5, 50, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 5), 35 * 6, 50, null);
     }
 
     public void drawShadedTextures(){
+        int y = 50;
+        //shaded top face left
+        y += 50;
+        graphics.drawImage(textureManager.getFaceTexture(4, 2), 32, y, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 5), 64, y, null);
+        graphics.drawImage(faceShaders.getShader(1), 32, 100, null);
+        //shaded bot face left
+        y += 50;
+        graphics.drawImage(textureManager.getFaceTexture(4, 2), 32, y, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 5), 64, y, null);
+        graphics.drawImage(faceShaders.getShader(2), 32, 150, null);
 
-        //draw a shaded top face
-        BufferedImage face1 = faceShaders.shadeTopFaceTop(textureManager.getFaceTexture(5, 0));
-        BufferedImage face2 = faceShaders.shadeTopFaceTop(textureManager.getFaceTexture(5, 3));
-        graphics.drawImage(face1, 35, 150,  null);
-        graphics.drawImage(face2, 35+32, 150,  null);
+        //shaded top face right
+        y += 50;
+        graphics.drawImage(textureManager.getFaceTexture(4, 2), 32, y, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 5), 64, y, null);
+        graphics.drawImage(faceShaders.getShader(3), 32, 200, null);
+        //shaded bot face right
+        y += 50;
+        graphics.drawImage(textureManager.getFaceTexture(4, 2), 32, y, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 5), 64, y, null);
+        graphics.drawImage(faceShaders.getShader(4), 32, 250, null);
 
-        //draw a shaded bot face
-        BufferedImage face3 = faceShaders.shadeTopFaceBottom(textureManager.getFaceTexture(5, 0));
-        BufferedImage face4 = faceShaders.shadeTopFaceBottom(textureManager.getFaceTexture(5, 3));
-        graphics.drawImage(face3, 35, 300,  null);
-        graphics.drawImage(face4, 35+32, 300,  null);
+        y += 50;
+        int x = 25;
+        y += 50;
+        graphics.drawImage(textureManager.getFaceTexture(4, 1), x, y+16, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 4), x, y, null);
+        graphics.drawImage(faceShaders.getShader(5), x, y, null);
+
+        y += 50;
+        graphics.drawImage(textureManager.getFaceTexture(4, 1), x, y+16, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 4), x, y, null);
+        graphics.drawImage(faceShaders.getShader(6), x, y, null);
+
+        y += 50;
+        graphics.drawImage(textureManager.getFaceTexture(4, 1), x, y+16, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 4), x, y, null);
+        graphics.drawImage(faceShaders.getShader(7), x, y, null);
+
+        y += 50;
+        graphics.drawImage(textureManager.getFaceTexture(4, 1), x, y+16, null);
+        graphics.drawImage(textureManager.getFaceTexture(4, 4), x, y, null);
+        graphics.drawImage(faceShaders.getShader(8), x, y, null);
 
     }
 

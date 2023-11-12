@@ -14,55 +14,85 @@ public class CastedBlock {
     */
 
     //The cords in the octree of the block
-    private long[] blockCords;//[0] = x, [1] = y, [2] = z.
+    private long[][] triangleBlockCords;//[0] = x, [1] = y, [2] = z.
 
     //The type of block it is.
-    private int[][] type; //[0] block id, [1] = face
+    private int[][] triangleData; //[] block id, [][] = face
+
+    private int[] triangleShadeData;
 
     //The location on the screen. The cast block is located
     private int[] screenCords; //[0] = x, //[1] = y
     //if the block is shaded
-    private boolean isShaded;
 
     public CastedBlock(int[] screenCords){
         this.screenCords = screenCords;
-        this.type = new int[2][2];
+        this.triangleData = new int[2][2];
+        this.triangleBlockCords = new long[2][3];
+        this.triangleShadeData = new int[2];
     }
 
-    public void setScreenY(int newY){
-        this.screenCords[1] = newY;
-    }
-
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Cords
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Get the cords of the block
+     * the triangle is rendered on
+     */
     //set the cast blocks info
-    public void set(long[] newCords){
-        this.blockCords = newCords;
+    public void setTriangleBlockCords(int triangle, long[] newCords){
+        this.triangleBlockCords[triangle] = newCords;
     }
 
-    public void setTriangle(int triangle, int[] newType){
-        this.type[triangle] = newType;
+    public long[] getTriangleBlockCords(int triangle){
+        return triangleBlockCords[triangle];
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Shaders
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * the faces shade
+     */
+
+    public void setTriangleShader(int triangle, int shader){
+        triangleShadeData[triangle] = shader;
+    }
+
+    public int getTriangleShader(int triangle){
+        return triangleShadeData[triangle];
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Texture
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Stores the block type
+     * and triangle texture type
+     */
+
+    public void setTriangleTexture(int triangle, int[] newType){
+        this.triangleData[triangle] = newType;
+    }
+
+    public int[] getTriangleTexture(int triangle){
+        return triangleData[triangle];
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Screen cords
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Store the screen cords of
+     * where on screen the block
+     * is located.
+     */
+
+    public int[] getScreenCords(){
+        return screenCords;
     }
 
     public int getScreenX(){
         return screenCords[0];
     }
+
     public int getScreenY(){
         return screenCords[1];
-    }
-
-    //get the cords of the block
-    public long[] getBlockCords(){
-        return blockCords;
-    }
-    //get the type of block
-    public int[] getType(int triangle){
-        return type[triangle];
-    }
-
-    public void setShaded(boolean b) {
-        this.isShaded = b;
-    }
-
-    public boolean isShaded() {
-        return this.isShaded;
     }
 }

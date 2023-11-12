@@ -35,9 +35,6 @@ public class GridDrawingManager extends BufferedImage {
     //constructor
     GridDrawingManager(GameData gameData, int xRez, int yRez) {
         super(xRez,yRez, TYPE_4BYTE_ABGR_PRE);
-        graphics.drawImage(textureManager.getFaceTexture(1, 3), 20, 1000, null);
-        BufferedImage shadedFull = faceShader.shadeTopFaceTop(textureManager.getFaceTexture(1, 3));
-        graphics.drawImage(shadedFull, 50, 1000, null);
         this.gameData = gameData;
     }
 
@@ -49,70 +46,36 @@ public class GridDrawingManager extends BufferedImage {
 
     //Draws a triangle in a specific cord in the triangle grid
     private void drawTriangle(int x, int y, int blockType, int triangle) {
-        graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), (x * BLOCK_WIDTH_FACTOR), (y * BLOCK_HEIGHT_FACTOR), null);
-
-    }
-    private void drawShadedTriangle(int x, int y, int blockType, int triangle) {
-        graphics.drawImage(faceShader.shadeWhole(textureManager.getFaceTexture(blockType, triangle)), (x * BLOCK_WIDTH_FACTOR), (y * BLOCK_HEIGHT_FACTOR), null);
+        graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), x, y, null);
     }
 
-    //draws the top 2 faces of a block, with 2 triangles inputs.
-    public void drawTopBlock(CastedBlock castedBlock){
-        int x = castedBlock.getScreenX();
-        int y = castedBlock.getScreenY();
-        x = x - y;
-        y = x + y * 2;
-        if (castedBlock.isShaded()){
-            drawShadedTriangle(x, y, castedBlock.getType(0)[0], castedBlock.getType(0)[1]);
-            drawShadedTriangle(x + 1, y, castedBlock.getType(1)[0], castedBlock.getType(1)[1]);
-        }
-        else {
-            drawTriangle(x, y, castedBlock.getType(0)[0], castedBlock.getType(0)[1]);
-            drawTriangle(x + 1, y, castedBlock.getType(1)[0], castedBlock.getType(1)[1]);
-        }
+    //draws the top face of the block, using 2 triangle textures
+    public void drawCastedBlock(CastedBlock castedBlock){
+
+        //get the cords
+        int[] cords = blockCorToScreenCor(castedBlock.getScreenCords());
+
+        //texture drawing | 32 needs to be added shift second texture over
+        drawTriangle(cords[0], cords[1], castedBlock.getTriangleTexture(0)[0], castedBlock.getTriangleTexture(0)[1]);
+        drawTriangle(cords[0] + 32, cords[1], castedBlock.getTriangleTexture(1)[0], castedBlock.getTriangleTexture(1)[1]);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Update
+     *  Coordinate tools
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *Methods for drawing triangles at specific locations
+     *  Methods for converting between isometric and normal cords
      */
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Debugging
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *Methods for drawing triangles at specific locations
-     */
+    //convert a blocks (x, y) to a screen based (x, y)
+    private int[] blockCorToScreenCor(int[] cor){
+        //isometric to normal cord conversion
+        int x = (cor[0] - cor[1]);
+        int y = (x + cor[1]* 2);
 
-    //draws a block at a cord
-    public void drawBlock(int x, int y, int blockType) {
-        x = x - y;
-        y = x + y * 2;
-        drawTriangle(x, y, blockType, 0);
-        drawTriangle(x, y + 1, blockType, 1);
-        drawTriangle(x, y + 2, blockType, 2);
-        drawTriangle(x + 1, y, blockType, 3);
-        drawTriangle(x + 1, y + 1, blockType, 4);
-        drawTriangle(x + 1, y + 2, blockType, 5);
-    }
+        //Block texture size
+        x = x * BLOCK_WIDTH_FACTOR;
+        y = y * BLOCK_HEIGHT_FACTOR;
 
-    //draws a grid using triangles
-    public void testDrawTriangleGrid() {
-        Graphics2D g2d = this.createGraphics();
-        g2d.setColor(Color.BLACK);
-
-        for (int x = 0; x < 60; x++) {
-            g2d.drawLine(x * 32, 0, x * 32, 1080);
-
-            int offset = 0;
-            if (x % 2 == 0) {
-                offset = 16;
-            } else {
-                offset = 0;
-            }
-            for (int y = 0; y < 34; y++) {
-                g2d.drawImage(textureManager.getFaceTexture(1, 1), (x * 32), (y * 32) + offset, null);
-            }
-        }
+        return new int[]{(x), (y)};
     }
 }

@@ -2,7 +2,6 @@ package GUI.Menus.Renderer.raycastRendering;
 
 import GameData.GameData;
 import World.ActiveBranch.ActiveArea;
-import World.ActiveBranch.ActiveBranch;
 import World.World;
 
 import java.awt.*;
@@ -45,7 +44,7 @@ public class RaycastRenderer extends BufferedImage {
                 castedBlocks[x][y] = rayCast(castedBlocks[x][y], new int[]{0, 1, 2}, 0);
                 castedBlocks[x][y] = castShadows(castedBlocks[x][y]);
 
-                drawingManager.drawTopBlock(castedBlocks[x][y]);
+                drawingManager.drawCastedBlock(castedBlocks[x][y]);
             }
         }
         graphics.drawImage(drawingManager, 0, 0, null);
@@ -72,8 +71,8 @@ public class RaycastRenderer extends BufferedImage {
                 cords[order[axis]]--;
                 int block = world.getBlock(cords[0], cords[1], cords[2]);
                 if (block != 0){
-                    castedBlock.set(new long[]{cords[0], cords[1], cords[2]});
-                    castedBlock.setTriangle(side, new int[]{block, (order[axis]) + (side*3)});
+                    castedBlock.setTriangleBlockCords(side, new long[]{cords[0], cords[1], cords[2]});
+                    castedBlock.setTriangleTexture(side, new int[]{block, (order[axis]) + (side*3)});
                     return castedBlock;
                 }
             }
@@ -91,26 +90,27 @@ public class RaycastRenderer extends BufferedImage {
      */
 
     public CastedBlock castShadows(CastedBlock castedBlock){
-        long[] blockCords = castedBlock.getBlockCords();
-        blockCords[2]++;
+        int side = 0;
+        long[] cords = castedBlock.getTriangleBlockCords(side);
+        int[] order = new int[]{0, 1, 2};
 
-        for (int distance = 0; distance < 25; distance++)
+        for (int distance = 0; distance < gameData.drawDistance; distance++)
         {
             for (int axis = 0; axis < 3; axis++){
-                if (axis == 0){
-                    blockCords[axis]--;
+                if (order[axis] == 2){
+                    cords[order[axis]]++;
                 }
-                else {
-                    blockCords[axis]++;
+                else{
+                    cords[order[axis]]--;
                 }
-                int block = world.getBlock(blockCords[0], blockCords[1], blockCords[2]);
+                int block = world.getBlock(cords[0], cords[1], cords[2]);
                 if (block != 0){
-                    castedBlock.setShaded(true);
+
                     return castedBlock;
                 }
             }
         }
-        castedBlock.setShaded(false);
+
         return castedBlock;
     }
 
@@ -122,12 +122,12 @@ public class RaycastRenderer extends BufferedImage {
 
     public void rayCastAndPlace(int placingBlock){
         CastedBlock castedBlock = castedBlocks[gameData.xCamRez/2][gameData.yCamRez/2];
-        long[] blockCor = castedBlock.getBlockCords();
+        long[] blockCor = castedBlock.getTriangleBlockCords(0);
         int x = 0;
         int y = 0;
         int z = 1;
-        int triangle1 = castedBlock.getType(1)[1];
-        int triangle2 = castedBlock.getType(1)[0];
+        int triangle1 = castedBlock.getTriangleTexture(1)[1];
+        int triangle2 = castedBlock.getTriangleTexture(1)[0];
 
         System.out.println(triangle1);
         if (triangle2 == 2){

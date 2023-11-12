@@ -7,77 +7,92 @@ import java.awt.image.BufferedImage;
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Adds shaded textures to blocks
  *
+ * I'm going to need to make 12 different types
+ *
  */
 public class FaceShaders {
+    private BufferedImage[] shades;
     public FaceShaders(){
+        shades = new BufferedImage[9];
+        createShadedTopFace();
+        createShadedLeftFace();
+    }
 
+    private void createShadedLeftFace() {
+        //top
+        int[] xPoints = new int[]{0, 0, 16};
+        int[] yPoints = new int[]{0, 32, 24};
+        shades[5] = drawShadedPolygon(xPoints, yPoints);
+        xPoints = new int[]{0, 16, 32};
+        yPoints = new int[]{32, 24, 48};
+        shades[6] = drawShadedPolygon(xPoints, yPoints);
+        //bot
+        xPoints = new int[]{32, 16, 0};
+        yPoints = new int[]{16, 24, 0};
+        shades[7] = drawShadedPolygon(xPoints, yPoints);
+        xPoints = new int[]{32, 16, 0};
+        yPoints = new int[]{48, 24, 32};
+        shades[8] = drawShadedPolygon(xPoints, yPoints);
     }
 
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Face shader
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     * Adds shaded textures to blocks
+    public void createShadedTopFace(){
+        //top
+        int[] xPoints = new int[]{0, 32, 32};
+        int[] yPoints = new int[]{16, 0, 16};
+        shades[1] = drawShadedPolygon(xPoints, yPoints);
+        xPoints = new int[]{64, 32, 32};
+        yPoints = new int[]{16, 0, 16};
+        shades[2] = drawShadedPolygon(xPoints, yPoints);
+        //bot
+        xPoints = new int[]{0, 32, 32};
+        yPoints = new int[]{16, 32, 16};
+        shades[3] = drawShadedPolygon(xPoints, yPoints);
+        xPoints = new int[]{32, 32, 64};
+        yPoints = new int[]{16, 32, 16};
+        shades[4] = drawShadedPolygon(xPoints, yPoints);
+    }
+
+    public BufferedImage drawShadedPolygon(int[] xPoints, int[] yPoints){
+        BufferedImage image = new BufferedImage(64, 64, BufferedImage.TYPE_4BYTE_ABGR);
+        Graphics gTop = image.getGraphics();
+        gTop.setColor(new Color(0xC0000000, true));
+        gTop.fillPolygon(xPoints, yPoints, 3);
+        return image;
+    }
+
+    public BufferedImage shade(BufferedImage image) {
+        Graphics2D g2d = image.createGraphics();
+
+        // Set the color to a semi-transparent black
+        g2d.setColor(new Color(0x7C000000, true));
+
+        //Use inputed condition to skip adding unwanted pixels
+        for (int y = 0; y< image.getHeight(); y++){
+            for(int x = 0; x< image.getWidth(); x++){
+                if((image.getRGB(x, y) != 0x00000000)){
+                    g2d.fillRect(x, y, 1, 1);
+                }
+            }
+        }
+        g2d.dispose();
+        return image;
+    }
+
+    public BufferedImage getShader(int face) {
+        return shades[face];
+    }
+
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Create the different shades
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Shades are similar to the triangle grid,
+     * but from a different angle.
+     *
+     * Triangles essentially rotated.
      *
      */
 
-    //shades the top face
-    public BufferedImage shadeTopFaceTop(BufferedImage face){
-        BufferedImage shadedFace = new BufferedImage(face.getWidth(), face.getHeight(), face.getType());
-        Graphics2D g2d = shadedFace.createGraphics();
-        g2d.drawImage(face, 0, 0, null);
-        // Set the color to a semi-transparent black
-        g2d.setColor(new Color(0x7C000000, true));
 
-        //Use inputted condition to skip adding unwanted pixels
-        for (int y = 0; y< shadedFace.getHeight()/2; y++){
-            for(int x = 0; x< shadedFace.getWidth(); x++){
-                if((shadedFace.getRGB(x, y) != 0x00000000)){
-                    g2d.fillRect(x, y, 1, 1);
-                }
-            }
-        }
-        g2d.dispose();
-        return shadedFace;
-    }
-
-    //shades the top face
-    public BufferedImage shadeTopFaceBottom(BufferedImage face){
-        BufferedImage shadedFace = new BufferedImage(face.getWidth(), face.getHeight(), face.getType());
-        Graphics2D g2d = shadedFace.createGraphics();
-        g2d.drawImage(face, 0, 0, null);
-        // Set the color to a semi-transparent black
-        g2d.setColor(new Color(0x7C000000, true));
-
-        //Use inputted condition to skip adding unwanted pixels
-        for (int y = shadedFace.getHeight()/2; y < shadedFace.getHeight(); y++){
-            for(int x = 0; x< shadedFace.getWidth(); x++){
-                if((shadedFace.getRGB(x, y) != 0x00000000)){
-                    g2d.fillRect(x, y, 1, 1);
-                }
-            }
-        }
-        g2d.dispose();
-        return shadedFace;
-    }
-
-    //shades the entire block.
-    public BufferedImage shadeWhole(BufferedImage face){
-        BufferedImage shadedFace = new BufferedImage(face.getWidth(), face.getHeight(), face.getType());
-        Graphics2D g2d = shadedFace.createGraphics();
-        g2d.drawImage(face, 0, 0, null);
-        // Set the color to a semi-transparent black
-        g2d.setColor(new Color(0x7C000000, true));
-
-        //Use inputted condition to skip adding unwanted pixels
-        for (int y = 0; y< shadedFace.getHeight(); y++){
-            for(int x = 0; x< shadedFace.getWidth(); x++){
-                if((shadedFace.getRGB(x, y) != 0x00000000)){
-                    g2d.fillRect(x, y, 1, 1);
-                }
-            }
-        }
-        g2d.dispose();
-        return shadedFace;
-    }
 }
