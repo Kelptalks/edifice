@@ -1,16 +1,15 @@
 import GUI.GUI;
-import GameData.gameData;
+import GameData.GameData;
 import Testing.Testing;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        gameData gameData = new gameData();
+        GameData gameData = new GameData();
         GUI gameFrame = new GUI(gameData);
 
 
-        Testing testing = new Testing();
-        testing.testActiveBranch();
-
-
+        //Testing testing = new Testing();
+        //testing.testKey();
+        //testing.testActiveBranch();
     }
 }

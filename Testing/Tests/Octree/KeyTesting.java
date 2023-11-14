@@ -21,6 +21,7 @@ public class KeyTesting {
         System.out.println("~~~~~~~~~~~~~~~~");
 
         //run tests
+        keyToCords();
         testBitSubtract();
         testBitAdd();
         testGetRelativeKey();
@@ -34,14 +35,37 @@ public class KeyTesting {
 
         long key = 45;
 
-        keyMod.printUnpackedKeyBinary(key);
-
         key = keyMod.getRelativeKey(45, 0,  -1, 2, 0);
-
-        keyMod.printUnpackedKeyBinary(key);
     }
 
+    public void keyToCords(){
+        KeyMod keyMod = new KeyMod();
 
+        long key = 500000;
+        int x = -1;
+        int y = -50;
+        int z = 0;
+
+        //set the axis
+        key = keyMod.getRelativeKey(0, 0,  x, y, z);
+
+        long[] cords = keyMod.keyToCords(key);
+
+        //check the returned value
+        if (cords[0] != keyMod.axisToCord(key, 0)){
+            System.out.println("-(fail) key to cords x axis expected(" + keyMod.axisToCord(key, 0) + "), but was (" + cords[0] + ")");
+        }
+        else if (cords[1] != keyMod.axisToCord(key, 1)){
+            System.out.println("-(fail) key to cords y axis expected(" + keyMod.axisToCord(key, 1) + "), but was (" + cords[1] + ")");
+        }
+        else if (cords[2] != keyMod.axisToCord(key, 2)){
+            System.out.println("-(fail) key to cords z axis expected(" + keyMod.axisToCord(key, 2) + "), but was (" + cords[2] + ")");
+        }
+        else{
+            System.out.println("-(pass) key to cords");
+        }
+
+    }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * Relative key manipulation

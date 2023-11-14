@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import GUI.Menus.Renderer.Textures.FaceShaders;
 import GUI.Menus.Renderer.Textures.TextureManager;
+import GameData.GameData;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  Grid Manager class
@@ -17,8 +19,8 @@ import GUI.Menus.Renderer.Textures.TextureManager;
 public class GridDrawingManager extends BufferedImage {
 
     //Textures
-    private static final TextureManager textureManager = new TextureManager();
-
+    private final TextureManager textureManager = new TextureManager();
+    private final FaceShaders faceShader = new FaceShaders();
 
     //graphics
     Graphics2D graphics = this.createGraphics();
@@ -28,10 +30,10 @@ public class GridDrawingManager extends BufferedImage {
     public final int BLOCK_HEIGHT_FACTOR = 16;
 
     //create gameData class
-    private final GameData.gameData gameData;
+    private final GameData gameData;
 
     //constructor
-    GridDrawingManager(GameData.gameData gameData, int xRez, int yRez) {
+    GridDrawingManager(GameData gameData, int xRez, int yRez) {
         super(xRez,yRez, TYPE_4BYTE_ABGR_PRE);
         this.gameData = gameData;
     }
@@ -44,58 +46,52 @@ public class GridDrawingManager extends BufferedImage {
 
     //Draws a triangle in a specific cord in the triangle grid
     private void drawTriangle(int x, int y, int blockType, int triangle) {
-        graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), (x * BLOCK_WIDTH_FACTOR), (y * BLOCK_HEIGHT_FACTOR), null);
+        graphics.drawImage(textureManager.getFaceTexture(blockType, triangle), x, y, null);
     }
 
-    //draws the top 2 faces of a block, with 2 triangles inputs.
-    public void drawTopBlock(int x, int y, int[] triangle1, int[] triangle2){
-        x = x - y;
-        y = x + y * 2;
-        drawTriangle(x, y, triangle1[0], triangle1[1]);
-        drawTriangle(x + 1, y, triangle2[0], triangle2[1]);
-    }
+    //draws the top face of the block, using 2 triangle textures
+    public void drawCastedBlock(CastedBlock castedBlock){
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Update
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *Methods for drawing triangles at specific locations
-     */
+        //get the cords
+        int[] cords = blockCorToScreenCor(castedBlock.getScreenCords());
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Debugging
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *Methods for drawing triangles at specific locations
-     */
+        //texture drawing | 32 needs to be added shift second texture over
+        drawTriangle(cords[0], cords[1], castedBlock.getTriangleTexture(0)[0], castedBlock.getTriangleTexture(0)[1]);
+        drawTriangle(cords[0] + 32, cords[1], castedBlock.getTriangleTexture(1)[0], castedBlock.getTriangleTexture(1)[1]);
 
-    //draws a block at a cord
-    public void drawBlock(int x, int y, int blockType) {
-        x = x - y;
-        y = x + y * 2;
-        drawTriangle(x, y, blockType, 0);
-        drawTriangle(x, y + 1, blockType, 1);
-        drawTriangle(x, y + 2, blockType, 2);
-        drawTriangle(x + 1, y, blockType, 3);
-        drawTriangle(x + 1, y + 1, blockType, 4);
-        drawTriangle(x + 1, y + 2, blockType, 5);
-    }
+        //drawShader(cords[0], cords[1], 1);
+        //drawShader(cords[0], cords[1], 2);
 
-    //draws a grid using triangles
-    public void testDrawTriangleGrid() {
-        Graphics2D g2d = this.createGraphics();
-        g2d.setColor(Color.BLACK);
-
-        for (int x = 0; x < 60; x++) {
-            g2d.drawLine(x * 32, 0, x * 32, 1080);
-
-            int offset = 0;
-            if (x % 2 == 0) {
-                offset = 16;
-            } else {
-                offset = 0;
-            }
-            for (int y = 0; y < 34; y++) {
-                g2d.drawImage(textureManager.getFaceTexture(1, 1), (x * 32), (y * 32) + offset, null);
-            }
+        if (castedBlock.getTriangleShader(0) != 0){
+            drawShader(cords[0], cords[1], 0, castedBlock.getTriangleShader(0));
         }
+
+        if (castedBlock.getTriangleShader(1) != 0){
+            drawShader(cords[0], cords[1], 1, castedBlock.getTriangleShader(1));
+        }
+
+    }
+
+    public void drawShader(int x, int y, int face, int shade) {
+        graphics.drawImage(faceShader.getShader(face, shade), x, y, null);
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Coordinate tools
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Methods for converting between isometric and normal cords
+     */
+
+    //convert a blocks (x, y) to a screen based (x, y)
+    private int[] blockCorToScreenCor(int[] cor){
+        //isometric to normal cord conversion
+        int x = (cor[0] - cor[1]);
+        int y = (x + cor[1]* 2);
+
+        //Block texture size
+        x = x * BLOCK_WIDTH_FACTOR;
+        y = y * BLOCK_HEIGHT_FACTOR;
+
+        return new int[]{(x), (y)};
     }
 }

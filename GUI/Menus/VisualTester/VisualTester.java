@@ -1,4 +1,5 @@
-package GUI.Menus.PerlinNoise;
+package GUI.Menus.VisualTester;
+
 import GUI.Menus.Menu;
 import GameData.GameData;
 import javax.swing.*;
@@ -11,12 +12,12 @@ import java.awt.*;
  *  My perlin noise generation
  *  Allowing me to debug more easily
  */
-public class PerlinNoiseMenu extends JPanel implements Menu {
+public class VisualTester extends JPanel implements Menu {
     private GameData gameData;
-    private PerlinVisualiser perlinVisualiser;
-    public PerlinNoiseMenu(GameData gameData){
+    private TextureVisualiser textureVisualiser;
+    public VisualTester(GameData gameData){
         this.gameData = new GameData();
-        this.perlinVisualiser = new PerlinVisualiser(gameData);
+        this.textureVisualiser = new TextureVisualiser(gameData);
         repaint();
     }
 
@@ -24,7 +25,7 @@ public class PerlinNoiseMenu extends JPanel implements Menu {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
-        g2D.drawImage(perlinVisualiser, 0, 0, this); // Assuming rayCaster is a BufferedImage
+        g2D.drawImage(textureVisualiser, 0, 0, this); // Assuming rayCaster is a BufferedImage
     }
 
     @Override

@@ -1,6 +1,8 @@
 package GUI.Menus.Renderer.raycastRendering;
 
-import World.DataStorage.Octree.ActiveBranch;
+import GameData.GameData;
+import World.ActiveBranch.ActiveArea;
+import World.World;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,18 +16,19 @@ public class RaycastRenderer extends BufferedImage {
     private GridDrawingManager drawingManager;
     private Graphics graphics = this.getGraphics();
 
-    private ActiveBranch world = new ActiveBranch();
+    private ActiveArea world;
 
-    GameData.gameData gameData;
+    GameData gameData;
     //private World world = new World();
 
     private int[][][] culledCoordMods;
     private CastedBlock[][] castedBlocks;
 
-    public RaycastRenderer(GameData.gameData gameData) {
+    public RaycastRenderer(GameData gameData) {
         super(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ, TYPE_4BYTE_ABGR_PRE);
         this.drawingManager = new GridDrawingManager(gameData ,gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ);
         this.gameData = gameData;
+        this.world = new ActiveArea(new World(), 576460750000000000L, 7);
         updateCulledCoordMods();
     }
 
@@ -35,148 +38,66 @@ public class RaycastRenderer extends BufferedImage {
      *
      */
     public void rayCast(){
-        for (int y = 0; y < yCamRez; y++){
-            for (int x =  0; x < xCamRez; x++) {
-                castedBlocks[x][y] = pathLeftFace(castedBlocks[x][y]);
-                castedBlocks[x][y] = pathRightFace(castedBlocks[x][y]);
+        for (int y = 0; y < gameData.yCamRez; y++){
+            for (int x =  0; x < gameData.xCamRez; x++) {
+                castedBlocks[x][y] = rayCast(castedBlocks[x][y], new int[]{1, 0, 2}, 1);
+                castedBlocks[x][y] = rayCast(castedBlocks[x][y], new int[]{0, 1, 2}, 0);
+                castedBlocks[x][y] = castShadows(castedBlocks[x][y]);
 
-                drawingManager.drawTopBlock(castedBlocks[x][y].getScreenX(), castedBlocks[x][y].getScreenY(),
-                        castedBlocks[x][y].getType(0),
-                        castedBlocks[x][y].getType(1));
+                drawingManager.drawCastedBlock(castedBlocks[x][y]);
             }
         }
         graphics.drawImage(drawingManager, 0, 0, null);
         graphics.setColor(Color.BLACK);
-        graphics.fillOval(((xCamRez) * 32)-5, ((xCamRez) * 16)+25, 10, 10);
+        graphics.fillOval(((gameData.xCamRez) * 32)-5, ((gameData.xCamRez) * 16)+25, 10, 10);
+        castShadows(castedBlocks[gameData.xCamRez/2][gameData.yCamRez/2]);
     }
 
-    //GetCastedBlock
-    private CastedBlock pathLeftFace(CastedBlock castedBlock){
-        long x = castedBlock.getScreenX() + gameData.playerXCamCor;
-        long y = castedBlock.getScreenY() + gameData.playerYCamCor;
-        long z = gameData.playerZCamCor;
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Cam to block casting
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     */
+    //cast a block using a specific order
+    private CastedBlock rayCast(CastedBlock castedBlock, int[] order, int side){
+        long[] cords = new long[3];
+        cords[0] = (castedBlock.getScreenX() + gameData.playerXCamCor);
+        cords[1] = (castedBlock.getScreenY() + gameData.playerYCamCor);
+        cords[2] = (gameData.playerZCamCor);
 
-        int block = 0;
-
-        for (int distance = 0; distance < drawDistance; distance++)
+        for (int distance = 0; distance < gameData.drawDistance; distance++)
         {
-            x--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                castedBlock.set(new long[]{x, y, z});
-                castedBlock.setTriangle(0, new int[]{block, 4});
-                return castedBlock;
-            }
-
-            y--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                castedBlock.set(new long[]{x, y, z});
-                castedBlock.setTriangle(0, new int[]{block, 2});
-                return castedBlock;
-            }
-
-            z--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                castedBlock.set(new long[]{x, y, z});
-                castedBlock.setTriangle(0, new int[]{block, 0});;
-                return castedBlock;
+            for (int axis = 0; axis < 3; axis++){
+                cords[order[axis]]--;
+                int block = world.getBlock(cords[0], cords[1], cords[2]);
+                if (block != 0){
+                    castedBlock.setTriangleBlockCords(side, new long[]{cords[0], cords[1], cords[2]});
+                    castedBlock.setTriangleTexture(side, new int[]{block, (order[axis]) + (side*3)});
+                    return castedBlock;
+                }
             }
         }
-        castedBlock.set(new long[]{x, y, z});
-        castedBlock.setTriangle(0, new int[]{1, 0});
-        return castedBlock;
-    }
-    //GetCastedBlock
-    private CastedBlock pathRightFace(CastedBlock castedBlock){
-        long x = castedBlock.getScreenX() + gameData.playerXCamCor;
-        long y = castedBlock.getScreenY() + gameData.playerYCamCor;
-        long z = gameData.playerZCamCor;
-
-        int block = 0;
-
-        for (int distance = 0; distance < drawDistance; distance++)
-        {
-            y--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                castedBlock.set(new long[]{x, y, z});
-                castedBlock.setTriangle(1, new int[]{block, 1});
-                return castedBlock;
-            }
-
-            x--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                castedBlock.set(new long[]{x, y, z});
-                castedBlock.setTriangle(1, new int[]{block, 5});
-                return castedBlock;
-            }
-
-            z--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                castedBlock.set(new long[]{x, y, z});
-                castedBlock.setTriangle(1, new int[]{block, 3});;
-                return castedBlock;
-            }
-        }
-        castedBlock.set(new long[]{x, y, z});
-        castedBlock.setTriangle(1, new int[]{1, 3});
         return castedBlock;
     }
 
-    private int[] pathLeftTop(long x, long y){
-        long z = gameData.playerZCamCor;
-        int block = world.getBlock(x, y, z);
-        for (int distance = 0; distance < drawDistance; distance++)
-        {
-            x--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                return new int[]{block, 4};
-            }
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Shadows
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * pathing shadows, by pathing
+     * from a block to the left, and
+     * if a block is hit, then draw
+     * shadow on that triangle.
+     */
 
-            y--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                return new int[]{block, 2};
-            }
+    public CastedBlock castShadows(CastedBlock castedBlock){
 
-            z--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                return new int[]{block, 0};
-            }
-        }
-        return new int[]{0, 0};
-    }
 
-    private int[] pathRightTop(long x, long y){
-        long z = gameData.playerZCamCor;
-        int block = world.getBlock(x, y, z);
-        for (int distance = 0; distance < drawDistance; distance++)
-        {
-            y--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                return new int[]{block, 1};
-            }
+        int side = 0;
+        castedBlock.setTriangleShader(0, 1);
+        castedBlock.setTriangleShader(1, 1);
 
-            x--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                return new int[]{block, 5};
-            }
 
-            z--;
-            block = world.getBlock(x, y, z);
-            if (block != 0){
-                return new int[]{block, 3};
-            }
-        }
-        return new int[]{0, 3};
+        return castedBlock;
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -185,17 +106,37 @@ public class RaycastRenderer extends BufferedImage {
      *
      */
 
+    public void rayCastAndPlace(int placingBlock){
+        CastedBlock castedBlock = castedBlocks[gameData.xCamRez/2][gameData.yCamRez/2];
+        long[] blockCor = castedBlock.getTriangleBlockCords(0);
+        int x = 0;
+        int y = 0;
+        int z = 1;
+        int triangle1 = castedBlock.getTriangleTexture(1)[1];
+        int triangle2 = castedBlock.getTriangleTexture(1)[0];
+
+        System.out.println(triangle1);
+        if (triangle2 == 2){
+            System.out.println("Right");
+            x = 1;
+            z = 0;
+        }
+        if (triangle1 == 4){
+            System.out.println("left");
+            y = 1;
+            z = 0;
+        }
+        world.setBlock(blockCor[0] + x, blockCor[1] + y, blockCor[2] + z, placingBlock);
+    }
+
     public void pathAndPlace(int placingBlock){
 
-        long x = culledCoordMods[xCamRez/2][yCamRez/2][0] + gameData.playerXCamCor;
-        long y = culledCoordMods[xCamRez/2][yCamRez/2][1] + gameData.playerYCamCor;
-
+        long x = culledCoordMods[gameData.xCamRez/2][gameData.yCamRez/2][0] + gameData.playerXCamCor;
+        long y = culledCoordMods[gameData.xCamRez/2][gameData.yCamRez/2][1] + gameData.playerYCamCor;
         long z = gameData.playerZCamCor;
 
-        System.out.println(x);
-        System.out.println(y);
         int block = world.getBlock(x, y, z);
-        for (int distance = 0; distance < drawDistance; distance++)
+        for (int distance = 0; distance < gameData.drawDistance; distance++)
         {
             y--;
             block = world.getBlock(x, y, z);
@@ -220,17 +161,18 @@ public class RaycastRenderer extends BufferedImage {
         }
     }
 
+
     public void pathAndRemove(){
 
-        long x = culledCoordMods[xCamRez/2][yCamRez/2][0] + gameData.playerXCamCor;
-        long y = culledCoordMods[xCamRez/2][yCamRez/2][1] + gameData.playerYCamCor;
+        long x = culledCoordMods[gameData.xCamRez/2][gameData.yCamRez/2][0] + gameData.playerXCamCor;
+        long y = culledCoordMods[gameData.xCamRez/2][gameData.yCamRez/2][1] + gameData.playerYCamCor;
 
         long z = gameData.playerZCamCor;
 
         System.out.println(x);
         System.out.println(y);
         int block = world.getBlock(x, y, z);
-        for (int distance = 0; distance < drawDistance; distance++)
+        for (int distance = 0; distance < gameData.drawDistance; distance++)
         {
             y--;
             block = world.getBlock(x, y, z);
@@ -264,15 +206,15 @@ public class RaycastRenderer extends BufferedImage {
      */
 
     public void updateCulledCoordMods(){
-        int[][][] CoordMods = new int[xCamRez][yCamRez][2];
-        CastedBlock[][] newCastedBlocks = new CastedBlock[xCamRez][yCamRez];
+        int[][][] CoordMods = new int[gameData.xCamRez][gameData.yCamRez][2];
+        CastedBlock[][] newCastedBlocks = new CastedBlock[gameData.xCamRez][gameData.yCamRez];
         //cycle through cam cords
-        for (int y = 0; y < yCamRez; y++){
+        for (int y = 0; y < gameData.yCamRez; y++){
             int[] rowOrginMod = new int[]{y/2, y/2};
             if (y%2 != 0){
                 rowOrginMod[0]++;
             }
-            for (int x = 0; x < xCamRez; x++){
+            for (int x = 0; x < gameData.xCamRez; x++){
                 CoordMods[x][y] = new int[]{rowOrginMod[0] + x, rowOrginMod[1] - x};
                 newCastedBlocks[x][y] = new CastedBlock(new int[]{rowOrginMod[0] + x, rowOrginMod[1] - x});
             }
@@ -280,13 +222,4 @@ public class RaycastRenderer extends BufferedImage {
         this.culledCoordMods = CoordMods;
         this.castedBlocks = newCastedBlocks;
     }
-
-    //draw distance
-    private int drawDistance = 150;
-
-    //Render Size
-    private int xCamRez = 29;
-    private int yCamRez = 61;
-
-
 }

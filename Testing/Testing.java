@@ -4,6 +4,7 @@ import Testing.Tests.Octree.ActiveBranchTesting;
 import Testing.Tests.Octree.KeyTesting;
 import Testing.Tests.Octree.LeafTesting;
 import Testing.Tests.Octree.OctreTesting;
+import Testing.Tests.TerrainGenTesting;
 import Testing.Tests.WorldTesting;
 
 import java.util.Scanner;
@@ -104,5 +105,9 @@ public class Testing {
 
     public void testKey(){
         new KeyTesting().run();
+    }
+
+    public void testTerrainGen(){
+        new TerrainGenTesting().run();
     }
 }

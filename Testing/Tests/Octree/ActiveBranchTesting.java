@@ -1,9 +1,7 @@
 package Testing.Tests.Octree;
 
-import World.DataStorage.Octree.ActiveBranch;
-import World.DataStorage.Octree.Octree;
-
-import static java.lang.Long.toBinaryString;
+import World.ActiveBranch.ActiveBranch;
+import World.World;
 
 public class ActiveBranchTesting {
 
@@ -13,29 +11,13 @@ public class ActiveBranchTesting {
         System.out.println("~~ ActiveBranchTesting ~~");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~");
 
-        //run tests
-        testLoadUp();
-        testCorToKey();
+        testDirectionalLoading();
 
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    public void testCorToKey(){
-        ActiveBranch activeBranch = new ActiveBranch();
-
-        activeBranch.setBlock(1, 1, 1, 5);
-        activeBranch.setBlock(1, 1, -1, 5);
-
-        System.out.println("testing");
-        System.out.println(activeBranch.getBlock(1, 1, 1));
-
-    }
-
-    private void testLoadUp(){
-        ActiveBranch activeBranch = new ActiveBranch();
-        activeBranch.loadUp();
-        System.out.println("-(pass) testLoadUp");
-
+    public void testDirectionalLoading(){
+        ActiveBranch activeBranch = new ActiveBranch(new World());
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
