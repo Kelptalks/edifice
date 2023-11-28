@@ -90,12 +90,12 @@ public class RaycastRenderer extends BufferedImage {
      */
 
     public CastedBlock castShadows(CastedBlock castedBlock){
+        castedBlock.setTriangleShader(0, 0);
+        castedBlock.setTriangleShader(1, 0);
 
-
-        int side = 0;
-        castedBlock.setTriangleShader(0, 1);
-        castedBlock.setTriangleShader(1, 1);
-
+        if (castedBlock.getTriangleTexture(0)[1] == 0){
+            castedBlock.setTriangleShader(0, 4);
+        }
 
         return castedBlock;
     }
