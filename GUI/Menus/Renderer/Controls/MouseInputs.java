@@ -1,6 +1,7 @@
 package GUI.Menus.Renderer.Controls;
 
 import GUI.Menus.Renderer.Renderer;
+import GUI.Menus.Renderer.raycastRendering.RaycastRenderer;
 import GameData.GameData;
 
 import java.awt.event.MouseEvent;
@@ -8,27 +9,26 @@ import java.awt.event.MouseListener;
 public class MouseInputs implements MouseListener {
     private GameData gameData;
     private Renderer renderer;
-    public MouseInputs(GameData gameData){
+
+    private RaycastRenderer rayCaster;
+
+    public MouseInputs(GameData gameData, RaycastRenderer rayCaster) {
+        this.rayCaster = rayCaster;
         this.gameData = gameData;
     }
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
 
-        //WAY TO IMPROVE!!
-        //get mouse inputs and set them to a current menu
-        //this is really poorly done, and can be fixed
-        //I can move a ray tracing algorithm directly in
-        //here and modify a shared world in the game data.
-
-        //get mouse inputs and set it to renderer to modifier a block
-        this.renderer = (Renderer) gameData.menu;
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        if (e.getButton() == MouseEvent.BUTTON1){
+            rayCaster.rayCastAndPlace(e.getX(), e.getY(), gameData.currentBlock);
+        }
+        else {
+            rayCaster.rayCastAndBreak(e.getX(), e.getY());
+        }
     }
 
     @Override

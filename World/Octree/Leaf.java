@@ -1,8 +1,10 @@
-package World.DataStorage.Octree;
+package World.Octree;
 
-import World.TerrainGen.TerrainGen;
+import World.BlockEntity.BlockEntity;
+import World.BlockEntity.Terp.Terp;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Leaf Class
@@ -15,6 +17,7 @@ public class Leaf implements Serializable{
     }
 
     private long[] leafs = new long[512];
+    private ArrayList<BlockEntity> blockEntities = new ArrayList<BlockEntity>();
     private static final int BLOCKS_PER_LONG = 8;//Blocks contained in each bitPackedInt
     private static final int BITS_PER_BLOCK = 8;//How many bits each block takes up
     private static final int BLOCKS_PER_LEAF = 512*8;//How many blocks each block takes up
@@ -54,6 +57,22 @@ public class Leaf implements Serializable{
         int arrayIndex = (key & 0xFFF) >> 3;
         int bitIndex = key & 7;
         leafs[arrayIndex] = (leafs[arrayIndex] & ~(0xFFL << (bitIndex * BITS_PER_BLOCK))) | ((blockType & 0xFFL) << (bitIndex * BITS_PER_BLOCK));
+        if (blockType == 11){
+            blockEntities.add(new Terp(key));
+        }
     }
 
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * block Entity retrieval
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     */
+    public BlockEntity getBlockEntity(long key){
+        for (BlockEntity block : blockEntities){
+            if (block.getLocation() == key){
+                return block;
+            }
+        }
+        return null;
+    }
 }

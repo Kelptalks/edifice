@@ -13,9 +13,28 @@ import java.awt.image.BufferedImage;
 public class FaceShaders {
     private BufferedImage[][] shades;
     public FaceShaders(){
-        shades = new BufferedImage[2][5];
+        shades = new BufferedImage[2][9];
         createShadedTopFace();
         createShadedLeftFace();
+        createShadedWholeFace();
+    }
+
+    public void createShadedTopFace(){
+        //top
+        int[] xPoints = new int[]{0, 32, 32};
+        int[] yPoints = new int[]{16, 0, 16};
+        shades[0][1] = drawShadedPolygon(xPoints, yPoints);
+        xPoints = new int[]{32, 0, 0};
+        yPoints = new int[]{16, 0, 16};
+        shades[1][1] = drawShadedPolygon(xPoints, yPoints);
+        //bot
+        xPoints = new int[]{0, 32, 32};
+        yPoints = new int[]{16, 32, 16};
+        shades[0][2] = drawShadedPolygon(xPoints, yPoints);
+
+        xPoints = new int[]{0, 0, 32};
+        yPoints = new int[]{16, 32, 16};
+        shades[1][2] = drawShadedPolygon(xPoints, yPoints);
     }
 
     private void createShadedLeftFace() {
@@ -35,23 +54,20 @@ public class FaceShaders {
         shades[1][4] = drawShadedPolygon(xPoints, yPoints);
     }
 
-
-    public void createShadedTopFace(){
-        //top
-        int[] xPoints = new int[]{0, 32, 32};
-        int[] yPoints = new int[]{16, 0, 16};
-        shades[0][1] = drawShadedPolygon(xPoints, yPoints);
-        xPoints = new int[]{32, 0, 0};
-        yPoints = new int[]{16, 0, 16};
-        shades[0][2] = drawShadedPolygon(xPoints, yPoints);
-        //bot
-        xPoints = new int[]{0, 32, 32};
-        yPoints = new int[]{16, 32, 16};
-        shades[1][1] = drawShadedPolygon(xPoints, yPoints);
-
+    private void createShadedWholeFace(){
+        int[] xPoints = new int[]{0,32, 32};
+        int[] yPoints = new int[]{16, 0, 32};
+        shades[0][5] = drawShadedPolygon(xPoints, yPoints);
         xPoints = new int[]{0, 0, 32};
-        yPoints = new int[]{16, 32, 16};
-        shades[1][2] = drawShadedPolygon(xPoints, yPoints);
+        yPoints = new int[]{0, 32, 16};
+        shades[1][5] = drawShadedPolygon(xPoints, yPoints);
+        //bot
+        xPoints = new int[]{32, 0, 0};
+        yPoints = new int[]{16, 32, 0};
+        shades[0][6] = drawShadedPolygon(xPoints, yPoints);
+        xPoints = new int[]{32, 32, 0};
+        yPoints = new int[]{48, 16, 32};
+        shades[1][6] = drawShadedPolygon(xPoints, yPoints);
     }
 
     public BufferedImage drawShadedPolygon(int[] xPoints, int[] yPoints){

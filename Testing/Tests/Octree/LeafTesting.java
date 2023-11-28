@@ -1,6 +1,7 @@
 package Testing.Tests.Octree;
 
-import World.DataStorage.Octree.Leaf;
+import GameData.GameData;
+import World.Octree.Leaf;
 
 public class LeafTesting {
 

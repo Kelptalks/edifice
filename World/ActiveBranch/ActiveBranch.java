@@ -1,9 +1,9 @@
 package World.ActiveBranch;
 
 import GameData.GameData;
-import World.DataStorage.Octree.Branch;
-import World.DataStorage.Octree.KeyMod;
-import World.DataStorage.Octree.Octree;
+import World.Octree.Branch;
+import World.Octree.KeyMod;
+import World.Octree.Octree;
 import World.World;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

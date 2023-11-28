@@ -1,9 +1,9 @@
 package World.TerrainGen;
 
-import World.DataStorage.Octree.Branch;
-import World.DataStorage.Octree.KeyMod;
-import World.DataStorage.Octree.Leaf;
-import World.DataStorage.Octree.Octree;
+import World.Octree.Branch;
+import World.Octree.KeyMod;
+import World.Octree.Leaf;
+import World.Octree.Octree;
 
 import java.awt.*;
 import java.util.Random;
@@ -36,11 +36,22 @@ public class TerrainGen{
                 }
             }
         }
+    }
 
-        System.out.println(branch.getLeafCount());
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Shape generation
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * generating basic shapes
+     */
+
+    public void genCuboid(long x, long y, long z, long width, long height){
 
 
-        //branch.setBlock(root, 7);
+
+    }
+
+    public void genSphere(long x, long y, long z, long width, long height){
+
 
 
     }
@@ -50,6 +61,7 @@ public class TerrainGen{
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * generate a tree
      */
+
     public void genTree(Branch branch, int x, int y){
         long root =(long) Math.pow(8, 2L << branch.getDepth());
         root = keyMod.getRelativeKey(root, 0, 10 + x, +10 + y, 1);

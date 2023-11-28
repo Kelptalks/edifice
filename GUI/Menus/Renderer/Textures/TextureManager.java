@@ -17,7 +17,8 @@ public class TextureManager {
 
     private BufferedImage [][]blockTextures = new BufferedImage[15][6];
     private String blockFilePaths[] = {null, "Textures/1.png", "Textures/2.png", "Textures/3.png"
-    , "Textures/4.png", "Textures/5.png", "Textures/6.png", "Textures/7.png"};
+    , "Textures/4.png", "Textures/5.png", "Textures/6.png", "Textures/7.png", "Textures/8.png", "Textures/9.png"
+    , "Textures/10.png", "Textures/11.png"};
 
     public TextureManager(){
         for (int x = 1; x < blockFilePaths.length; x++){

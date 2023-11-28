@@ -3,6 +3,7 @@ package GUI.Menus.Renderer;
 import GUI.Menus.Menu;
 import GUI.Menus.Renderer.Controls.KeyBoardInputs;
 import GUI.Menus.Renderer.Controls.MouseInputs;
+import GUI.Menus.Renderer.Effects.Effects;
 import GUI.Menus.Renderer.raycastRendering.RaycastRenderer;
 import GameData.GameData;
 
@@ -18,15 +19,17 @@ import java.awt.event.ActionListener;
  */
 public class Renderer extends JPanel implements Menu {
     private RaycastRenderer rayCaster;
+    private Effects effects;
     private GameData gameData;
 
     public Renderer(GameData gameData){
         this.rayCaster = new RaycastRenderer(gameData);
+        this.effects = new Effects(gameData);
         this.setPreferredSize(new Dimension(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ));
 
         //add keyInputs
         this.setFocusable(true); //set the focus
-        this.addMouseListener(new MouseInputs(gameData));
+        this.addMouseListener(new MouseInputs(gameData, rayCaster));
         this.addKeyListener(new KeyBoardInputs(gameData, rayCaster));
 
         //Start rendering loop
@@ -47,7 +50,6 @@ public class Renderer extends JPanel implements Menu {
                 repaint();
             }
         };
-
         new Timer(delay, taskPerformer).start();
     }
 
@@ -63,6 +65,7 @@ public class Renderer extends JPanel implements Menu {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
         g2D.drawImage(rayCaster, -15, -15, this); // Assuming rayCaster is a BufferedImage
+        g2D.drawImage(effects, -15, -15, this); // Assuming rayCaster is a BufferedImage
     }
 
     //sets this object as the current menu

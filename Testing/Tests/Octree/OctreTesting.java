@@ -1,6 +1,6 @@
 package Testing.Tests.Octree;
-import World.DataStorage.Octree.Branch;
-import World.DataStorage.Octree.Octree;
+import World.Octree.Branch;
+import World.Octree.Octree;
 
 import java.util.Arrays;
 

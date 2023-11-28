@@ -51,22 +51,13 @@ public class KeyBoardInputs implements KeyListener {
                 //move the camera right
                 gameData.playerZCamCor -= 1;
                 break;
-            case KeyEvent.VK_SPACE:
-                //move the camera right
-                rayCaster.rayCastAndPlace(currentBlock);
-                break;
             case KeyEvent.VK_R:
                 //move the camera right
-                currentBlock++;
-                if (currentBlock > 7){
-                    currentBlock = 1;
+                gameData.currentBlock++;
+                if (gameData.currentBlock > 11){
+                    gameData.currentBlock = 1;
                 }
                 break;
-            case KeyEvent.VK_X:
-                //move the camera right
-                rayCaster.pathAndRemove();
-                break;
-
             default:
                 break;
         }

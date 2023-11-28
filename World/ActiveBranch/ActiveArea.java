@@ -1,8 +1,8 @@
 package World.ActiveBranch;
 
-import World.DataStorage.Octree.Branch;
-import World.DataStorage.Octree.KeyMod;
-import World.DataStorage.Octree.Octree;
+import World.Octree.Branch;
+import World.Octree.KeyMod;
+import World.Octree.Octree;
 import World.World;
 
 public class ActiveArea {
@@ -129,6 +129,10 @@ public class ActiveArea {
     public void setBlock(long x, long y, long z, int block) {
         long relativeKey = keyMod.getRelativeKey(branchCenterKey, 0, x, y, z);
         activeBranches[1][1][1].setBlock(relativeKey, block);
+    }
+
+    public void setBlock(long key, int block){
+        activeBranches[1][1][1].setBlock(key, block);
     }
 }
 

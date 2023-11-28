@@ -1,8 +1,9 @@
 package World;
 
+import World.ActiveBranch.ActiveArea;
 import World.ActiveBranch.ActiveBranch;
-import World.DataStorage.Octree.Branch;
-import World.DataStorage.Octree.Octree;
+import World.Octree.Branch;
+import World.Octree.Octree;
 import World.TerrainGen.TerrainGen;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -12,8 +13,7 @@ import World.TerrainGen.TerrainGen;
  *  and generate terrain
  */
 public class World{
-
-    private ActiveBranch activeBranch;
+    private ActiveArea activeArea;
     private Octree octree;
     private TerrainGen terrainGen;
 
@@ -26,9 +26,6 @@ public class World{
         long groundHeight = octree.getDimension(depth);
         System.out.println("Ground height : " + groundHeight);
         this.terrainGen = new TerrainGen(groundHeight);
-
-        //set up active branch
-        this.activeBranch = new ActiveBranch(this);
     }
 
     public Branch loadBranch(long key, int depth){
@@ -37,5 +34,9 @@ public class World{
         terrainGen.generateBranch(branch, key, depth);
 
         return branch;
+    }
+
+    public ActiveArea getActiveArea(){
+        return this.activeArea;
     }
 }

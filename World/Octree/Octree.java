@@ -1,4 +1,4 @@
-package World.DataStorage.Octree;
+package World.Octree;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Octree

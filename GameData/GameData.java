@@ -1,10 +1,12 @@
 package GameData;
 
 import GUI.Menus.Menu;
-import World.DataStorage.Octree.Octree;
+import World.ActiveBranch.ActiveArea;
+import World.Octree.Octree;
+import World.World;
 
 public class GameData {
-
+    public WorldUpdate worldUpdates = new WorldUpdate();
     public long playerXCamCor = 0;
     public long playerYCamCor = 0;
     public long playerZCamCor = 0;
@@ -35,11 +37,8 @@ public class GameData {
      *  World
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
-
-    public Octree octree;
-
-
-
+    public static World world = new World();
+    public static ActiveArea activeArea = new ActiveArea(world, 576460750000000000L, 7);
     public String SaveDirectory = "World/DataStorage/Octree/SaveData";
-
+    public int currentBlock = 1;
 }

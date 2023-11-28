@@ -1,4 +1,4 @@
-package World.DataStorage.Octree;
+package World.Octree;
 
 import static java.lang.Long.toBinaryString;
 

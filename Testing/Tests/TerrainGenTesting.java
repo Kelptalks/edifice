@@ -1,7 +1,7 @@
 package Testing.Tests;
 
-import World.DataStorage.Octree.KeyMod;
-import World.DataStorage.Octree.Leaf;
+import World.Octree.KeyMod;
+import World.Octree.Leaf;
 import World.TerrainGen.TerrainGen;
 
 public class TerrainGenTesting {
