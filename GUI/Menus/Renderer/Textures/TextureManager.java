@@ -16,9 +16,8 @@ import javax.imageio.ImageIO;
 public class TextureManager {
 
     private BufferedImage [][]blockTextures = new BufferedImage[15][6];
-    private String blockFilePaths[] = {null, "Textures/1.png", "Textures/2.png", "Textures/3.png"
-    , "Textures/4.png", "Textures/5.png", "Textures/6.png", "Textures/7.png", "Textures/8.png", "Textures/9.png"
-    , "Textures/10.png", "Textures/11.png"};
+    private String blockFilePaths[] = {null, "edifice/Textures/1.png", "edifice/Textures/2.png", "edifice/Textures/3.png", "edifice/Textures/4.png", "edifice/Textures/5.png"
+    , "edifice/Textures/6.png", "edifice/Textures/7.png", "edifice/Textures/8.png", "edifice/Textures/9.png", "edifice/Textures/10.png", "edifice/Textures/11.png"};
 
     public TextureManager(){
         for (int x = 1; x < blockFilePaths.length; x++){

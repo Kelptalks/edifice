@@ -14,7 +14,7 @@ import java.awt.*;
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
  */
-public class GUI extends JFrame {
+public class GUI extends JFrame{
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Constructor
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -68,5 +68,4 @@ public class GUI extends JFrame {
         this.revalidate();
         this.repaint();
     }
-
 }

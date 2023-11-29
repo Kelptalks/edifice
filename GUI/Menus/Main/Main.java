@@ -2,6 +2,7 @@ package GUI.Menus.Main;
 import GUI.GUI;
 import GUI.Menus.Menu;
 import GameData.GameData;
+import MainLoop.MainLoop;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +36,10 @@ public class Main extends JPanel implements Menu {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Start game logic thread
+                Thread gameThread = new Thread(new MainLoop(gameData));
+                gameThread.start();
+                //Start renderer
                 GUI.setMenu("renderer");
             }
         });
@@ -49,6 +54,7 @@ public class Main extends JPanel implements Menu {
         tests.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Start rendering thread
                 GUI.setMenu("VisualTester");
             }
         });
