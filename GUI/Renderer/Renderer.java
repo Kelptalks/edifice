@@ -1,10 +1,9 @@
-package GUI.Menus.Renderer;
-
-import GUI.Menus.Menu;
-import GUI.Menus.Renderer.Controls.KeyBoardInputs;
-import GUI.Menus.Renderer.Controls.MouseInputs;
-import GUI.Menus.Renderer.Effects.Effects;
-import GUI.Menus.Renderer.raycastRendering.RaycastRenderer;
+package GUI.Renderer;
+import GUI.Renderer.Controls.KeyBoardInputs;
+import GUI.Renderer.Controls.MouseInputs;
+import GUI.Renderer.Controls.MouseMotionInputs;
+import GUI.Renderer.Effects.Effects;
+import GUI.Renderer.raycastRendering.RaycastRenderer;
 import GameData.GameData;
 
 import javax.swing.*;
@@ -17,7 +16,7 @@ import java.awt.event.ActionListener;
  *  Manages the rendering of the
  *  the actual game.
  */
-public class Renderer extends JPanel implements Menu {
+public class Renderer extends JPanel{
     private RaycastRenderer rayCaster;
     private Effects effects;
     private GameData gameData;
@@ -31,6 +30,7 @@ public class Renderer extends JPanel implements Menu {
         this.setFocusable(true); //set the focus
         this.addMouseListener(new MouseInputs(gameData, rayCaster));
         this.addKeyListener(new KeyBoardInputs(gameData, rayCaster));
+        this.addMouseMotionListener(new MouseMotionInputs(gameData, effects));
 
         //Start rendering loop
         startRenderLoop();
@@ -43,7 +43,7 @@ public class Renderer extends JPanel implements Menu {
      */
 
     private void startRenderLoop(){
-        int delay = 16; // milliseconds
+        int delay = 0; // milliseconds
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 rayCaster.rayCast();
@@ -64,14 +64,8 @@ public class Renderer extends JPanel implements Menu {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
-        g2D.drawImage(rayCaster, -15, -15, this); // Assuming rayCaster is a BufferedImage
-        g2D.drawImage(effects, -15, -15, this); // Assuming rayCaster is a BufferedImage
-    }
-
-    //sets this object as the current menu
-    @Override
-    public void setCurrentMenu(){
-        gameData.menu = this;
+        g2D.drawImage(rayCaster, -30, -15, this); // Assuming rayCaster is a BufferedImage
+        g2D.drawImage(effects, 0, 0, this); // Assuming rayCaster is a BufferedImage
     }
 
 }

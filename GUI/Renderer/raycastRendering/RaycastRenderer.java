@@ -1,8 +1,7 @@
-package GUI.Menus.Renderer.raycastRendering;
+package GUI.Renderer.raycastRendering;
 
 import GameData.GameData;
 import World.ActiveBranch.ActiveArea;
-import World.World;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -21,8 +20,9 @@ public class RaycastRenderer extends BufferedImage {
     private CastedBlock[][] castedBlocks;
 
     public RaycastRenderer(GameData gameData) {
-        super(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ, TYPE_4BYTE_ABGR_PRE);
-        this.drawingManager = new GridDrawingManager(gameData ,gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ);
+        super(gameData.SCREEN_X_REZ + 30, gameData.SCREEN_Y_REZ + 15, TYPE_4BYTE_ABGR_PRE);
+        this.drawingManager = new GridDrawingManager(gameData ,gameData.SCREEN_X_REZ + 30, gameData.SCREEN_Y_REZ + 15);
+
         this.gameData = gameData;
         this.world = gameData.activeArea;
         updateCulledCoordMods();

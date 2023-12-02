@@ -2,6 +2,8 @@ package World.Octree;
 
 
 
+import GameData.GameData;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -16,6 +18,7 @@ public class Branch implements Serializable {
 
     private String file;
     private final int depth;
+    private GameData gameData;
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Constructor
@@ -23,7 +26,7 @@ public class Branch implements Serializable {
      * initialized the correct array-based
      * depth, depths below 4 are leaf branches
      */
-    public Branch(int depth){
+    public Branch(GameData gameData, int depth){
         this.depth = depth;
         if (depth == 4){
             this.leaves = new Leaf[8];
@@ -83,30 +86,30 @@ public class Branch implements Serializable {
         if (depth > 4){
             //generate branch if the branch is empty
             if (branches[index] == null){
-                branches[index] = new Branch(this.depth - 1);
+                branches[index] = new Branch(gameData, this.depth - 1);
             }
             return branches[index].getLeaf(key);
         }
 
         else if (depth == 4) {
             if (leaves[index] == null){
-                leaves[index] = new Leaf();
+                leaves[index] = new Leaf(gameData);
             }
             return leaves[index];
         }
         return null;
     }
 
-    public void fillLeaves(){
+    public void fillLeaves(int block){
         if (this.depth > 4){
             for(Branch branch : branches){
-                branch.fillLeaves();
+                branch.fillLeaves(block);
             }
         }
 
         else if (depth == 4) {
             for (Leaf leaf : leaves){
-                leaf.fill(4);
+                leaf.fill(block);
             }
         }
     }

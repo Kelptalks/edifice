@@ -1,5 +1,6 @@
 package World.ActiveBranch;
 
+import GameData.GameData;
 import World.Octree.Branch;
 import World.Octree.KeyMod;
 import World.Octree.Octree;
@@ -105,7 +106,7 @@ public class ActiveArea {
     private long branchDimension;
     private long branchCenterKey;
     private void setBranchDimension() {
-        Octree octree = new Octree(0);
+        Octree octree = new Octree(new GameData(), 0);
         branchDimension = octree.getDimension(branchLoadingScale) / 2;
         branchCenterKey = keyMod.getRelativeKey(0, branchLoadingScale, branchDimension, branchDimension, branchDimension);
     }
@@ -133,6 +134,10 @@ public class ActiveArea {
 
     public void setBlock(long key, int block){
         activeBranches[1][1][1].setBlock(key, block);
+    }
+
+    public int getBlock(long key) {
+        return activeBranches[1][1][1].getBlock(key);
     }
 }
 

@@ -1,5 +1,6 @@
 package World;
 
+import GameData.GameData;
 import World.ActiveBranch.ActiveArea;
 import World.ActiveBranch.ActiveBranch;
 import World.Octree.Branch;
@@ -17,10 +18,10 @@ public class World{
     private Octree octree;
     private TerrainGen terrainGen;
 
-    public World(){
+    public World(GameData gameData){
         //set up Octree
         int depth = 20;
-        this.octree = new Octree(depth);
+        this.octree = new Octree(gameData, depth);
 
         //set up terrain generation
         long groundHeight = octree.getDimension(depth);

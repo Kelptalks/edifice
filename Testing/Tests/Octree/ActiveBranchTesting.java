@@ -1,5 +1,6 @@
 package Testing.Tests.Octree;
 
+import GameData.GameData;
 import World.ActiveBranch.ActiveBranch;
 import World.World;
 
@@ -17,7 +18,7 @@ public class ActiveBranchTesting {
     }
 
     public void testDirectionalLoading(){
-        ActiveBranch activeBranch = new ActiveBranch(new World());
+
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

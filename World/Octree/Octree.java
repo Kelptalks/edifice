@@ -17,6 +17,8 @@ package World.Octree;
  *
  */
 
+import GameData.GameData;
+
 import java.util.Timer;
 
 import static java.lang.Integer.toBinaryString;
@@ -28,9 +30,11 @@ public class Octree {
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *
      */
-    public Octree(int depth){
+    private GameData gameData;
+    public Octree(GameData gameData, int depth){
         this.depth = depth;
-        this.root = new Branch(depth);
+        this.gameData = gameData;
+        this.root = new Branch(gameData, depth);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -82,7 +86,7 @@ public class Octree {
             //generate a branch if null
             if (branch.getBranch(index) == null){
                 //System.out.println("Generating Branch at depth: " + currentDepth + " | index : " + index);
-                branch.setBranch(new Branch(currentDepth), index);
+                branch.setBranch(new Branch(gameData, currentDepth), index);
             }
 
             //return the branch with that key
@@ -98,7 +102,7 @@ public class Octree {
         //if the branches depth on branch level
         if (branch.getDepth() > 4){
             for (int x = 0; x < nodeSize; x++){
-                Branch newBranch = new Branch(currentDepth - 1);
+                Branch newBranch = new Branch(gameData,currentDepth - 1);
                 populate(newBranch);
                 branch.setBranch(newBranch, x);
             }
@@ -107,7 +111,7 @@ public class Octree {
         //if the branches depth is on leave level
         if (branch.getDepth() == 4){
             for (int x = 0; x < nodeSize; x++) {
-                Leaf newLeaf = new Leaf();
+                Leaf newLeaf = new Leaf(gameData);
                 branch.setLeaf(newLeaf, x);
             }
         }

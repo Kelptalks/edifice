@@ -55,9 +55,9 @@ public class ActiveBranch{
      * and intertwine with a link list
      */
 
-    public ActiveBranch(World world){
-        this.octree = new Octree(20);
-        this.activeArea = new ActiveArea(world, 576460750000000000L, branchLoadingScale);
+    public ActiveBranch(GameData gameData){
+        this.octree = new Octree(gameData, 20);
+        this.activeArea = new ActiveArea(gameData.world, 576460750000000000L, branchLoadingScale);
     }
 
     //return a block relative to the center of the core

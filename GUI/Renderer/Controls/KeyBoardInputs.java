@@ -1,6 +1,6 @@
-package GUI.Menus.Renderer.Controls;
+package GUI.Renderer.Controls;
 
-import GUI.Menus.Renderer.raycastRendering.RaycastRenderer;
+import GUI.Renderer.raycastRendering.RaycastRenderer;
 import GameData.GameData;
 
 import java.awt.event.KeyEvent;

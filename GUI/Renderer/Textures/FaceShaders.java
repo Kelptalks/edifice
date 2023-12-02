@@ -1,4 +1,4 @@
-package GUI.Menus.Renderer.Textures;
+package GUI.Renderer.Textures;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

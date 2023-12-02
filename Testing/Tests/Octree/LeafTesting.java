@@ -18,7 +18,7 @@ public class LeafTesting {
     }
 
     public void testSetAndGetBlock(){
-        Leaf leaf = new Leaf();
+        Leaf leaf = new Leaf(new GameData());
         for (int x = 0; x < 4095; x++){
             leaf.setBlock(x, 3);
         }

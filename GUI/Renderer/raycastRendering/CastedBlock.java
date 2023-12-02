@@ -1,4 +1,4 @@
-package GUI.Menus.Renderer.raycastRendering;
+package GUI.Renderer.raycastRendering;
 
 public class CastedBlock {
 

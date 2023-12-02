@@ -23,10 +23,10 @@ public class TerrainGen{
     KeyMod keyMod = new KeyMod();
 
     public void generateBranch(Branch branch, long key, int depth){
-        branch.getBranch(4).fillLeaves();
-        branch.getBranch(5).fillLeaves();
-        branch.getBranch(6).fillLeaves();
-        branch.getBranch(7).fillLeaves();
+        branch.getBranch(4).fillLeaves(2);
+        branch.getBranch(5).fillLeaves(2);
+        branch.getBranch(6).fillLeaves(2);
+        branch.getBranch(7).fillLeaves(2);
 
         Random random = new Random();
         for (int x = -200; x < 200; x++){
@@ -34,6 +34,13 @@ public class TerrainGen{
                 if (random.nextInt(0, 200) == 0){
                     genTree(branch, x, y);
                 }
+            }
+        }
+
+        long root = (long) Math.pow(8, 2L << branch.getDepth());
+        for (int x = -200; x < 200; x++){
+            for (int y = -200; y < 200; y++){
+                branch.setBlock(keyMod.getRelativeKey(root, 0, x, y, 0), 4);
             }
         }
     }
@@ -46,13 +53,9 @@ public class TerrainGen{
 
     public void genCuboid(long x, long y, long z, long width, long height){
 
-
-
     }
 
     public void genSphere(long x, long y, long z, long width, long height){
-
-
 
     }
 
@@ -63,7 +66,7 @@ public class TerrainGen{
      */
 
     public void genTree(Branch branch, int x, int y){
-        long root =(long) Math.pow(8, 2L << branch.getDepth());
+        long root = (long) Math.pow(8, 2L << branch.getDepth());
         root = keyMod.getRelativeKey(root, 0, 10 + x, +10 + y, 1);
         Random random = new Random();
 
