@@ -1,7 +1,7 @@
 package GUI;
 
+import GUI.IsoRenderer.IsoRenderer;
 import GUI.PlayerConrolMenu.PlayerControlMenu;
-import GUI.Renderer.Renderer;
 import GameData.GameData;
 
 import javax.swing.*;
@@ -30,14 +30,14 @@ public class GUI extends JFrame{
         this.setLayout(new BorderLayout());
 
         //Set renderer
-        Renderer renderer = new Renderer(gameData);
+        IsoRenderer isoRenderer = new IsoRenderer(gameData);
         PlayerControlMenu playerControlMenu = new PlayerControlMenu(gameData);
 
         // Add components to layout
         this.add(playerControlMenu, BorderLayout.WEST);
-        this.add(renderer, BorderLayout.EAST);
+        this.add(isoRenderer, BorderLayout.EAST);
         this.pack();
-
         this.setVisible(true);
+        isoRenderer.run();
     }
 }

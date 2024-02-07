@@ -8,8 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PlayerControlMenu extends JPanel {
-    private MenuVisuals visuals = new MenuVisuals(100, 1080);
+    private MenuVisuals visuals;
     public PlayerControlMenu(GameData gameData){
+        visuals = new MenuVisuals(gameData,100, 1080);
         this.setPreferredSize(new Dimension(100, 1080));
         this.addMouseListener(new PlayerMouseInputs());
     }

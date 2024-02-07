@@ -1,5 +1,7 @@
 package GUI.PlayerConrolMenu.Visuals;
 
+import GameData.GameData;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.BasicStroke;
@@ -7,8 +9,10 @@ import java.awt.BasicStroke;
 public class MenuVisuals extends BufferedImage {
 
     private Graphics graphics = (Graphics2D) this.getGraphics();
-    public MenuVisuals(int width, int height) {
+    private GameData gameData;
+    public MenuVisuals(GameData gameData, int width, int height) {
         super(width, height, TYPE_4BYTE_ABGR_PRE);
+        this.gameData = gameData;
         setUp();
     }
 
@@ -24,7 +28,6 @@ public class MenuVisuals extends BufferedImage {
 
         // Draw the text
         graphics.drawString("Edifice", 10, 20);
-
     }
 
     private void drawButton(){
