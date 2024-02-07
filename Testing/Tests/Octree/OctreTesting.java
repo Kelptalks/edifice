@@ -1,6 +1,7 @@
 package Testing.Tests.Octree;
-import World.DataStorage.Octree.Branch;
-import World.DataStorage.Octree.Octree;
+import GameData.GameData;
+import World.Octree.Branch;
+import World.Octree.Octree;
 
 import java.util.Arrays;
 
@@ -33,7 +34,7 @@ public class OctreTesting {
     }
 
     public void testPopulate(){
-        Octree octree = new Octree(9);
+        Octree octree = new Octree(new GameData(), 9);
         octree.populate(octree.getRoot());
         System.out.println("-(pass) populate test");
     }
@@ -47,7 +48,7 @@ public class OctreTesting {
      */
     public void testLoadBranch() {
         //setUp
-        Octree octree = new Octree(9);
+        Octree octree = new Octree(new GameData(), 9);
         octree.populate(octree.getRoot());
         int key = 293823232;
         int depth = 5;
@@ -81,7 +82,7 @@ public class OctreTesting {
      */
     public void testSavingBranch(){
         //setup
-        Octree octree = new Octree(7);
+        Octree octree = new Octree(new GameData(), 7);
         octree.populate(octree.getRoot());
         String fileName = "test";
         boolean unloadedTest = false;

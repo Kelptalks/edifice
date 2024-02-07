@@ -1,6 +1,6 @@
 package Testing.Tests.Octree;
 
-import World.DataStorage.Octree.KeyMod;
+import World.Octree.KeyMod;
 
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

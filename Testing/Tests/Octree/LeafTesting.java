@@ -1,6 +1,7 @@
 package Testing.Tests.Octree;
 
-import World.DataStorage.Octree.Leaf;
+import GameData.GameData;
+import World.Octree.Leaf;
 
 public class LeafTesting {
 
@@ -17,7 +18,7 @@ public class LeafTesting {
     }
 
     public void testSetAndGetBlock(){
-        Leaf leaf = new Leaf();
+        Leaf leaf = new Leaf(new GameData());
         for (int x = 0; x < 4095; x++){
             leaf.setBlock(x, 3);
         }

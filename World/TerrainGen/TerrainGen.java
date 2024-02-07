@@ -1,9 +1,9 @@
 package World.TerrainGen;
 
-import World.DataStorage.Octree.Branch;
-import World.DataStorage.Octree.KeyMod;
-import World.DataStorage.Octree.Leaf;
-import World.DataStorage.Octree.Octree;
+import World.Octree.Branch;
+import World.Octree.KeyMod;
+import World.Octree.Leaf;
+import World.Octree.Octree;
 
 import java.awt.*;
 import java.util.Random;
@@ -23,10 +23,10 @@ public class TerrainGen{
     KeyMod keyMod = new KeyMod();
 
     public void generateBranch(Branch branch, long key, int depth){
-        branch.getBranch(4).fillLeaves();
-        branch.getBranch(5).fillLeaves();
-        branch.getBranch(6).fillLeaves();
-        branch.getBranch(7).fillLeaves();
+        branch.getBranch(4).fillLeaves(2);
+        branch.getBranch(5).fillLeaves(2);
+        branch.getBranch(6).fillLeaves(2);
+        branch.getBranch(7).fillLeaves(2);
 
         Random random = new Random();
         for (int x = -200; x < 200; x++){
@@ -37,11 +37,25 @@ public class TerrainGen{
             }
         }
 
-        System.out.println(branch.getLeafCount());
+        long root = (long) Math.pow(8, 2L << branch.getDepth());
+        for (int x = -200; x < 200; x++){
+            for (int y = -200; y < 200; y++){
+                branch.setBlock(keyMod.getRelativeKey(root, 0, x, y, 0), 4);
+            }
+        }
+    }
 
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Shape generation
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * generating basic shapes
+     */
 
-        //branch.setBlock(root, 7);
+    public void genCuboid(long x, long y, long z, long width, long height){
 
+    }
+
+    public void genSphere(long x, long y, long z, long width, long height){
 
     }
 
@@ -50,8 +64,9 @@ public class TerrainGen{
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * generate a tree
      */
+
     public void genTree(Branch branch, int x, int y){
-        long root =(long) Math.pow(8, 2L << branch.getDepth());
+        long root = (long) Math.pow(8, 2L << branch.getDepth());
         root = keyMod.getRelativeKey(root, 0, 10 + x, +10 + y, 1);
         Random random = new Random();
 

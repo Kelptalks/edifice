@@ -1,45 +1,42 @@
 package GameData;
 
-import GUI.Menus.Menu;
-import World.DataStorage.Octree.Octree;
+import GUI.IsoRenderer.GridManager.CastedBlock;
+import GUI.IsoRenderer.GridManager.CastedBlockCuller;
+import MainLoop.TikManager.TikManager;
+import World.ActiveBranch.ActiveArea;
+import World.Octree.KeyMod;
+import World.World;
 
 public class GameData {
+    public long playerCamKey = 576460750000000000L;
+    public KeyMod keyMod = new KeyMod();
 
-    public long playerXCamCor = 0;
-    public long playerYCamCor = 0;
-    public long playerZCamCor = 0;
-
-    public boolean block = false;
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Menu
-     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     */
-    public Menu menu;
+    public Block[] blocks = Block.values();
+    public int currentBlock = 1;
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Screen rez
+     *  Render Settings
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
     public int SCREEN_X_REZ = 1920;
     public int SCREEN_Y_REZ = 1080;
-
-    //draw distance
-    public int drawDistance = 150;
-
-    //Render Size
-    public int xCamRez = 29;
-    public int yCamRez = 61;
+    public int drawDistance = 1000;
+    public int xCamRez = SCREEN_X_REZ/64;
+    public int yCamRez = SCREEN_Y_REZ/16;
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  World
+     *  Game state
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
+    public long worldCenter = 576460750000000000L;
+    public TikManager tikManager = new TikManager();
 
-    public Octree octree;
+    public World world;
+    public ActiveArea activeArea;
 
-
-
-    public String SaveDirectory = "World/DataStorage/Octree/SaveData";
-
+    //set up the world info
+    public void setUpWorld(){
+        this.world = new World(this);
+        activeArea = new ActiveArea(world, worldCenter, 7);
+    }
 }
