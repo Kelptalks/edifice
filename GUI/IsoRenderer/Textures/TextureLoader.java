@@ -15,6 +15,10 @@ public class TextureLoader {
         return loadSpriteSheet("edifice/Textures/solidBlocks.png");
     }
 
+    public Image loadFilters() {
+        return loadSpriteSheet("edifice/Textures/filters.png");
+    }
+
     //Sprite sheet loader
     public Image loadSpriteSheet(String filePath){
         try {
@@ -26,5 +30,9 @@ public class TextureLoader {
             System.out.println("Failed to Load Textures");
             return null;
         }
+    }
+
+    public Image loadmasks() {
+        return loadSpriteSheet("edifice/Textures/masks.png");
     }
 }

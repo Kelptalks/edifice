@@ -1,15 +1,11 @@
 package GUI.IsoRenderer;
 
-import GUI.IsoRenderer.GridManager.CastedBlock;
-import GUI.IsoRenderer.GridManager.CastedBlockCuller;
-import GUI.IsoRenderer.GridManager.GridManager;
-import GUI.IsoRenderer.RayCaster.RayCaster;
+import GUI.IsoRenderer.Camera.GridManager.Structure.CastedBlock;
+import GUI.IsoRenderer.Camera.GridManager.GridManager;
 import GUI.IsoRenderer.Textures.NewTextureManager;
-import GUI.IsoRenderer.Textures.Texture;
 import GameData.Block;
 import GameData.GameData;
 
-import javax.swing.plaf.synth.SynthStyle;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -17,50 +13,25 @@ public class Canvas extends BufferedImage {
 
 
     private final GameData gameData;
+    private final GridManager gridManager;
     private Graphics graphics; //Drawing tool from awt
-    private GridManager gridManager;
     private NewTextureManager textureManager;
-    private RayCaster rayCaster;
-    private CastedBlockCuller castedBlockCuller;
-    private CastedBlock[][] castedBlocks;
-    public Canvas(GameData gameData, int xRez, int yRez) {
+    public Canvas(GameData gameData, GridManager gridManager, int xRez, int yRez) {
         super(xRez, yRez, TYPE_4BYTE_ABGR_PRE);
         this.gameData = gameData;
+
         this.graphics = super.getGraphics();
-        this.gridManager = new GridManager();
+        this.gridManager = gridManager;
         this.textureManager = new NewTextureManager(gridManager);
-        this.rayCaster = new RayCaster(gameData);
-        this.castedBlockCuller = new CastedBlockCuller(gameData);
-        this.castedBlocks = castedBlockCuller.getCulledCordMods(gameData.xCamRez, gameData.yCamRez);
-
-
     }
 
 
     //Renders a frame
-    private int temp = 1;
-    public void renderFrame() {
-
+    public void renderFrame(CastedBlock[][] castedBlocks) {
         //Clear the frame
         graphics.setColor(Color.CYAN);
         graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
-
-        long t1 = System.nanoTime();
-        rayCaster.castBlocks(castedBlocks);
-
-
         drawCastedBlocks(castedBlocks);
-        long t2 = System.nanoTime();
-
-        this.castedBlocks = castedBlockCuller.getCulledCordMods(gameData.xCamRez, gameData.yCamRez);
-
-        gameData.playerCamKey = gameData.keyMod.getRelativeKey(gameData.playerCamKey, 0, 0, 0, 0);
-
-        Image tmp = this.getScaledInstance(1920, 1080 - temp, Image.SCALE_SMOOTH);
-
-        temp++;
-        System.out.println((t2 - t1) / 1000000);
-
     }
 
 
@@ -74,19 +45,39 @@ public class Canvas extends BufferedImage {
 
     public void drawCastedBlock(CastedBlock castedBlock){
         Block[] blockType = castedBlock.getBlockType();
-        int[] drawCords = gridManager.IsoToScreen(castedBlock.getIsoScreenCords());
+        int[] drawCords = gridManager.isoToScreen(castedBlock.getIsoScreenCords());
 
         Image leftTri = textureManager.getTexture(blockType[0], castedBlock.getLeftTexture());
         Image rightTri = textureManager.getTexture(blockType[1], castedBlock.getRightTexture());
 
         graphics.drawImage(leftTri, drawCords[0], drawCords[1], null);
         graphics.drawImage(rightTri, drawCords[0] + 32, drawCords[1], null);
+
+
+        graphics.setColor(Color.WHITE);
+
+        if ((inputScreenCor[0] / 32)%2 == 0){
+            graphics.drawPolygon(gridManager.getLeftTriangle(screenCor[0], screenCor[1]));
+        }
+        else {
+            graphics.drawPolygon(gridManager.getRightTriangle(screenCor[0] + 32, screenCor[1]));
+        }
     }
 
-    public void drawPoint(int xCor, int yCor){
-        graphics.setColor(Color.RED);
+    private int[] screenCor = new int[]{0, 0};
+    private int[] inputScreenCor = new int[]{0, 0};
+    public void test(int x, int y) {
+        inputScreenCor = new int[]{x, y};
+        int[] isoCords = gridManager.ScreenToIso(x, y);
+        this.screenCor = gridManager.isoToScreen(isoCords);
+    }
+
+    public void drawPoint(int xCor, int yCor) {
         graphics.fillOval(xCor, yCor, 5, 5);
-        String cords = "(" + xCor + ", " + yCor + ")";
+
+        int[] iso = gridManager.ScreenToIso(xCor, yCor);
+
+        String cords = "(" + iso[0] + ", " + iso[1] + ")";
         graphics.drawString(cords, xCor + 3, yCor);
     }
 }

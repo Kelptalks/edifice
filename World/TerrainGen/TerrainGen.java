@@ -2,8 +2,7 @@ package World.TerrainGen;
 
 import World.Octree.Branch;
 import World.Octree.KeyMod;
-import World.Octree.Leaf;
-import World.Octree.Octree;
+import GameData.Block;
 
 import java.awt.*;
 import java.util.Random;
@@ -23,10 +22,10 @@ public class TerrainGen{
     KeyMod keyMod = new KeyMod();
 
     public void generateBranch(Branch branch, long key, int depth){
-        branch.getBranch(4).fillLeaves(2);
-        branch.getBranch(5).fillLeaves(2);
-        branch.getBranch(6).fillLeaves(2);
-        branch.getBranch(7).fillLeaves(2);
+        branch.getBranch(4).fillLeaves(Block.Stone.id);
+        branch.getBranch(5).fillLeaves(Block.Stone.id);
+        branch.getBranch(6).fillLeaves(Block.Stone.id);
+        branch.getBranch(7).fillLeaves(Block.Stone.id);
 
         Random random = new Random();
         for (int x = -200; x < 200; x++){
@@ -38,9 +37,9 @@ public class TerrainGen{
         }
 
         long root = (long) Math.pow(8, 2L << branch.getDepth());
-        for (int x = -200; x < 200; x++){
-            for (int y = -200; y < 200; y++){
-                branch.setBlock(keyMod.getRelativeKey(root, 0, x, y, 0), 4);
+        for (int x = -400; x < 400; x++){
+            for (int y = -400; y < 400; y++){
+                branch.setBlock(keyMod.getRelativeKey(root, 0, x, y, 0), Block.Grass);
             }
         }
     }
@@ -74,7 +73,7 @@ public class TerrainGen{
 
 
         for (int z = 0; z < height; z++){
-            branch.setBlock(keyMod.getRelativeKey(root, 0, 0, 0, z), 5);
+            branch.setBlock(keyMod.getRelativeKey(root, 0, 0, 0, z), Block.Log.id);
             //branch generation
             if (height > 8 && z == 5){
                 int xMod = 0;
@@ -87,9 +86,9 @@ public class TerrainGen{
                     xMod *= -1;
                     yMod *= -1;
                 }
-                branch.setBlock(keyMod.getRelativeKey(root, 0, yMod, xMod, z), 5);
-                branch.setBlock(keyMod.getRelativeKey(root, 0, yMod * 2, xMod * 2, z), 5);
-                branch.setBlock(keyMod.getRelativeKey(root, 0, yMod * 2, xMod * 2, z + 1), 5);
+                branch.setBlock(keyMod.getRelativeKey(root, 0, yMod, xMod, z), Block.Log.id);
+                branch.setBlock(keyMod.getRelativeKey(root, 0, yMod * 2, xMod * 2, z), Block.Log.id);
+                branch.setBlock(keyMod.getRelativeKey(root, 0, yMod * 2, xMod * 2, z + 1), Block.Log.id);
                 genTreeTop(branch, keyMod.getRelativeKey(root, 0, yMod * 2, xMod * 2, z + 1));
             }
         }
@@ -101,11 +100,11 @@ public class TerrainGen{
     }
 
     public void genTreeTop(Branch branch, long key){
-        branch.setBlock(keyMod.modAxis(key, 0, 0, -1), 7);
-        branch.setBlock(keyMod.modAxis(key, 0, 0, 1), 7);
-        branch.setBlock(keyMod.modAxis(key, 0, 1, -1), 7);
-        branch.setBlock(keyMod.modAxis(key, 0, 1, 1), 7);
-        branch.setBlock(keyMod.modAxis(key, 0, 2, 1), 7);
+        branch.setBlock(keyMod.modAxis(key, 0, 0, -1), Block.Leaf);
+        branch.setBlock(keyMod.modAxis(key, 0, 0, 1), Block.Leaf);
+        branch.setBlock(keyMod.modAxis(key, 0, 1, -1), Block.Leaf);
+        branch.setBlock(keyMod.modAxis(key, 0, 1, 1), Block.Leaf);
+        branch.setBlock(keyMod.modAxis(key, 0, 2, 1), Block.Leaf);
     }
 
 }

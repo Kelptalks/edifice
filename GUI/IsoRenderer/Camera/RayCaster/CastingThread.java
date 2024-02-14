@@ -1,6 +1,6 @@
-package GUI.IsoRenderer.RayCaster;
+package GUI.IsoRenderer.Camera.RayCaster;
 
-import GUI.IsoRenderer.GridManager.CastedBlock;
+import GUI.IsoRenderer.Camera.GridManager.Structure.CastedBlock;
 
 public class CastingThread implements Runnable{
     private RayCaster rayCaster;
@@ -14,5 +14,6 @@ public class CastingThread implements Runnable{
     public void run() {
         rayCaster.castLeft(castedBlock);
         rayCaster.castRight(castedBlock);
+        rayCaster.castRightShadow(castedBlock);
     }
 }

@@ -3,6 +3,7 @@ package World.Octree;
 import GameData.GameData;
 import World.BlockEntity.BlockEntity;
 import World.BlockEntity.Terp.Terp;
+import GameData.Block;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,7 +55,8 @@ public class Leaf implements Serializable{
         int arrayIndex = (key & 0xFFF) >> 3;
         int bitIndex = key & 7;
         leafs[arrayIndex] = (leafs[arrayIndex] & ~(0xFFL << (bitIndex * BITS_PER_BLOCK))) | ((blockType & 0xFFL) << (bitIndex * BITS_PER_BLOCK));
-        if (blockType == 11){
+
+        if (gameData.blocks[blockType] == Block.LBM){
             blockEntities.add(new Terp(gameData, key));
         }
     }

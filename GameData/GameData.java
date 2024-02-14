@@ -1,7 +1,5 @@
 package GameData;
 
-import GUI.IsoRenderer.GridManager.CastedBlock;
-import GUI.IsoRenderer.GridManager.CastedBlockCuller;
 import MainLoop.TikManager.TikManager;
 import World.ActiveBranch.ActiveArea;
 import World.Octree.KeyMod;
@@ -9,6 +7,9 @@ import World.World;
 
 public class GameData {
     public long playerCamKey = 576460750000000000L;
+
+    public int canvasXOffSet = 0;
+    public int canvasYOffSet = 0;
     public KeyMod keyMod = new KeyMod();
 
     public Block[] blocks = Block.values();
@@ -21,8 +22,8 @@ public class GameData {
     public int SCREEN_X_REZ = 1920;
     public int SCREEN_Y_REZ = 1080;
     public int drawDistance = 1000;
-    public int xCamRez = SCREEN_X_REZ/64;
-    public int yCamRez = SCREEN_Y_REZ/16;
+    public int xCamRez = SCREEN_X_REZ/64 * 2;
+    public int yCamRez = SCREEN_Y_REZ/16 * 2;
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Game state
