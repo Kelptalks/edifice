@@ -6,6 +6,7 @@ import GameData.GameData;
 
 import java.io.*;
 import java.util.Scanner;
+import GameData.Block;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Branch class
@@ -142,6 +143,10 @@ public class Branch implements Serializable {
         else if (depth == 4) {
             leaves[index].setBlock((int) key, block);
         }
+    }
+
+    public void setBlock(long key, Block block){
+        setBlock(key, block.id);
     }
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Tools

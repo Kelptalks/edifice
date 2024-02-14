@@ -1,7 +1,6 @@
 package GUI;
 
 import GUI.IsoRenderer.IsoRenderer;
-import GUI.PlayerConrolMenu.PlayerControlMenu;
 import GameData.GameData;
 
 import javax.swing.*;
@@ -27,15 +26,12 @@ public class GUI extends JFrame{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Telp");
 
-        this.setLayout(new BorderLayout());
+
 
         //Set renderer
         IsoRenderer isoRenderer = new IsoRenderer(gameData);
-        PlayerControlMenu playerControlMenu = new PlayerControlMenu(gameData);
-
         // Add components to layout
-        this.add(playerControlMenu, BorderLayout.WEST);
-        this.add(isoRenderer, BorderLayout.EAST);
+        this.add(isoRenderer);
         this.pack();
         this.setVisible(true);
         isoRenderer.run();

@@ -4,7 +4,7 @@ import GameData.GameData;
 import World.Octree.Branch;
 import World.Octree.KeyMod;
 import World.Octree.Octree;
-import World.World;
+import GameData.Block;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  ActiveBranch
@@ -45,6 +45,7 @@ public class ActiveBranch{
     private Octree octree;
 
     private ActiveArea activeArea;
+    private GameData gameData;
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Constructor
@@ -56,6 +57,7 @@ public class ActiveBranch{
      */
 
     public ActiveBranch(GameData gameData){
+        this.gameData = gameData;
         this.octree = new Octree(gameData, 20);
         this.activeArea = new ActiveArea(gameData.world, 576460750000000000L, branchLoadingScale);
     }
@@ -67,6 +69,10 @@ public class ActiveBranch{
 
     public void setBlock(long xCor, long yCor, long zCor, int BlockType){
         activeArea.setBlock(xCor, yCor, zCor, BlockType);
+    }
+
+    public void setBlock(long xCor, long yCor, long zCor, Block block){
+        activeArea.setBlock(xCor, yCor, zCor, block.id);
     }
 
 }

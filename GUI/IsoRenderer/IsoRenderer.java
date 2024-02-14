@@ -1,5 +1,12 @@
 package GUI.IsoRenderer;
 
+import GUI.IsoRenderer.Camera.Camera;
+import GUI.IsoRenderer.Camera.CameraData;
+import GUI.IsoRenderer.Controls.PlayerMouseInputs;
+import GUI.IsoRenderer.Camera.GridManager.Structure.CastedBlock;
+import GUI.IsoRenderer.Camera.GridManager.Structure.CastedBlockCuller;
+import GUI.IsoRenderer.Camera.GridManager.GridManager;
+import GUI.IsoRenderer.Camera.RayCaster.RayCaster;
 import GameData.GameData;
 
 import javax.swing.*;
@@ -16,8 +23,29 @@ import java.awt.*;
 public class IsoRenderer extends JPanel implements Runnable {
 
     private Canvas canvas;
+    private CastedBlockCuller castedBlockCuller;
+    private CastedBlock[][] castedBlocks;
+    private RayCaster rayCaster;
+    private GridManager gridManager;
+    private GameData gameData;
+    private CameraData cameraData;
+    private Camera camera;
+
+    private PlayerMouseInputs playerMouseInputs;
     public IsoRenderer(GameData gameData){
-        this.canvas = new Canvas(gameData,1920, 1080);
+        this.gameData = gameData;
+
+        this.castedBlockCuller = new CastedBlockCuller(gameData);
+        this.castedBlocks = castedBlockCuller.getCulledCordMods(gameData.xCamRez, gameData.yCamRez);
+        this.rayCaster = new RayCaster(gameData);
+        this.gridManager = new GridManager();
+
+        this.cameraData = new CameraData(gameData);
+        this.camera = new Camera(gameData, cameraData);
+
+        this.addMouseMotionListener(new PlayerMouseInputs(gameData, cameraData));
+        this.addMouseListener(new PlayerMouseInputs(gameData, cameraData));
+
         this.setPreferredSize(new Dimension(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ));
         repaint();
     }
@@ -38,19 +66,21 @@ public class IsoRenderer extends JPanel implements Runnable {
 
     //renders a new frame and draws it to the panel
     public void renderFrame(){
-        long t1 = System.nanoTime();
-        canvas.renderFrame();
-        this.repaint();
-        long t2 = System.nanoTime();
+        //this.castedBlocks = castedBlockCuller.getCulledCordMods(gameData.xCamRez, gameData.yCamRez);
+        //ray cast the screen
+        //rayCaster.castBlocks(castedBlocks);
 
-        //Print frame rendering times
-        //System.out.println("Frame rendered(Time : " + (t2 - t1) + ")");
+        //draw the castedBlocks blocks
+        //canvas.renderFrame(castedBlocks);
+        camera.renderFrame();
+
+        this.repaint();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
-        g2D.drawImage(this.canvas, 0, 0, this);
+        g2D.drawImage(this.camera, 0, 0, this);
     }
 }
