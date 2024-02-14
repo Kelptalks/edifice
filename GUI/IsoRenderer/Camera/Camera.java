@@ -40,7 +40,13 @@ public class Camera extends BufferedImage {
 
     public void renderFrame(){
         drawCastedChunks();
-        this.graphics.drawImage(cameraData.textureManager.getFilter(0, Texture.LeftBotFace), 0, 0, null);
+        Texture[] allTextures = Texture.values();
+
+
+        for (int x = 0; x < allTextures.length; x++){
+            this.graphics.drawImage(cameraData.textureManager.getFilter(0, allTextures[x]), 64, 50 *x, null);
+        }
+        //this.graphics.drawImage(cameraData.textureManager.getFilter(0, Texture.BotBotHalf), 64, 50, null);
     }
 
     public void drawCastedChunks(){
