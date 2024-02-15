@@ -18,12 +18,14 @@ public enum Texture {
 
 
     //Shading
-    TopTopHalf(6, new int[]{0, 0}, false, 1, -65536),
-    BotBotHalf(7, new int[]{0, 0}, false, 1, -3801344),
-    LeftFaceNorth(8, new int[]{0, 0}, false, 1, -8257281),
-    LeftFaceEast(9, new int[]{0, 0}, false, 1, -3801344),
-    LeftFaceSouth(8, new int[]{0, 0}, false, 1, -16727553),
-    LeftFaceWest(9, new int[]{0, 0}, false, 1, -16253184);
+    TopTopHalfLeft(6, new int[]{0, 0}, false, 1, -65536),
+    TopTopHalfRight(7, new int[]{0, 0}, false, 1, -3111425),
+    BotBotHalfLeft(8, new int[]{0, 0}, false, 1, -3801344),
+    BotBotHalfRight(9, new int[]{0, 0}, false, 1, -16711871),
+    LeftFaceNorth(10, new int[]{0, 0}, false, 1, -8257281),
+    LeftFaceEast(11, new int[]{0, 0}, false, 1, -196376),
+    LeftFaceSouth(12, new int[]{0, 0}, false, 1, -16727553),
+    LeftFaceWest(13, new int[]{0, 0}, false, 1, -16253184);
 
     int id;
     public final int[] translations;

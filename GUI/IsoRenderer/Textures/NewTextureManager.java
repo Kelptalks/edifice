@@ -39,18 +39,17 @@ public class NewTextureManager {
             shaders[0][texture.id] = maskTexture(0, texture, (BufferedImage) filters);
         }
 
-        System.out.println(masks.getHeight());
-        System.out.println(masks.getRGB(16, 64 + 24));
-        System.out.println(masks.getRGB(20, 64 + 24));
+        //System.out.println(masks.getRGB(48, 64 + 8));
+        //System.out.println(masks.getRGB(48, 64 + 18));
 
     }
 
     public Image getBlockSprite(Block block, Texture texture){
         if (block.spriteSheet == "solidBlocks"){
-            return spliceTexture(block.spriteSheetIndex, texture, solidBlocks);
+            return maskTexture(block.spriteSheetIndex, texture, (BufferedImage) solidBlocks);
         }
         else if (block.spriteSheet == "animated"){
-            return spliceTexture(block.spriteSheetIndex, texture, animations);
+            return maskTexture(block.spriteSheetIndex, texture, (BufferedImage) animations);
         }
         return null;
     }
@@ -79,7 +78,32 @@ public class NewTextureManager {
 
             }
         }
-        return image;
+
+        int xMin = 64;
+        int yMin = 64;
+
+        for (int y = 0; y < 64; y++){
+            for (int x = 0; x < 64; x++) {
+                if(image.getRGB(x, y) != 0){
+                    if (x < xMin){
+                        xMin = x;
+                    }
+                    if (y < yMin){
+                        yMin = y;
+                    }
+                }
+            }
+        }
+
+        if (Texture.BotBotHalfRight == texture){
+            yMin-=16;
+        }
+        if (Texture.BotBotHalfLeft == texture){
+            yMin-=16;
+            xMin-= 2;
+        }
+
+        return image.getSubimage(xMin, yMin, 64 - xMin, 64 - yMin);
     }
 
     private Image[][] textures = new Image[Block.values().length][6];

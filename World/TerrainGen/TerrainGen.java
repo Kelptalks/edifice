@@ -40,6 +40,7 @@ public class TerrainGen{
         for (int x = -400; x < 400; x++){
             for (int y = -400; y < 400; y++){
                 branch.setBlock(keyMod.getRelativeKey(root, 0, x, y, 0), Block.Grass);
+                branch.setBlock(keyMod.getRelativeKey(root, 0, x, x, 1), Block.Fruit);
             }
         }
     }

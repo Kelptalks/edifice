@@ -8,15 +8,15 @@ import java.io.IOException;
 public class TextureLoader {
 
     public Image loadAnimated(){
-        return loadSpriteSheet("Textures/animated.png");
+        return loadSpriteSheet("edifice/Textures/animated.png");
     }
 
     public Image loadSolidBlocks(){
-        return loadSpriteSheet("Textures/solidBlocks.png");
+        return loadSpriteSheet("edifice/Textures/solidBlocks.png");
     }
 
     public Image loadMasks() {
-        return loadSpriteSheet("Textures/Masks.png");
+        return loadSpriteSheet("edifice/Textures/Masks.png");
     }
 
     //Sprite sheet loader
@@ -33,6 +33,6 @@ public class TextureLoader {
     }
 
     public Image loadFilters() {
-        return loadSpriteSheet("Textures/filters.png");
+        return loadSpriteSheet("edifice/Textures/filters.png");
     }
 }

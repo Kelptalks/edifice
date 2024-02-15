@@ -44,7 +44,8 @@ public class Camera extends BufferedImage {
 
 
         for (int x = 0; x < allTextures.length; x++){
-            this.graphics.drawImage(cameraData.textureManager.getFilter(0, allTextures[x]), 64, 50 *x, null);
+            this.graphics.drawRect(64, 32 * x, 32, 32);
+            this.graphics.drawImage(cameraData.textureManager.getFilter(0, allTextures[x]), 64, 32 *x, null);
         }
         //this.graphics.drawImage(cameraData.textureManager.getFilter(0, Texture.BotBotHalf), 64, 50, null);
     }
@@ -54,7 +55,7 @@ public class Camera extends BufferedImage {
             for (int y = 0; y < castedChunks[0].length; y++){
                 CastedChunk castedChunk = castedChunks[x][y];
                 castedChunk.getScreenX();
-                graphics.drawImage(castedChunk.getRenderedImage(), castedChunk.getScreenX() + cameraData.xCamOffSet, castedChunk.getScreenY()  + cameraData.yCamOffSet, null);
+                graphics.drawImage(castedChunk.getRenderedImage(), castedChunk.getScreenX() + cameraData.xCamOffSet - cameraData.camXCenterPixel, castedChunk.getScreenY()  + cameraData.yCamOffSet - cameraData.camYCenterPixel, null);
             }
         }
     }

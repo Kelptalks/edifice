@@ -121,35 +121,86 @@ public class RayCaster {
         castedBlock.setRightBlockKey(key);
     }
 
-    public void castRightShadow(CastedBlock castedBlock){
+    public void castRightShadow(CastedBlock castedBlock) {
+        int distance = 0;
+        long key = castedBlock.getRightBLockKey();
+        Block block;
+
+        if (castedBlock.getRightTexture() == Texture.TopRightFace) {
+            while (distance < gameData.drawDistance) {
+                distance++;
+                key = gameData.keyMod.modAxis(key, 0, 2, 1);
+                block = gameData.blocks[gameData.activeArea.getBlock(key)];
+                if (!block.transparent) {
+                    //castedBlock.setRightFilter(Texture.TopRightFace);
+                    break;
+                }
+
+                //y side\
+                long yKey = gameData.keyMod.modAxis(key, 0, 1, 1);
+                block = gameData.blocks[gameData.activeArea.getBlock(yKey)];
+                if (!block.transparent) {
+                    castedBlock.setRightFilter(Texture.BotBotHalfRight);
+
+                }
+
+                //x side
+                key = gameData.keyMod.modAxis(key, 0, 0, -1);
+                block = gameData.blocks[gameData.activeArea.getBlock(key)];
+                if (!block.transparent) {
+                    castedBlock.setRightFilter(Texture.TopTopHalfRight);
+
+                }
+
+                key = gameData.keyMod.modAxis(key, 0, 1, 1);
+                block = gameData.blocks[gameData.activeArea.getBlock(key)];
+                if (!block.transparent) {
+                    castedBlock.setRightFilter(Texture.TopRightFace);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void castLeftShadow(CastedBlock castedBlock) {
         int distance = 0;
         long key = castedBlock.getLeftBLockKey();
         Block block;
 
-        while(distance < gameData.drawDistance){
-            distance++;
+        if (castedBlock.getLeftTexture() == Texture.TopLeftFace) {
+            while (distance < gameData.drawDistance) {
+                distance++;
+                key = gameData.keyMod.modAxis(key, 0, 2, 1);
+                block = gameData.blocks[gameData.activeArea.getBlock(key)];
+                if (!block.transparent) {
+                    //castedBlock.setRightFilter(Texture.TopRightFace);
+                    break;
+                }
 
-            key = gameData.keyMod.modAxis(key, 0, 2, 1);
-            block = gameData.blocks[gameData.activeArea.getBlock(key)];
-            if (!block.transparent){
-                //castedBlock.setRightFilter(Texture.TopRightFace);
-                break;
-            }
+                //y side\
+                long yKey = gameData.keyMod.modAxis(key, 0, 1, 1);
+                block = gameData.blocks[gameData.activeArea.getBlock(yKey)];
+                if (!block.transparent) {
+                    castedBlock.setLeftFilter(Texture.BotBotHalfLeft);
+                }
 
-            key = gameData.keyMod.modAxis(key, 0, 0, -1);
-            block = gameData.blocks[gameData.activeArea.getBlock(key)];
-            if (!block.transparent){
-                //castedBlock.setRightFilter(Texture.TopRightFace);
-                break;
-            }
+                //x side
+                key = gameData.keyMod.modAxis(key, 0, 0, -1);
+                block = gameData.blocks[gameData.activeArea.getBlock(key)];
+                if (!block.transparent) {
+                    castedBlock.setLeftFilter(Texture.TopTopHalfLeft);
 
-            key = gameData.keyMod.modAxis(key, 0, 1, 1);
-            block = gameData.blocks[gameData.activeArea.getBlock(key)];
-            if (!block.transparent){
-                castedBlock.setRightFilter(Texture.TopRightFace);
-                break;
+                }
+
+                key = gameData.keyMod.modAxis(key, 0, 1, 1);
+                block = gameData.blocks[gameData.activeArea.getBlock(key)];
+                if (!block.transparent) {
+                    castedBlock.setLeftFilter(Texture.TopLeftFace);
+                    break;
+                }
             }
         }
     }
+
 
 }

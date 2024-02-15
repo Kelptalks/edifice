@@ -33,8 +33,8 @@ public class CameraData {
     public int xCamCenter = camXRez/2;
     public int yCamCenter = camYRez/2;
 
-    public int xChunkRez = 64;
-    public int yChunkRez = 64;
+    public int xChunkRez = 16;
+    public int yChunkRez = 16;
     public int xChunkPixelRez = xChunkRez * spriteXScale + 64;
     public int yChunkPixelRez = yChunkRez * spriteYScale;
 
@@ -42,6 +42,9 @@ public class CameraData {
     public int xCamOffSet = 0;
     public int yCamOffSet = 0;
 
-    public int camChunkXRez = 5;
-    public int camChunkYRez = 5;
+    public int camChunkXRez = 10;
+    public int camChunkYRez = 20;
+
+    public int camXCenterPixel = xChunkPixelRez * camChunkXRez / 2;
+    public int camYCenterPixel = yChunkPixelRez * camChunkYRez / 4;
 }

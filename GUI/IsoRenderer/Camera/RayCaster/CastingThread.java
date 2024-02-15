@@ -15,5 +15,6 @@ public class CastingThread implements Runnable{
         rayCaster.castLeft(castedBlock);
         rayCaster.castRight(castedBlock);
         rayCaster.castRightShadow(castedBlock);
+        rayCaster.castLeftShadow(castedBlock);
     }
 }

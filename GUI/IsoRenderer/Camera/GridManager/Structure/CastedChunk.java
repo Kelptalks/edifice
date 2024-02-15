@@ -1,6 +1,7 @@
 package GUI.IsoRenderer.Camera.GridManager.Structure;
 
 import GUI.IsoRenderer.Camera.CameraData;
+import GUI.IsoRenderer.Textures.Texture;
 import GameData.Block;
 
 import java.awt.*;
@@ -49,11 +50,11 @@ public class CastedChunk {
                 g.drawImage(rightTri, drawCords[0] + 32, drawCords[1], null);
 
                 if (castedBlock.getLeftFilter() != null){
-                    //g.drawImage(cameraData.textureManager.getFilter(0, castedBlock.getLeftTexture()), drawCords[0], drawCords[1], null);
+                    g.drawImage(cameraData.textureManager.getFilter(0, castedBlock.getLeftFilter()), drawCords[0], drawCords[1], null);
                     //System.out.println("yo");
                 }
                 if (castedBlock.getRightFilter() != null){
-                    //g.drawImage(cameraData.textureManager.getFilter(0, castedBlock.getRightFilter()), drawCords[0] + 32, drawCords[1], null);
+                    g.drawImage(cameraData.textureManager.getFilter(0, castedBlock.getRightFilter()), drawCords[0] + 32, drawCords[1], null);
                     //System.out.println("yo");
                 }
             }
