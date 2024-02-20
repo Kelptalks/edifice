@@ -67,17 +67,19 @@ public class PlayerMouseInputs implements MouseMotionListener, MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         if (cameraData.xCamOffSet > cameraData.xChunkPixelRez){
-            cameraData.xCamOffSet = cameraData.xCamOffSet % cameraData.xChunkPixelRez;
+            //cameraData.xCamOffSet = cameraData.xCamOffSet % cameraData.xChunkPixelRez;
+            //cameraData.castedChunkCuller.shiftChunkX(1);
         }
         if (cameraData.xCamOffSet < -cameraData.xChunkPixelRez){
-            cameraData.xCamOffSet = cameraData.xCamOffSet % -cameraData.xChunkPixelRez;
+            //cameraData.xCamOffSet = cameraData.xCamOffSet % -cameraData.xChunkPixelRez;
+            //cameraData.castedChunkCuller.shiftChunkX(-1);
         }
 
         if (cameraData.yCamOffSet > cameraData.yChunkPixelRez){
-            cameraData.yCamOffSet = cameraData.yCamOffSet % cameraData.yChunkPixelRez;
+            //cameraData.yCamOffSet = cameraData.yCamOffSet % cameraData.yChunkPixelRez;
         }
         if (cameraData.yCamOffSet < -cameraData.yChunkPixelRez){
-            cameraData.yCamOffSet = cameraData.yCamOffSet % -cameraData.yChunkPixelRez;
+            //cameraData.yCamOffSet = cameraData.yCamOffSet % -cameraData.yChunkPixelRez;
         }
     }
 

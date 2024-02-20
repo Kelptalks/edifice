@@ -40,9 +40,34 @@ public class TerrainGen{
         for (int x = -400; x < 400; x++){
             for (int y = -400; y < 400; y++){
                 branch.setBlock(keyMod.getRelativeKey(root, 0, x, y, 0), Block.Grass);
-                branch.setBlock(keyMod.getRelativeKey(root, 0, x, x, 1), Block.Fruit);
+
             }
         }
+
+
+        //hive gen testing
+        long onScreen = keyMod.getRelativeKey(root, 0, 220, 150, -35);
+        genSphere(branch, onScreen, 35, Block.Stone);
+
+        onScreen = keyMod.getRelativeKey(onScreen, 0, 0, 0, 35);
+        long onScreen2 = onScreen;
+        for (int x = 0; x < 5; x++){
+            onScreen = keyMod.getRelativeKey(onScreen, 0, 0, 2, 2);
+            onScreen2 = keyMod.getRelativeKey(onScreen2, 0, 1, 0, 3);
+            genSphere(branch, onScreen, 8, Block.Fruit);
+            genSphere(branch, onScreen2, 8, Block.Fruit);
+        }
+
+        onScreen = keyMod.getRelativeKey(root, 0, 220, 150, 0);
+        for(int x = 0; x< 10; x++){
+            onScreen = keyMod.getRelativeKey(onScreen, 0, 0, 2, 2);
+            onScreen2 = keyMod.getRelativeKey(onScreen2, 0, 1, 0, 3);
+            genSphere(branch, onScreen, 6, Block.Air);
+            genSphere(branch, onScreen2, 6, Block.Air);
+        }
+
+
+        //branch.setBlock(onScreen, Block.Fruit);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,12 +76,34 @@ public class TerrainGen{
      * generating basic shapes
      */
 
-    public void genCuboid(long x, long y, long z, long width, long height){
-
+    public void genCuboid(Branch branch, long key, long xScale, long yScale, long zScale){
+        for (int z = 0; z < zScale; z++){
+            for (int y = 0; y < yScale; y++){
+                for (int x = 0; x < xScale; x++){
+                    branch.setBlock(keyMod.getRelativeKey(key, 0, x, y, z), Block.Air);
+                }
+            }
+        }
     }
 
-    public void genSphere(long x, long y, long z, long width, long height){
+    public void genCircle(Branch branch, long key, long radius, Block block){
+        float angleInterval = 0.1F;
+        for (float angle = 0; angle < 360; angle += angleInterval){
+            for (int currentRadius = 0; currentRadius < radius; currentRadius++){
+                int xCor = (int) (Math.cos(Math.toRadians(angle)) * currentRadius);
+                int yCor = (int) (Math.sin(Math.toRadians(angle)) * currentRadius);
+                branch.setBlock(keyMod.getRelativeKey(key, 0, xCor, yCor, 0), block);
+            }
+        }
+    }
 
+    public void genSphere(Branch branch, long key, long radius, Block block){
+        float angleInterval = 90F /radius;
+        for (float angle = 0; angle < 180; angle += angleInterval){
+            key = keyMod.getRelativeKey(key, 0, 0, 0, 1);
+            int zRadius = (int) (Math.sin(Math.toRadians(angle)) * radius);
+            genCircle(branch, key, zRadius, block);
+        }
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

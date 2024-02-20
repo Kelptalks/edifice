@@ -13,9 +13,7 @@ import java.awt.image.BufferedImage;
 public class Camera extends BufferedImage {
     GameData gameData;
     CameraData cameraData;
-    private CastedChunk[][] castedChunks;
     private RayCaster rayCaster;
-    private CastedChunkCuller castedChunkCuller;
     Graphics graphics;
     public Camera(GameData gameData, CameraData cameraData){
         super(cameraData.camXRez, cameraData.camYRez, TYPE_4BYTE_ABGR_PRE);
@@ -27,12 +25,14 @@ public class Camera extends BufferedImage {
         this.rayCaster = new RayCaster(gameData);
 
 
-        this.castedChunkCuller = new CastedChunkCuller(gameData, cameraData);
+        this.cameraData.castedChunkCuller = new CastedChunkCuller(gameData, cameraData);
+        this.cameraData.castedChunks = cameraData.castedChunkCuller.getCulledCordMods();
 
-        //create chunk pool
-        this.castedChunks = castedChunkCuller.getCulledCordMods();
-        castedChunkCuller.setCulledCordWorldKeys(castedChunks);
-        renderChunks(castedChunks);
+        //SetUpChunks
+        cameraData.castedChunkCuller.setCulledCordWorldKeys(cameraData.castedChunks);
+
+        //Render Chunks
+        renderChunks(cameraData.castedChunks);
 
 
 
@@ -51,17 +51,19 @@ public class Camera extends BufferedImage {
     }
 
     public void drawCastedChunks(){
-        for (int x = 0; x < castedChunks.length; x++){
-            for (int y = 0; y < castedChunks[0].length; y++){
-                CastedChunk castedChunk = castedChunks[x][y];
-                castedChunk.getScreenX();
-                graphics.drawImage(castedChunk.getRenderedImage(), castedChunk.getScreenX() + cameraData.xCamOffSet - cameraData.camXCenterPixel, castedChunk.getScreenY()  + cameraData.yCamOffSet - cameraData.camYCenterPixel, null);
+        for (int x = 0; x < cameraData.castedChunks.length; x++){
+            for (int y = 0; y < cameraData.castedChunks[0].length; y++){
+                CastedChunk castedChunk = cameraData.castedChunks[x][y];
+
+
+                int scale = 1;
+                int xDrawCords = ((castedChunk.getScreenX() + cameraData.xCamOffSet) / scale) - (cameraData.camXCenterPixel/scale);
+                int yDrawCords = ((castedChunk.getScreenY()  + cameraData.yCamOffSet) / scale) - (cameraData.camYCenterPixel/scale);
+
+
+                graphics.drawImage(castedChunk.getRenderedImage(), xDrawCords , yDrawCords, null);
             }
         }
-    }
-
-    public void shiftChunkArray(int xShift, int yShift){
-
     }
 
     public void renderChunks(CastedChunk[][] castedChunks){
@@ -75,7 +77,7 @@ public class Camera extends BufferedImage {
         }
     }
     public void renderChunk(CastedChunk castedChunk){
-        rayCaster.castBlocks(castedChunk.getCastedBlocks());
-        castedChunk.renderChunks();
+
+        castedChunk.renderChunk();
     }
 }

@@ -3,6 +3,7 @@ package GUI.IsoRenderer.Camera.GridManager.Structure;
 import GUI.IsoRenderer.Camera.CameraData;
 import GUI.IsoRenderer.Textures.Texture;
 import GameData.Block;
+import GameData.GameData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -25,9 +26,9 @@ public class CastedChunk {
 
     public CastedChunk(CameraData cameraData){
         this.cameraData = cameraData;
-        this.worldKey = 0;
+
         this.castedBlocks = cameraData.castedBlockCuller.getIsoCastedBlock(cameraData.xChunkRez, cameraData.yChunkRez);
-        cameraData.castedBlockCuller.setCulledCordWorldKeys(castedBlocks, worldKey);
+
         this.renderedImage = new BufferedImage(cameraData.xChunkPixelRez, cameraData.yChunkPixelRez, TYPE_4BYTE_ABGR_PRE);
     }
 
@@ -35,9 +36,14 @@ public class CastedChunk {
         return this.castedBlocks;
     }
 
-    public void renderChunks() {
+    public void renderChunk() {
+        //rayCast the blocks in the chunk
+        cameraData.rayCaster.castBlocks(this.castedBlocks);
+
+        //draw the ray casted chunk to screen
         Graphics g = renderedImage.getGraphics();
         g.translate((cameraData.xChunkPixelRez)/2, 0);
+        //cameraData.castedBlockCuller.setCulledCordWorldKeys(castedBlocks, worldKey);
         for (CastedBlock[] castedBlockRow : castedBlocks){
             for (CastedBlock castedBlock : castedBlockRow){
                 Block[] blockType = castedBlock.getBlockType();
@@ -51,11 +57,9 @@ public class CastedChunk {
 
                 if (castedBlock.getLeftFilter() != null){
                     g.drawImage(cameraData.textureManager.getFilter(0, castedBlock.getLeftFilter()), drawCords[0], drawCords[1], null);
-                    //System.out.println("yo");
                 }
                 if (castedBlock.getRightFilter() != null){
                     g.drawImage(cameraData.textureManager.getFilter(0, castedBlock.getRightFilter()), drawCords[0] + 32, drawCords[1], null);
-                    //System.out.println("yo");
                 }
             }
         }
@@ -69,6 +73,10 @@ public class CastedChunk {
 
     public void setWorldKey(long newWorldKey){
         this.worldKey = newWorldKey;
+    }
+
+    public long getWorldKey(){
+        return worldKey;
     }
 
     private int[] cords = new int[2];

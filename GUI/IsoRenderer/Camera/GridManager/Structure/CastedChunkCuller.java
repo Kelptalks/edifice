@@ -44,4 +44,27 @@ public class CastedChunkCuller {
         }
     }
 
+    public void shiftChunkX(int i) {
+        CastedChunk[][] castedChunks = cameraData.castedChunks;
+        for(CastedChunk[] castedChunkRow : castedChunks){
+            for(CastedChunk castedChunk : castedChunkRow) {
+                int[] currentIsoCords = castedChunk.getIsoCords();
+                if (i > 0) {
+                    castedChunk.setIsoCords(new int[]{currentIsoCords[0] - 1, currentIsoCords[1] + 1});
+                }
+                if (i < 0) {
+                    castedChunk.setIsoCords(new int[]{currentIsoCords[0] + 1, currentIsoCords[1] - 1});
+                }
+            }
+        }
+        setCulledCordWorldKeys(castedChunks);
+
+        for(CastedChunk[] castedChunkRow : castedChunks){
+            for(CastedChunk castedChunk : castedChunkRow) {
+                castedChunk.renderChunk();
+            }
+        }
+
+        cameraData.castedChunks = castedChunks;
+    }
 }

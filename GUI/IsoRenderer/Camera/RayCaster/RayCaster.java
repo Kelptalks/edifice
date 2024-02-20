@@ -51,7 +51,7 @@ public class RayCaster {
     public void castLeft(CastedBlock castedBlock){
         long key = castedBlock.getWorldKey();
         int distance = 0;
-        key = gameData.keyMod.modAxis(key, 0, 2, 200);
+        key = gameData.keyMod.modAxis(key, 0, 2, 250);
         Block block;
         while(distance < gameData.drawDistance){
             distance++;
@@ -87,7 +87,7 @@ public class RayCaster {
     public void castRight(CastedBlock castedBlock){
         long key = castedBlock.getWorldKey();
         int distance = 0;
-        key = gameData.keyMod.modAxis(key, 0, 2, 200);
+        key = gameData.keyMod.modAxis(key, 0, 2, 250);
         Block block;
 
         while(distance < gameData.drawDistance){
@@ -141,15 +141,19 @@ public class RayCaster {
                 block = gameData.blocks[gameData.activeArea.getBlock(yKey)];
                 if (!block.transparent) {
                     castedBlock.setRightFilter(Texture.BotBotHalfRight);
-
                 }
 
                 //x side
                 key = gameData.keyMod.modAxis(key, 0, 0, -1);
                 block = gameData.blocks[gameData.activeArea.getBlock(key)];
                 if (!block.transparent) {
-                    castedBlock.setRightFilter(Texture.TopTopHalfRight);
-
+                    if (castedBlock.getRightFilter() == Texture.BotBotHalfRight){
+                        castedBlock.setRightFilter(Texture.TopRightFace);
+                        break;
+                    }
+                    else {
+                        castedBlock.setRightFilter(Texture.TopTopHalfRight);
+                    }
                 }
 
                 key = gameData.keyMod.modAxis(key, 0, 1, 1);
@@ -157,6 +161,27 @@ public class RayCaster {
                 if (!block.transparent) {
                     castedBlock.setRightFilter(Texture.TopRightFace);
                     break;
+                }
+            }
+        }
+
+        if (castedBlock.getRightTexture() == Texture.LeftTopFace) {
+            while (distance < 2) {
+                distance++;
+
+
+
+                key = gameData.keyMod.modAxis(key, 0, 1, 1);
+                key = gameData.keyMod.modAxis(key, 0, 0, -1);
+                block = gameData.blocks[gameData.activeArea.getBlock(key)];
+                if (!block.transparent) {
+                    castedBlock.setRightFilter(Texture.LeftFaceWest);
+                    key = gameData.keyMod.modAxis(key, 0, 2, 1);
+                    block = gameData.blocks[gameData.activeArea.getBlock(key)];
+                    if (!block.transparent) {
+                        castedBlock.setRightFilter(Texture.LeftTopFace);
+                        break;
+                    }
                 }
             }
         }
@@ -177,7 +202,7 @@ public class RayCaster {
                     break;
                 }
 
-                //y side\
+                //y side
                 long yKey = gameData.keyMod.modAxis(key, 0, 1, 1);
                 block = gameData.blocks[gameData.activeArea.getBlock(yKey)];
                 if (!block.transparent) {
@@ -188,7 +213,13 @@ public class RayCaster {
                 key = gameData.keyMod.modAxis(key, 0, 0, -1);
                 block = gameData.blocks[gameData.activeArea.getBlock(key)];
                 if (!block.transparent) {
-                    castedBlock.setLeftFilter(Texture.TopTopHalfLeft);
+                    if (castedBlock.getLeftFilter() == Texture.BotBotHalfLeft){
+                        castedBlock.setLeftFilter(Texture.TopLeftFace);
+                        break;
+                    }
+                    else {
+                        castedBlock.setLeftFilter(Texture.TopTopHalfLeft);
+                    }
 
                 }
 
@@ -197,6 +228,26 @@ public class RayCaster {
                 if (!block.transparent) {
                     castedBlock.setLeftFilter(Texture.TopLeftFace);
                     break;
+                }
+            }
+        }
+
+        if (castedBlock.getLeftTexture() == Texture.LeftBotFace) {
+            while (distance < 2) {
+                distance++;
+
+
+                key = gameData.keyMod.modAxis(key, 0, 1, 1);
+                key = gameData.keyMod.modAxis(key, 0, 0, -1);
+                block = gameData.blocks[gameData.activeArea.getBlock(key)];
+                if (!block.transparent) {
+                    castedBlock.setLeftFilter(Texture.LeftFaceSouth);
+                    key = gameData.keyMod.modAxis(key, 0, 2, 1);
+                    block = gameData.blocks[gameData.activeArea.getBlock(key)];
+                    if (!block.transparent) {
+                        castedBlock.setLeftFilter(Texture.LeftBotFace);
+                        break;
+                    }
                 }
             }
         }

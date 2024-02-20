@@ -12,6 +12,8 @@ public class CastingThread implements Runnable{
     }
     @Override
     public void run() {
+        castedBlock.setRightFilter(null);
+        castedBlock.setLeftFilter(null);
         rayCaster.castLeft(castedBlock);
         rayCaster.castRight(castedBlock);
         rayCaster.castRightShadow(castedBlock);

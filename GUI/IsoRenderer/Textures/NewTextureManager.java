@@ -102,6 +102,9 @@ public class NewTextureManager {
             yMin-=16;
             xMin-= 2;
         }
+        if (Texture.LeftFaceSouth == texture){
+            yMin-=8;
+        }
 
         return image.getSubimage(xMin, yMin, 64 - xMin, 64 - yMin);
     }
