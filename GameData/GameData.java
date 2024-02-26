@@ -13,7 +13,7 @@ public class GameData {
     public KeyMod keyMod = new KeyMod();
 
     public Block[] blocks = Block.values();
-    public int currentBlock = 1;
+    public Block currentBlock = blocks[1];
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Render Settings
@@ -21,7 +21,7 @@ public class GameData {
      */
     public int SCREEN_X_REZ = 1920;
     public int SCREEN_Y_REZ = 1080;
-    public int drawDistance = 1000;
+    public int drawDistance = 200;
     public int xCamRez = SCREEN_X_REZ/64 * 2;
     public int yCamRez = SCREEN_Y_REZ/16 * 2;
 

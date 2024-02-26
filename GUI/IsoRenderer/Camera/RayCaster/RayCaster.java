@@ -1,14 +1,17 @@
 package GUI.IsoRenderer.Camera.RayCaster;
 
 import GUI.IsoRenderer.Camera.GridManager.Structure.CastedBlock;
+import GUI.IsoRenderer.Camera.GridManager.Structure.CastedChunk;
 import GUI.IsoRenderer.Textures.Texture;
 import GameData.GameData;
 import GameData.Block;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * RayCaster
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *
+ */
 public class RayCaster {
 
     private final GameData gameData;
@@ -17,37 +20,53 @@ public class RayCaster {
 
     }
 
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * High level casting
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Cast a single block or a
+     * collection of them
+     */
 
-    //creates an array that contains instructions the direction the ray is cast.
-    public void createOrder(String order){
-
-    }
-
-
-
-    public void castBlocks(CastedBlock[][] castedBlocks){
-        ExecutorService executor = Executors.newFixedThreadPool(5);
-
+    //ray cast a chunk in other words ray-cast a bunch of blocks
+    public void castChunk(CastedChunk castedChunk){
+        CastedBlock[][] castedBlocks = castedChunk.getCastedBlocks();
         for (CastedBlock[] castedBlockRow : castedBlocks){
             for (CastedBlock castedBlock : castedBlockRow){
-                CastingThread castingRunnable = new CastingThread(this, castedBlock);
-                executor.execute(castingRunnable);
+                castBlock(castedBlock);
             }
         }
-        executor.shutdown(); // Stop accepting new tasks
-        try {
-            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
+    public void castChunkThread(CastedChunk castedChunk) {
+        castChunk(castedChunk);
+    }
+
+    //Ray cast a single block
     public void castBlock(CastedBlock castedBlock){
-        castLeft(castedBlock);
-        castRight(castedBlock);
+        if (true) {
+            castedBlock.setLeftFilter(null);
+            castedBlock.setRightFilter(null);
+            castLeft(castedBlock);
+            castRight(castedBlock);
+            castRightShadow(castedBlock);
+            castLeftShadow(castedBlock);
+        }
+        if (false){
+
+        }
     }
 
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Ray casting
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Casting rays to identify
+     * the first not transparent block
+     * hit and select the correct texture
+     * based off which side of the block
+     * was hit.
+     */
+
+    //Cast the left side of the screenCords
     public void castLeft(CastedBlock castedBlock){
         long key = castedBlock.getWorldKey();
         int distance = 0;
@@ -56,6 +75,8 @@ public class RayCaster {
         while(distance < gameData.drawDistance){
             distance++;
 
+
+            //if ray hits top block face
             key = gameData.keyMod.modAxis(key, 0, 0, -1);
             block = gameData.blocks[gameData.activeArea.getBlock(key)];
             if (!block.transparent){
@@ -65,6 +86,7 @@ public class RayCaster {
                 break;
             }
 
+            //if ray hits left block face
             key = gameData.keyMod.modAxis(key, 0, 1, -1);
             block = gameData.blocks[gameData.activeArea.getBlock(key)];
             if (!block.transparent){
@@ -73,6 +95,7 @@ public class RayCaster {
                 break;
             }
 
+            //if ray hits right block face
             key = gameData.keyMod.modAxis(key, 0, 2, -1);
             block = gameData.blocks[gameData.activeArea.getBlock(key)];
             if (!block.transparent){
@@ -84,6 +107,7 @@ public class RayCaster {
         castedBlock.setLeftBlockKey(key);
     }
 
+    //Cast the right side of the screenCords
     public void castRight(CastedBlock castedBlock){
         long key = castedBlock.getWorldKey();
         int distance = 0;
@@ -93,6 +117,7 @@ public class RayCaster {
         while(distance < gameData.drawDistance){
             distance++;
 
+            //if ray hits top block face
             key = gameData.keyMod.modAxis(key, 0, 1, -1);
             block = gameData.blocks[gameData.activeArea.getBlock(key)];
             if (!block.transparent){
@@ -118,8 +143,97 @@ public class RayCaster {
                 break;
             }
         }
+
         castedBlock.setRightBlockKey(key);
     }
+
+    public void castLeftBack(CastedBlock castedBlock){
+        long key = castedBlock.getWorldKey();
+        int distance = 0;
+        key = gameData.keyMod.modAxis(key, 0, 2, 250);
+        Block block;
+        while(distance < gameData.drawDistance){
+            distance++;
+
+
+            //if ray hits top block face
+            key = gameData.keyMod.modAxis(key, 0, 0, 1);
+            block = gameData.blocks[gameData.activeArea.getBlock(key)];
+            if (!block.transparent){
+                castedBlock.setBlockType(1, block);
+                castedBlock.setRightTexture(Texture.LeftTopFace);
+                break;
+            }
+
+            //if ray hits left block face
+            key = gameData.keyMod.modAxis(key, 0, 1, 1);
+            block = gameData.blocks[gameData.activeArea.getBlock(key)];
+            if (!block.transparent){
+                castedBlock.setBlockType(1, block);
+                castedBlock.setRightTexture(Texture.RightBotFace);
+                castedBlock.setRightFilter(Texture.RightBotFace);
+                break;
+            }
+
+            //if ray hits right block face
+            key = gameData.keyMod.modAxis(key, 0, 2, -1);
+            block = gameData.blocks[gameData.activeArea.getBlock(key)];
+            if (!block.transparent){
+                castedBlock.setBlockType(1, block);
+                castedBlock.setRightTexture(Texture.TopRightFace);
+                break;
+            }
+        }
+        castedBlock.setLeftBlockKey(key);
+    }
+
+    //Cast the right side of the screenCords
+    public void castRightBack(CastedBlock castedBlock){
+        long key = castedBlock.getWorldKey();
+        int distance = 0;
+        key = gameData.keyMod.modAxis(key, 0, 2, 250);
+        Block block;
+
+        while(distance < gameData.drawDistance){
+            distance++;
+
+            //if ray hits top block face
+            key = gameData.keyMod.modAxis(key, 0, 1, 1);
+            block = gameData.blocks[gameData.activeArea.getBlock(key)];
+            if (!block.transparent){
+                castedBlock.setBlockType(0, block);
+                castedBlock.setLeftTexture(Texture.RightTopFace);
+                castedBlock.setLeftFilter(Texture.RightTopFace);
+                break;
+            }
+
+            key = gameData.keyMod.modAxis(key, 0, 0, 1);
+            block = gameData.blocks[gameData.activeArea.getBlock(key)];
+            if (!block.transparent){
+                castedBlock.setBlockType(0, block);
+                castedBlock.setLeftTexture(Texture.LeftBotFace);
+                break;
+            }
+
+            key = gameData.keyMod.modAxis(key, 0, 2, -1);
+            block = gameData.blocks[gameData.activeArea.getBlock(key)];
+            if (!block.transparent){
+                castedBlock.setBlockType(0, block);
+                castedBlock.setLeftTexture(Texture.TopLeftFace);
+                break;
+            }
+        }
+
+        castedBlock.setRightBlockKey(key);
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Shadow casting
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * casting rays at a 90-degree
+     * angle relative the direction
+     * the rays where cast for rendering
+     */
 
     public void castRightShadow(CastedBlock castedBlock) {
         int distance = 0;
@@ -132,7 +246,7 @@ public class RayCaster {
                 key = gameData.keyMod.modAxis(key, 0, 2, 1);
                 block = gameData.blocks[gameData.activeArea.getBlock(key)];
                 if (!block.transparent) {
-                    //castedBlock.setRightFilter(Texture.TopRightFace);
+                    castedBlock.setRightFilter(Texture.TopRightFace);
                     break;
                 }
 
@@ -166,13 +280,15 @@ public class RayCaster {
         }
 
         if (castedBlock.getRightTexture() == Texture.LeftTopFace) {
-            while (distance < 2) {
+            while (distance < gameData.drawDistance) {
                 distance++;
 
 
 
                 key = gameData.keyMod.modAxis(key, 0, 1, 1);
+
                 key = gameData.keyMod.modAxis(key, 0, 0, -1);
+
                 block = gameData.blocks[gameData.activeArea.getBlock(key)];
                 if (!block.transparent) {
                     castedBlock.setRightFilter(Texture.LeftFaceWest);
@@ -183,6 +299,8 @@ public class RayCaster {
                         break;
                     }
                 }
+
+                key = gameData.keyMod.modAxis(key, 0, 2, 1);
             }
         }
     }
@@ -198,7 +316,7 @@ public class RayCaster {
                 key = gameData.keyMod.modAxis(key, 0, 2, 1);
                 block = gameData.blocks[gameData.activeArea.getBlock(key)];
                 if (!block.transparent) {
-                    //castedBlock.setRightFilter(Texture.TopRightFace);
+                    castedBlock.setLeftFilter(Texture.TopLeftFace);
                     break;
                 }
 
@@ -233,7 +351,7 @@ public class RayCaster {
         }
 
         if (castedBlock.getLeftTexture() == Texture.LeftBotFace) {
-            while (distance < 2) {
+            while (distance < gameData.drawDistance) {
                 distance++;
 
 
@@ -249,9 +367,9 @@ public class RayCaster {
                         break;
                     }
                 }
+                key = gameData.keyMod.modAxis(key, 0, 2, 1);
             }
         }
     }
-
 
 }

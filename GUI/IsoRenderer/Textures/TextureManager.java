@@ -5,17 +5,16 @@ import GameData.Block;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Arrays;
 
-public class NewTextureManager {
+public class TextureManager {
     private Image animations;
     private Image solidBlocks;
     private Image filters;
     private BufferedImage masks;
     private GridManager gridManager;
 
-    public NewTextureManager(GridManager gridManager){
+    public TextureManager(GridManager gridManager){
         //Load all the required sprite sheets
         TextureLoader textureLoader = new TextureLoader();
         this.solidBlocks = textureLoader.loadSolidBlocks();
@@ -37,11 +36,8 @@ public class NewTextureManager {
         //Splice and store shaders
         for (Texture texture : Texture.values()){
             shaders[0][texture.id] = maskTexture(0, texture, (BufferedImage) filters);
+            shaders[1][texture.id] = maskTexture(1, texture, (BufferedImage) filters);
         }
-
-        //System.out.println(masks.getRGB(48, 64 + 8));
-        //System.out.println(masks.getRGB(48, 64 + 18));
-
     }
 
     public Image getBlockSprite(Block block, Texture texture){
@@ -95,6 +91,7 @@ public class NewTextureManager {
             }
         }
 
+        //compensate for improperly trimmed textures
         if (Texture.BotBotHalfRight == texture){
             yMin-=16;
         }
@@ -114,7 +111,7 @@ public class NewTextureManager {
         return textures[block.id][texture.id];
     }
 
-    private Image[][] shaders = new Image[1][Texture.values().length];
+    private Image[][] shaders = new Image[2][Texture.values().length];
     public Image getFilter(int filter, Texture texture){
         return shaders[filter][texture.id];
     }

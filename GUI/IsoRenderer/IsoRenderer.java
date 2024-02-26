@@ -2,6 +2,7 @@ package GUI.IsoRenderer;
 
 import GUI.IsoRenderer.Camera.Camera;
 import GUI.IsoRenderer.Camera.CameraData;
+import GUI.IsoRenderer.Controls.PlayKeyInputs;
 import GUI.IsoRenderer.Controls.PlayerMouseInputs;
 import GUI.IsoRenderer.Camera.GridManager.Structure.CastedBlock;
 import GUI.IsoRenderer.Camera.GridManager.Structure.CastedBlockCuller;
@@ -32,6 +33,7 @@ public class IsoRenderer extends JPanel implements Runnable {
     private Camera camera;
 
     private PlayerMouseInputs playerMouseInputs;
+    private PlayKeyInputs playerKeyInputs;
     public IsoRenderer(GameData gameData){
         this.gameData = gameData;
 
@@ -43,10 +45,15 @@ public class IsoRenderer extends JPanel implements Runnable {
         this.cameraData = new CameraData(gameData);
         this.camera = new Camera(gameData, cameraData);
 
-        this.addMouseMotionListener(new PlayerMouseInputs(gameData, cameraData));
-        this.addMouseListener(new PlayerMouseInputs(gameData, cameraData));
+        this.playerKeyInputs = new PlayKeyInputs(gameData, cameraData);
+        this.addKeyListener(playerKeyInputs);
+
+        playerMouseInputs = new PlayerMouseInputs(gameData, cameraData);
+        this.addMouseListener(playerMouseInputs);
+        this.addMouseMotionListener(playerMouseInputs);
 
         this.setPreferredSize(new Dimension(gameData.SCREEN_X_REZ, gameData.SCREEN_Y_REZ));
+        this.setFocusable(true);
         repaint();
     }
 
@@ -66,12 +73,8 @@ public class IsoRenderer extends JPanel implements Runnable {
 
     //renders a new frame and draws it to the panel
     public void renderFrame(){
-        //this.castedBlocks = castedBlockCuller.getCulledCordMods(gameData.xCamRez, gameData.yCamRez);
-        //ray cast the screen
-        //rayCaster.castBlocks(castedBlocks);
 
         //draw the castedBlocks blocks
-        //canvas.renderFrame(castedBlocks);
         camera.renderFrame();
 
         this.repaint();

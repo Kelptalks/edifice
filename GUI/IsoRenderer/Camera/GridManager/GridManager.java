@@ -16,11 +16,6 @@ public class GridManager {
 
     int scale = 32;
 
-    public int[] isoToScreen(int x, int y, int scale){
-        int xCor = (x * scale) -(y * scale);
-        int yCor = (x * (scale / 2)) + (y * (scale / 2));
-        return new int[]{xCor, yCor};
-    }
     public int[] isoToScreen(int[] cords){
         int xCor = (cords[0] - cords[1]) * scale;
         int yCor = (cords[0] + cords[1]) * (scale / 2);
@@ -33,7 +28,7 @@ public class GridManager {
         return new int[]{xCor, yCor};
     }
 
-    public int[] ScreenToIso(int x, int y){
+    public int[] ScreenToIso(int x, int y, int scale){
         x -= 32;
 
         float isoX = (float) (x + 2 * y) / (2 * scale);
@@ -72,4 +67,11 @@ public class GridManager {
         return false;
     }
 
+    public Polygon Square(int scale) {
+        Polygon polygon = new Polygon();
+        polygon.npoints = 4;
+        polygon.xpoints = new int[]{-scale, 0, scale, 0};
+        polygon.ypoints = new int[]{(scale / 2), 0, scale/2, (scale)};
+        return polygon;
+    }
 }

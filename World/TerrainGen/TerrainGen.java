@@ -12,6 +12,18 @@ public class TerrainGen{
      *  TerrainGen
      *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Generate terrain
+     *
+     * Need to add a system for generating
+     * a library of shapes
+     * need a system for adding those shapes
+     * to the world based on factors like
+     * spacing, scale, location
+     *
+     * I will also need to implement a method
+     * for large-scale generated features
+     * to be planed but not generated in unexplored
+     * chunks.
+     *
      */
 
     private long groundHeight;
@@ -44,7 +56,12 @@ public class TerrainGen{
             }
         }
 
+        genHive(branch, root);
 
+        //branch.setBlock(onScreen, Block.Fruit);
+    }
+
+    public void genHive(Branch branch, long root){
         //hive gen testing
         long onScreen = keyMod.getRelativeKey(root, 0, 220, 150, -35);
         genSphere(branch, onScreen, 35, Block.Stone);
@@ -65,9 +82,10 @@ public class TerrainGen{
             genSphere(branch, onScreen, 6, Block.Air);
             genSphere(branch, onScreen2, 6, Block.Air);
         }
+    }
 
+    public void genLine(long start, long end, int width, Block block){
 
-        //branch.setBlock(onScreen, Block.Fruit);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

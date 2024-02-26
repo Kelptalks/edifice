@@ -2,10 +2,10 @@ package GUI.IsoRenderer.Camera;
 
 import GUI.IsoRenderer.Camera.GridManager.GridManager;
 import GUI.IsoRenderer.Camera.GridManager.Structure.CastedBlockCuller;
-import GUI.IsoRenderer.Camera.GridManager.Structure.CastedChunk;
-import GUI.IsoRenderer.Camera.GridManager.Structure.CastedChunkCuller;
+import GUI.IsoRenderer.Camera.GridManager.Structure.CastedChunkManager;
 import GUI.IsoRenderer.Camera.RayCaster.RayCaster;
-import GUI.IsoRenderer.Textures.NewTextureManager;
+import GUI.IsoRenderer.Camera.Window.Window;
+import GUI.IsoRenderer.Textures.TextureManager;
 import GameData.GameData;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -21,12 +21,10 @@ public class CameraData {
     }
     public GridManager gridManager = new GridManager();
     public RayCaster rayCaster;
-    public NewTextureManager textureManager = new NewTextureManager(gridManager);
+    public TextureManager textureManager = new TextureManager(gridManager);
     public CastedBlockCuller castedBlockCuller;
-
-    public CastedChunk[][] castedChunks;
-
-    public CastedChunkCuller castedChunkCuller;
+    public CastedChunkManager castedChunkManager;
+    public Window window;
 
     public long camWorldKey = 576460750000000000L;
     public int spriteXScale = 64;
@@ -35,9 +33,6 @@ public class CameraData {
     //Camera offsets
     public int camXRez = 1920;
     public int camYRez = 1080;
-
-    public int xCamCenter = camXRez/2;
-    public int yCamCenter = camYRez/2;
 
     public int xChunkRez = 16;
     public int yChunkRez = 16;

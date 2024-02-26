@@ -3,7 +3,6 @@ package GUI.IsoRenderer.Camera.GridManager.Structure;
 import GUI.IsoRenderer.Camera.CameraData;
 import GUI.IsoRenderer.Textures.Texture;
 import GameData.Block;
-import GameData.GameData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -26,9 +25,7 @@ public class CastedChunk {
 
     public CastedChunk(CameraData cameraData){
         this.cameraData = cameraData;
-
         this.castedBlocks = cameraData.castedBlockCuller.getIsoCastedBlock(cameraData.xChunkRez, cameraData.yChunkRez);
-
         this.renderedImage = new BufferedImage(cameraData.xChunkPixelRez, cameraData.yChunkPixelRez, TYPE_4BYTE_ABGR_PRE);
     }
 
@@ -38,8 +35,7 @@ public class CastedChunk {
 
     public void renderChunk() {
         //rayCast the blocks in the chunk
-        cameraData.rayCaster.castBlocks(this.castedBlocks);
-
+        cameraData.rayCaster.castChunkThread(this);
         //draw the ray casted chunk to screen
         Graphics g = renderedImage.getGraphics();
         g.translate((cameraData.xChunkPixelRez)/2, 0);
@@ -61,34 +57,46 @@ public class CastedChunk {
                 if (castedBlock.getRightFilter() != null){
                     g.drawImage(cameraData.textureManager.getFilter(0, castedBlock.getRightFilter()), drawCords[0] + 32, drawCords[1], null);
                 }
+
+                for (Texture texture : castedBlock.getLeftFilters()){
+                    g.drawImage(cameraData.textureManager.getFilter(1, texture), drawCords[0], drawCords[1], null);
+                }
+                for (Texture texture : castedBlock.getRightFilters()){
+                    g.drawImage(cameraData.textureManager.getFilter(1, texture), drawCords[0], drawCords[1] + 32, null);
+                }
             }
         }
         g.dispose();
     }
 
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * Getters/Setters
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     */
 
+    //Image
     public Image getRenderedImage() {
         return renderedImage;
     }
 
+    //World key
     public void setWorldKey(long newWorldKey){
         this.worldKey = newWorldKey;
     }
-
     public long getWorldKey(){
         return worldKey;
     }
 
-    private int[] cords = new int[2];
+    //Iso cords
+    private int[] isoCords = new int[2];
     public void setIsoCords(int[] newCords) {
-        cords = newCords;
+        isoCords = newCords;
     }
-
     public int[] getIsoCords(){
-        return cords;
+        return isoCords;
     }
 
-
+    //Screen cords
     private int[] screenCor = new int[2];
     public void setScreenCords(int[] cords){
         this.screenCor = cords;

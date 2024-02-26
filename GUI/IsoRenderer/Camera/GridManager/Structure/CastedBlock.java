@@ -3,6 +3,8 @@ package GUI.IsoRenderer.Camera.GridManager.Structure;
 import GUI.IsoRenderer.Textures.Texture;
 import GameData.Block;
 
+import java.util.ArrayList;
+
 public class CastedBlock {
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -24,6 +26,16 @@ public class CastedBlock {
         blockType[1] = Block.Air;
         texture[0] = Texture.TopLeftFace;
         texture[1] = Texture.TopRightFace;
+    }
+
+    private boolean highlight = false;
+
+    public void setHighlight(){
+        this.highlight = true;
+    }
+
+    public boolean getHighLight(){
+        return highlight;
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -114,6 +126,30 @@ public class CastedBlock {
 
     public Texture getRightFilter(){
         return this.filter[1];
+    }
+
+    ArrayList<Texture> leftFilters = new ArrayList<Texture>();
+    ArrayList<Texture> rightFilters = new ArrayList<Texture>();
+
+    public void addLeftFilter(Texture texture){
+        this.leftFilters.add(texture);
+    }
+
+    public void addRightFilter(Texture texture){
+        this.rightFilters.add(texture);
+    }
+
+    public ArrayList<Texture> getLeftFilters(){
+        return leftFilters;
+    }
+
+    public ArrayList<Texture> getRightFilters(){
+        return rightFilters;
+    }
+
+    public void clearFilters(){
+        rightFilters.clear();
+        leftFilters.clear();
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
