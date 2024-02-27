@@ -49,10 +49,11 @@ public class CastedChunkManager {
         //loop through all CastedBlocks blocks
         for(CastedChunk[] castedChunkRow : castedChunks){
             for(CastedChunk castedChunk : castedChunkRow){
+                castedChunk.updateCastedBlocks();
                 //Get the screen cords
                 int[] isoScreenCords = castedChunk.getIsoCords();
                 //use the screen cords and player cords to set the rendering plane
-                long key = gameData.keyMod.getRelativeKey(cameraData.camWorldKey, 0, isoScreenCords[0] * cameraData.xChunkRez, isoScreenCords[1] * cameraData.yChunkRez, 0);
+                long key = gameData.keyMod.getRelativeKey(cameraData.camWorldKey, 0, isoScreenCords[0] * cameraData.xChunkRez * cameraData.xCastingDirection, isoScreenCords[1] * cameraData.yChunkRez * cameraData.yCastingDirection, 0);
                 castedChunk.setWorldKey(key);
                 cameraData.castedBlockCuller.setCulledCordWorldKeys(castedChunk.getCastedBlocks(), key);
             }
@@ -164,25 +165,25 @@ public class CastedChunkManager {
         //Return the key of the correct side
         if (pixelCordsRemainder > 32){
             if(castedBlock.getRightTexture() == Texture.LeftTopFace){
-                key = gameData.keyMod.getRelativeKey(castedBlock.getRightBLockKey(), 0, 0, 1, 0);
+                key = gameData.keyMod.getRelativeKey(castedBlock.getRightBLockKey(), 0, 0, cameraData.yCastingDirection, 0);
             }
             else if (castedBlock.getRightTexture() == Texture.TopRightFace) {
                 key = gameData.keyMod.getRelativeKey(castedBlock.getRightBLockKey(), 0, 0, 0, 1);
             }
             else if (castedBlock.getRightTexture() == Texture.RightBotFace) {
-                key = gameData.keyMod.getRelativeKey(castedBlock.getRightBLockKey(), 0, 1, 0, 0);
+                key = gameData.keyMod.getRelativeKey(castedBlock.getRightBLockKey(), 0, cameraData.xCastingDirection, 0, 0);
             }
             gameData.activeArea.setBlock(key, block.id);
         }
         else{
             if(castedBlock.getLeftTexture() == Texture.LeftBotFace){
-                key = gameData.keyMod.getRelativeKey(castedBlock.getLeftBLockKey(), 0, 0, 1, 0);
+                key = gameData.keyMod.getRelativeKey(castedBlock.getLeftBLockKey(), 0, 0, cameraData.yCastingDirection, 0);
             }
             else if (castedBlock.getLeftTexture() == Texture.TopLeftFace) {
                 key = gameData.keyMod.getRelativeKey(castedBlock.getLeftBLockKey(), 0, 0, 0, 1);
             }
             else if (castedBlock.getLeftTexture() == Texture.RightTopFace) {
-                key = gameData.keyMod.getRelativeKey(castedBlock.getLeftBLockKey(), 0, 1, 0, 0);
+                key = gameData.keyMod.getRelativeKey(castedBlock.getLeftBLockKey(), 0, cameraData.xCastingDirection, 0, 0);
             }
         }
         gameData.activeArea.setBlock(key, block.id);
@@ -220,6 +221,5 @@ public class CastedChunkManager {
         }
         return new int[]{0, 0};
     }
-
 
 }

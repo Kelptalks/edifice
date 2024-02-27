@@ -37,9 +37,9 @@ public class IsoRenderer extends JPanel implements Runnable {
     public IsoRenderer(GameData gameData){
         this.gameData = gameData;
 
-        this.castedBlockCuller = new CastedBlockCuller(gameData);
+        this.castedBlockCuller = new CastedBlockCuller(gameData, cameraData);
         this.castedBlocks = castedBlockCuller.getCulledCordMods(gameData.xCamRez, gameData.yCamRez);
-        this.rayCaster = new RayCaster(gameData);
+        this.rayCaster = new RayCaster(gameData, cameraData);
         this.gridManager = new GridManager();
 
         this.cameraData = new CameraData(gameData);

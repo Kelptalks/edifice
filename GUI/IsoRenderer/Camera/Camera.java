@@ -19,6 +19,7 @@ public class Camera extends BufferedImage {
         super(cameraData.camXRez, cameraData.camYRez, TYPE_4BYTE_ABGR_PRE);
         this.gameData = gameData;
         this.cameraData = cameraData;
+        cameraData.camWorldKey = gameData.keyMod.getRelativeKey(cameraData.camWorldKey, 0, 0, 0, 250);
 
         //set up graphics
         this.graphics = this.getGraphics();
@@ -53,6 +54,4 @@ public class Camera extends BufferedImage {
             }
         }
     }
-
-
 }

@@ -18,7 +18,7 @@ import static java.awt.image.BufferedImage.TYPE_4BYTE_ABGR_PRE;
  */
 public class CastedChunk {
     //The collection of casted blocks that make up this chunk
-    private final CastedBlock[][] castedBlocks;
+    private CastedBlock[][] castedBlocks;
     private CameraData cameraData;
     private Image renderedImage;
     private long worldKey;
@@ -31,6 +31,10 @@ public class CastedChunk {
 
     public CastedBlock[][] getCastedBlocks(){
         return this.castedBlocks;
+    }
+
+    public void updateCastedBlocks(){
+        this.castedBlocks = cameraData.castedBlockCuller.getIsoCastedBlock(cameraData.xChunkRez, cameraData.yChunkRez);
     }
 
     public void renderChunk() {

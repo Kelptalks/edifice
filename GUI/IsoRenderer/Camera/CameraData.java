@@ -16,8 +16,8 @@ import GameData.GameData;
  */
 public class CameraData {
     public CameraData(GameData gameData){
-        this.castedBlockCuller = new CastedBlockCuller(gameData);
-        this.rayCaster = new RayCaster(gameData);
+        this.castedBlockCuller = new CastedBlockCuller(gameData, this);
+        this.rayCaster = new RayCaster(gameData, this);
     }
     public GridManager gridManager = new GridManager();
     public RayCaster rayCaster;
@@ -43,9 +43,14 @@ public class CameraData {
     public int xCamOffSet = 0;
     public int yCamOffSet = 0;
 
-    public int camChunkXRez = 10;
-    public int camChunkYRez = 20;
+    public int camChunkXRez = 5;
+    public int camChunkYRez = 10;
 
     public int camXCenterPixel = xChunkPixelRez * camChunkXRez / 2;
     public int camYCenterPixel = yChunkPixelRez * camChunkYRez / 4;
+
+    //For rendering in different directions
+    public int xCastingDirection = -1;
+    public int yCastingDirection = 1;
+
 }

@@ -1,25 +1,21 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Rendering
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  Camera rotations
  *
- *	1. Mouse to block screen Coords
  *
- *	2. Ray Casted Shadows
  *
- *  3. Multi Threading
- *
- *  4. Render Cashing
  */
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  Menus
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
- *	1. Custom Windows
+ *  Custom Windows
  *
- *	2. Settings Menu
+ *	Settings Menu
  *
- *	3. Saving/Loading Menu
+ *	Saving/Loading Menu
  *
  */
 
@@ -27,7 +23,8 @@
  *  World
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
- *	1. Perlin noise terrain gen
+ *	Perlin noise terrain gen
  *
- *  2. terrain generation
+ *  terrain generation
+ *
  */

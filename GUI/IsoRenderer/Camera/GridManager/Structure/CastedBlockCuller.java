@@ -1,11 +1,14 @@
 package GUI.IsoRenderer.Camera.GridManager.Structure;
 
+import GUI.IsoRenderer.Camera.CameraData;
 import GameData.GameData;
 
 public class CastedBlockCuller {
 
     private final GameData gameData;
-    public CastedBlockCuller(GameData gameData){
+    private final CameraData cameraData;
+    public CastedBlockCuller(GameData gameData, CameraData cameraData){
+        this.cameraData = cameraData;
         this.gameData = gameData;
     }
 
@@ -44,7 +47,7 @@ public class CastedBlockCuller {
                 //Get the screen cords
                 int[] isoScreenCords = castedBlock.getIsoScreenCords();
                 //use the screen cords and player cords to set the rendering plane
-                long key = gameData.keyMod.getRelativeKey(worldKey, 0, isoScreenCords[0], isoScreenCords[1], 0);
+                long key = gameData.keyMod.getRelativeKey(worldKey, 0, cameraData.xCastingDirection * isoScreenCords[0], cameraData.yCastingDirection * isoScreenCords[1], 0);
                 castedBlock.setWorldKey(key);
             }
         }
