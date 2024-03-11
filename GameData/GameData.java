@@ -6,10 +6,9 @@ import World.Octree.KeyMod;
 import World.World;
 
 public class GameData {
-    public long playerCamKey = 576460750000000000L;
 
-    public int canvasXOffSet = 0;
-    public int canvasYOffSet = 0;
+    public PlayerData playerData = new PlayerData();
+
     public KeyMod keyMod = new KeyMod();
 
     public Block[] blocks = Block.values();

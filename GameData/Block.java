@@ -19,7 +19,10 @@ public enum Block {
     Metal(12,"solidBlocks", 12, false),
     Leaf(13, "solidBlocks", 15, false),
     Factory(14,"animated", 0, false),
-    Crate(15,"animated", 1, false);
+    Crate(15,"animated", 1, false),
+    Dirt(16,"solidBlocks", 16, false),
+    Fungi(17,"solidBlocks", 17, false),
+    BlueGrass(18,"solidBlocks", 4, false);
 
     public int id;
     public final String spriteSheet;

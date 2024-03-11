@@ -42,8 +42,9 @@ public class TerrainGen{
         Random random = new Random();
         for (int x = -200; x < 200; x++){
             for (int y = -200; y < 200; y++){
-                if (random.nextInt(0, 200) == 0){
-                    genTree(branch, x, y);
+                if (random.nextInt(0, 1000) == 0){
+                    //genTree(branch, x, y);
+                    genFungi(branch, x, y);
                 }
             }
         }
@@ -51,7 +52,7 @@ public class TerrainGen{
         long root = (long) Math.pow(8, 2L << branch.getDepth());
         for (int x = -400; x < 400; x++){
             for (int y = -400; y < 400; y++){
-                branch.setBlock(keyMod.getRelativeKey(root, 0, x, y, 0), Block.Grass);
+                branch.setBlock(keyMod.getRelativeKey(root, 0, x, y, 0), Block.BlueGrass);
 
             }
         }
@@ -162,6 +163,18 @@ public class TerrainGen{
         root = keyMod.modAxis(root, 0, 2, height);
 
         genTreeTop(branch, root);
+
+    }
+
+    public void genFungi(Branch branch, int x, int y) {
+        long root = (long) Math.pow(8, 2L << branch.getDepth());
+        root = keyMod.getRelativeKey(root, 0, 10 + x, +10 + y, 1);
+        Random random = new Random();
+
+        int height = random.nextInt(20, 100);
+        for (int z = 0; z < height; z++){
+            genCircle(branch, keyMod.getRelativeKey(root, 0, x, y, z), (Math.abs(z-height))/10 , Block.Fungi);
+        }
 
     }
 

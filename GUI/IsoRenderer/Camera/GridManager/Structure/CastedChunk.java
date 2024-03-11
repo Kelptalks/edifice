@@ -26,7 +26,10 @@ public class CastedChunk {
     public CastedChunk(CameraData cameraData){
         this.cameraData = cameraData;
         this.castedBlocks = cameraData.castedBlockCuller.getIsoCastedBlock(cameraData.xChunkRez, cameraData.yChunkRez);
-        this.renderedImage = new BufferedImage(cameraData.xChunkPixelRez, cameraData.yChunkPixelRez, TYPE_4BYTE_ABGR_PRE);
+    }
+
+    public void setRenderedImage(Image renderedImage){
+        this.renderedImage = renderedImage;
     }
 
     public CastedBlock[][] getCastedBlocks(){
@@ -39,38 +42,8 @@ public class CastedChunk {
 
     public void renderChunk() {
         //rayCast the blocks in the chunk
-        cameraData.rayCaster.castChunkThread(this);
-        //draw the ray casted chunk to screen
-        Graphics g = renderedImage.getGraphics();
-        g.translate((cameraData.xChunkPixelRez)/2, 0);
-        //cameraData.castedBlockCuller.setCulledCordWorldKeys(castedBlocks, worldKey);
-        for (CastedBlock[] castedBlockRow : castedBlocks){
-            for (CastedBlock castedBlock : castedBlockRow){
-                Block[] blockType = castedBlock.getBlockType();
-                int[] drawCords = cameraData.gridManager.isoToScreen(castedBlock.getIsoScreenCords());
+        cameraData.renderer.renderChunk(this);
 
-                Image leftTri = cameraData.textureManager.getTexture(blockType[0], castedBlock.getLeftTexture());
-                Image rightTri = cameraData.textureManager.getTexture(blockType[1], castedBlock.getRightTexture());
-
-                g.drawImage(leftTri, drawCords[0], drawCords[1], null);
-                g.drawImage(rightTri, drawCords[0] + 32, drawCords[1], null);
-
-                if (castedBlock.getLeftFilter() != null){
-                    g.drawImage(cameraData.textureManager.getFilter(0, castedBlock.getLeftFilter()), drawCords[0], drawCords[1], null);
-                }
-                if (castedBlock.getRightFilter() != null){
-                    g.drawImage(cameraData.textureManager.getFilter(0, castedBlock.getRightFilter()), drawCords[0] + 32, drawCords[1], null);
-                }
-
-                for (Texture texture : castedBlock.getLeftFilters()){
-                    g.drawImage(cameraData.textureManager.getFilter(1, texture), drawCords[0], drawCords[1], null);
-                }
-                for (Texture texture : castedBlock.getRightFilters()){
-                    g.drawImage(cameraData.textureManager.getFilter(1, texture), drawCords[0], drawCords[1] + 32, null);
-                }
-            }
-        }
-        g.dispose();
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

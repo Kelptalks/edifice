@@ -40,13 +40,20 @@ public class PlayerMouseInputs implements MouseMotionListener, MouseListener {
         //Set button pressed
         buttonPressed = e.getButton();
 
-        //handle left click functions
-        if (buttonPressed == MouseEvent.BUTTON1){
-            removeBlock(e);
+        //If on window
+        if(cameraData.window.mouseOnWindow(e.getX(), e.getY())){
+            cameraData.window.mousePressed(e.getX(), e.getY());
         }
-        //Handle right click functions
-        if (buttonPressed == MouseEvent.BUTTON3){
-            placeBlock(e);
+        //if on main camera
+        else {
+            //handle left click functions
+            if (buttonPressed == MouseEvent.BUTTON1) {
+                removeBlock(e);
+            }
+            //Handle right click functions
+            if (buttonPressed == MouseEvent.BUTTON3) {
+                placeBlock(e);
+            }
         }
     }
 
@@ -86,13 +93,6 @@ public class PlayerMouseInputs implements MouseMotionListener, MouseListener {
     public void removeBlock(MouseEvent e){
 
         long key = cameraData.castedChunkManager.screenCordsToBlockKey(e.getX(), e.getY());
-
-        System.out.println( "x : "  + gameData.keyMod.keyToCords(key)[0]);
-        System.out.println("y : " + gameData.keyMod.keyToCords(key)[1]);
-        System.out.println("z : " +gameData.keyMod.keyToCords(key)[2]);
-
-
-
         gameData.activeArea.setBlock(key, Block.Air.id);
         cameraData.castedChunkManager.renderChunkArea(e.getX(), e.getY());
 
@@ -120,6 +120,7 @@ public class PlayerMouseInputs implements MouseMotionListener, MouseListener {
     public void checkOffsetForChunkLoading(){
         if (cameraData.xCamOffSet > cameraData.xChunkPixelRez){
             cameraData.xCamOffSet = cameraData.xCamOffSet % cameraData.xChunkPixelRez;
+            cameraData.castedChunkManager.shiftChunkX();
         }
         if (cameraData.xCamOffSet < -cameraData.xChunkPixelRez){
             cameraData.xCamOffSet = cameraData.xCamOffSet % -cameraData.xChunkPixelRez;

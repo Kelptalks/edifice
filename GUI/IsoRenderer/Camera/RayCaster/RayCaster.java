@@ -39,20 +39,14 @@ public class RayCaster {
         }
     }
 
-    public void castChunkThread(CastedChunk castedChunk) {
-        new RenderThread(this, castedChunk).run();
-    }
-
     //Ray cast a single block
     public void castBlock(CastedBlock castedBlock){
-        if (true) {
-            castedBlock.setLeftFilter(null);
-            castedBlock.setRightFilter(null);
-            castLeft(castedBlock);
-            castRight(castedBlock);
-            castRightShadow(castedBlock);
-            castLeftShadow(castedBlock);
-        }
+        castedBlock.setLeftFilter(null);
+        castedBlock.setRightFilter(null);
+        castLeft(castedBlock);
+        castRight(castedBlock);
+        castRightShadow(castedBlock);
+        castLeftShadow(castedBlock);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -25,6 +25,9 @@ public class PlayKeyInputs implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyChar() == 't'){
+            cameraData.window.toggleVisible();
+        }
         if (e.getKeyChar() == 'r'){
             blockNum++;
             if (blockNum > gameData.blocks.length - 1){
@@ -34,11 +37,18 @@ public class PlayKeyInputs implements KeyListener {
         }
 
         if (e.getKeyChar() == 'e') {
-            rotateCamera(CameraAngle.values()[z]);
             z++;
             if (z == 4){
                 z = 0;
             }
+            rotateCamera(CameraAngle.values()[z]);
+        }
+        if (e.getKeyChar() == 'q') {
+            z--;
+            if (z == -1){
+                z = 3;
+            }
+            rotateCamera(CameraAngle.values()[z]);
         }
 
     }

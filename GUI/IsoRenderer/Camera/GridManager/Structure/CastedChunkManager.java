@@ -14,7 +14,9 @@ public class CastedChunkManager {
         this.cameraData = cameraData;
 
         createCulledChunks();
+
         setWorldKeys();
+
         renderChunks();
     }
 
@@ -66,30 +68,14 @@ public class CastedChunkManager {
             for(CastedChunk castedChunk : castedChunkRow) {
                 castedChunk.setScreenCords(cameraData.gridManager.isoToScreen(castedChunk.getIsoCords(), cameraData.yChunkPixelRez));
                 castedChunk.renderChunk();
+                System.out.println("yo");
             }
         }
     }
 
     //shift all chunks and add a new set
-    public void shiftChunkX(int i) {
-        for(CastedChunk[] castedChunkRow : castedChunks){
-            for(CastedChunk castedChunk : castedChunkRow) {
-                int[] currentIsoCords = castedChunk.getIsoCords();
-                if (i > 0) {
-                    castedChunk.setIsoCords(new int[]{currentIsoCords[0] - 1, currentIsoCords[1] + 1});
-                }
-                if (i < 0) {
-                    castedChunk.setIsoCords(new int[]{currentIsoCords[0] + 1, currentIsoCords[1] - 1});
-                }
-            }
-        }
-        setWorldKeys();
+    public void shiftChunkX() {
 
-        for(CastedChunk[] castedChunkRow : castedChunks){
-            for(CastedChunk castedChunk : castedChunkRow) {
-                castedChunk.renderChunk();
-            }
-        }
     }
 
 
