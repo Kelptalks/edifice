@@ -33,15 +33,16 @@ public class Camera extends BufferedImage {
 
     //Draw the rendered chunks to the screen at their assigned positions.
     public void drawCastedChunks(){
-        graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
+        graphics.setColor(Color.CYAN);
+        graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
         //loop through Chunk Array
         for (int x = 0; x < cameraData.castedChunkManager.getChunks().length; x++){
             for (int y = 0; y < cameraData.castedChunkManager.getChunks()[0].length; y++){
                 //draw the chunks with in the correct position
                 CastedChunk castedChunk = cameraData.castedChunkManager.getChunks()[x][y];
 
-                int xDrawCords = (castedChunk.getScreenX() + cameraData.xCamOffSet) - (cameraData.camXCenterPixel);
-                int yDrawCords = (castedChunk.getScreenY()  + cameraData.yCamOffSet) - (cameraData.camYCenterPixel);
+                int xDrawCords = ((castedChunk.getScreenX() + cameraData.xCamOffSet) - (cameraData.camXCenterPixel));
+                int yDrawCords = ((castedChunk.getScreenY()  + cameraData.yCamOffSet) - (cameraData.camYCenterPixel));
 
                 graphics.drawImage(castedChunk.getRenderedImage(), xDrawCords , yDrawCords, null);
             }

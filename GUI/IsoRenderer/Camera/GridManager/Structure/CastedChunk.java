@@ -43,7 +43,7 @@ public class CastedChunk {
     public void renderChunk() {
         //rayCast the blocks in the chunk
         cameraData.renderer.renderChunk(this);
-
+        cameraData.renderer.drawChunk(this);
     }
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~

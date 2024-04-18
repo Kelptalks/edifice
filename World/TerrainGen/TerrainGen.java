@@ -5,6 +5,7 @@ import World.Octree.KeyMod;
 import GameData.Block;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class TerrainGen{
@@ -31,9 +32,34 @@ public class TerrainGen{
     public TerrainGen(long groundHeight){
         this.groundHeight = groundHeight;
     }
+
+
+
+
+    public void generateFeatures(){
+
+    }
+
+    //Generates a piler of ground-based off block order
+    public void generateGround(long x, long y, ArrayList blocks){
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     KeyMod keyMod = new KeyMod();
 
     public void generateBranch(Branch branch, long key, int depth){
+        this.groundHeight = (long) Math.pow(8, 2L << branch.getDepth());
+
         branch.getBranch(4).fillLeaves(Block.Stone.id);
         branch.getBranch(5).fillLeaves(Block.Stone.id);
         branch.getBranch(6).fillLeaves(Block.Stone.id);
@@ -43,23 +69,32 @@ public class TerrainGen{
         for (int x = -200; x < 200; x++){
             for (int y = -200; y < 200; y++){
                 if (random.nextInt(0, 1000) == 0){
-                    //genTree(branch, x, y);
-                    genFungi(branch, x, y);
+                    genTree(branch, x, y);
+                    //genFungi(branch, x, y);
                 }
             }
         }
 
-        long root = (long) Math.pow(8, 2L << branch.getDepth());
         for (int x = -400; x < 400; x++){
             for (int y = -400; y < 400; y++){
-                branch.setBlock(keyMod.getRelativeKey(root, 0, x, y, 0), Block.BlueGrass);
-
+                branch.setBlock(keyMod.getRelativeKey(groundHeight, 0, x, y, 0), Block.Grass);
             }
         }
 
-        genHive(branch, root);
+        //buildHill(groundHeight, branch);
+
+        //genHive(branch, groundHeight);
 
         //branch.setBlock(onScreen, Block.Fruit);
+    }
+
+    public void buildHill(long key, Branch branch){
+        long onScreen = keyMod.getRelativeKey(key, 0, 220, 150, 0);
+
+        genCuboid(branch, onScreen, 50, 50, 50, Block.Dirt);
+
+        onScreen = keyMod.getRelativeKey(key, 0, 220 + 25, 150, 0);
+        genCuboid(branch, onScreen, 25, 25, 25, Block.Grass);
     }
 
     public void genHive(Branch branch, long root){
@@ -95,11 +130,11 @@ public class TerrainGen{
      * generating basic shapes
      */
 
-    public void genCuboid(Branch branch, long key, long xScale, long yScale, long zScale){
+    public void genCuboid(Branch branch, long key, long xScale, long yScale, long zScale, Block block){
         for (int z = 0; z < zScale; z++){
             for (int y = 0; y < yScale; y++){
                 for (int x = 0; x < xScale; x++){
-                    branch.setBlock(keyMod.getRelativeKey(key, 0, x, y, z), Block.Air);
+                    branch.setBlock(keyMod.getRelativeKey(key, 0, x, y, z), block);
                 }
             }
         }

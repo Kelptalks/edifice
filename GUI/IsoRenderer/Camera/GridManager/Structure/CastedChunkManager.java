@@ -68,16 +68,9 @@ public class CastedChunkManager {
             for(CastedChunk castedChunk : castedChunkRow) {
                 castedChunk.setScreenCords(cameraData.gridManager.isoToScreen(castedChunk.getIsoCords(), cameraData.yChunkPixelRez));
                 castedChunk.renderChunk();
-                System.out.println("yo");
             }
         }
     }
-
-    //shift all chunks and add a new set
-    public void shiftChunkX() {
-
-    }
-
 
     //get the canvas cords based off screen cords
     public int[] screenToCanvasCords(int[] cords){
@@ -119,7 +112,6 @@ public class CastedChunkManager {
 
     }
 
-    //
     public long screenCordsToBlockKey(int x, int y){
         int[] canvasCords = screenToCanvasCords(new int[]{x, y});
         CastedChunk castedChunk = screenCordsToCastedChunk(x, y);
@@ -206,6 +198,19 @@ public class CastedChunkManager {
             }
         }
         return new int[]{0, 0};
+    }
+
+    //shift all chunks and add a new set
+    public void shiftChunkX() {
+        //Shift world key
+        cameraData.camWorldKey = gameData.keyMod.getRelativeKey(cameraData.camWorldKey, 0, -cameraData.xChunkRez, cameraData.yChunkRez, 0);
+
+
+
+    }
+
+    public void shiftChunkY() {
+
     }
 
 }
